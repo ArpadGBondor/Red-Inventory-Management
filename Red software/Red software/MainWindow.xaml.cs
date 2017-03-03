@@ -26,11 +26,12 @@ namespace Red_software
 
         public MainWindow()
         {
+            Database db = new Database();
 
+            db.Test();
 
             InitializeComponent();
 
-            Database.Test();
         }
     }
 }
