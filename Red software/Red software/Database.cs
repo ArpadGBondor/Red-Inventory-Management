@@ -2,17 +2,42 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using MySql.Data.MySqlClient;
+using System.Reflection;
 using System.Diagnostics;
+using System.Data.SqlClient;
 
 namespace Red_software
 {
     class Database
     {
-        private MySqlConnection connection;
+
+        public void CreateTable(Type linqTableClass, DataContext tempDc)
+        {
+                var metaTable = tempDc.Mapping.GetTable(linqTableClass);
+                var typeName = "System.Data.Linq.SqlClient.SqlBuilder";
+                var type = typeof(DataContext).Assembly.GetType(typeName);
+                var bf = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod;
+                var sql = type.InvokeMember("GetCreateTableCommand", bf, null, null, new[] { metaTable });
+                var sqlAsString = sql.ToString();
+                tempDc.ExecuteCommand(sqlAsString);
+        }
+
+        //public void Test()
+        //{
+        //    // DataContext takes a connection string 
+        //    //if (!db.DatabaseExists())
+        //    //    db.CreateDatabase();
+        //    // Get a typed table to run queries
+
+
+        //}
+
+        private SqlConnection connection;
+        string connectionString;
         private string server;
         private string database;
         private string uid;
@@ -28,19 +53,50 @@ namespace Red_software
         //initialize values
         private void Initialize()
         {
+
+            //DbConnection connection = new SqlConnection();
             server = "127.0.0.1";//:3306";
             database = "software";
             uid = "software";
             password = "Red_software";
-            string connectionString = "server=" + server + ";uid=" + uid + ";pwd=" + password + ";";
+            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Red\\Documents\\Visual Studio 2015\\Projects\\Red2\\Red software\\Red software\\Database.mdf\";Integrated Security=True;";
 
-            connection = new MySqlConnection(connectionString);
+            connection = new SqlConnection(connectionString);
         }
 
         public void Test()
         {
             if (OpenConnection())
             {
+
+                DataContext db = new DataContext(connectionString);
+                //CreateTable(typeof(Customer), db);
+
+                Table<Customer> Customers = db.GetTable<Customer>();
+
+                Customers.InsertOnSubmit(new Customer("ID007", "London"));
+                // Submit the change to the database.
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+
+
+                // Query for customers from London
+                var q =
+                   from c in Customers
+                   where c.City == "London"
+                   select c;
+                foreach (var cust in q)
+                    MessageBox.Show(String.Format("id = {0}, City = {1}", cust.CustomerID, cust.City));
+
+
+
+
                 CloseConnection();
             }
             //    string connectionstring = "server=localhost:3306; uid=" + '"' + "root" + '"' + "; pwd=" + '"' + "Red_software" + '"' + ";";
@@ -82,10 +138,10 @@ namespace Red_software
         }
 
 
-        /// <summary>
-        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// </summary>
-        /// <returns></returns>
+        ///// <summary>
+        ///// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///// </summary>
+        ///// <returns></returns>
 
         //open connection to database
         private bool OpenConnection()
@@ -95,7 +151,7 @@ namespace Red_software
                 connection.Open();
                 return true;
             }
-            catch (MySqlException ex)
+            catch (SqlException ex)
             {
                 //When handling errors, you can your application's response based 
                 //on the error number.
@@ -109,7 +165,7 @@ namespace Red_software
                         MessageBox.Show("Invalid username/password, please try again");
                         break;
                     default:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator: "+ex.Number.ToString());
+                        MessageBox.Show("Cannot connect to server.  Contact administrator: \n" + ex./*Number.*/ToString());
                         break;
                 }
                 return false;
@@ -131,205 +187,205 @@ namespace Red_software
             }
         }
 
-        //Insert statement
-        public void Insert()
-        {
-            string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
+        ////Insert statement
+        //public void Insert()
+        //{
+        //    string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
 
-            //open connection
-            if (this.OpenConnection() == true)
-            {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+        //    //open connection
+        //    if (this.OpenConnection() == true)
+        //    {
+        //        //create command and assign the query and connection from the constructor
+        //        MySqlCommand cmd = new MySqlCommand(query, connection);
 
-                //Execute command
-                cmd.ExecuteNonQuery();
+        //        //Execute command
+        //        cmd.ExecuteNonQuery();
 
-                //close connection
-                this.CloseConnection();
-            }
-        }
+        //        //close connection
+        //        this.CloseConnection();
+        //    }
+        //}
 
-        //Update statement
-        public void Update()
-        {
-            string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
+        ////Update statement
+        //public void Update()
+        //{
+        //    string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //create mysql command
-                MySqlCommand cmd = new MySqlCommand();
-                //Assign the query using CommandText
-                cmd.CommandText = query;
-                //Assign the connection using Connection
-                cmd.Connection = connection;
+        //    //Open connection
+        //    if (this.OpenConnection() == true)
+        //    {
+        //        //create mysql command
+        //        MySqlCommand cmd = new MySqlCommand();
+        //        //Assign the query using CommandText
+        //        cmd.CommandText = query;
+        //        //Assign the connection using Connection
+        //        cmd.Connection = connection;
 
-                //Execute query
-                cmd.ExecuteNonQuery();
+        //        //Execute query
+        //        cmd.ExecuteNonQuery();
 
-                //close connection
-                this.CloseConnection();
-            }
-        }
+        //        //close connection
+        //        this.CloseConnection();
+        //    }
+        //}
 
-        //Delete statement
-        public void Delete()
-        {
-            string query = "DELETE FROM tableinfo WHERE name='John Smith'";
+        ////Delete statement
+        //public void Delete()
+        //{
+        //    string query = "DELETE FROM tableinfo WHERE name='John Smith'";
 
-            if (this.OpenConnection() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                this.CloseConnection();
-            }
-        }
+        //    if (this.OpenConnection() == true)
+        //    {
+        //        MySqlCommand cmd = new MySqlCommand(query, connection);
+        //        cmd.ExecuteNonQuery();
+        //        this.CloseConnection();
+        //    }
+        //}
 
-        //Select statement
-        public List<string>[] Select()
-        {
-            string query = "SELECT * FROM tableinfo";
+        ////Select statement
+        //public List<string>[] Select()
+        //{
+        //    string query = "SELECT * FROM tableinfo";
 
-            //Create a list to store the result
-            List<string>[] list = new List<string>[3];
-            list[0] = new List<string>();
-            list[1] = new List<string>();
-            list[2] = new List<string>();
+        //    //Create a list to store the result
+        //    List<string>[] list = new List<string>[3];
+        //    list[0] = new List<string>();
+        //    list[1] = new List<string>();
+        //    list[2] = new List<string>();
 
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
+        //    //Open connection
+        //    if (this.OpenConnection() == true)
+        //    {
+        //        //Create Command
+        //        MySqlCommand cmd = new MySqlCommand(query, connection);
+        //        //Create a data reader and Execute the command
+        //        MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                //Read the data and store them in the list
-                while (dataReader.Read())
-                {
-                    list[0].Add(dataReader["id"] + "");
-                    list[1].Add(dataReader["name"] + "");
-                    list[2].Add(dataReader["age"] + "");
-                }
+        //        //Read the data and store them in the list
+        //        while (dataReader.Read())
+        //        {
+        //            list[0].Add(dataReader["id"] + "");
+        //            list[1].Add(dataReader["name"] + "");
+        //            list[2].Add(dataReader["age"] + "");
+        //        }
 
-                //close Data Reader
-                dataReader.Close();
+        //        //close Data Reader
+        //        dataReader.Close();
 
-                //close Connection
-                this.CloseConnection();
+        //        //close Connection
+        //        this.CloseConnection();
 
-                //return list to be displayed
-                return list;
-            }
-            else
-            {
-                return list;
-            }
-        }
+        //        //return list to be displayed
+        //        return list;
+        //    }
+        //    else
+        //    {
+        //        return list;
+        //    }
+        //}
 
-        //Count statement
-        public int Count()
-        {
-            string query = "SELECT Count(*) FROM tableinfo";
-            int Count = -1;
+        ////Count statement
+        //public int Count()
+        //{
+        //    string query = "SELECT Count(*) FROM tableinfo";
+        //    int Count = -1;
 
-            //Open Connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Mysql Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+        //    //Open Connection
+        //    if (this.OpenConnection() == true)
+        //    {
+        //        //Create Mysql Command
+        //        MySqlCommand cmd = new MySqlCommand(query, connection);
 
-                //ExecuteScalar will return one value
-                Count = int.Parse(cmd.ExecuteScalar() + "");
+        //        //ExecuteScalar will return one value
+        //        Count = int.Parse(cmd.ExecuteScalar() + "");
 
-                //close Connection
-                this.CloseConnection();
+        //        //close Connection
+        //        this.CloseConnection();
 
-                return Count;
-            }
-            else
-            {
-                return Count;
-            }
-        }
+        //        return Count;
+        //    }
+        //    else
+        //    {
+        //        return Count;
+        //    }
+        //}
 
-        //Backup
-        public void Backup()
-        {
-            try
-            {
-                DateTime Time = DateTime.Now;
-                int year = Time.Year;
-                int month = Time.Month;
-                int day = Time.Day;
-                int hour = Time.Hour;
-                int minute = Time.Minute;
-                int second = Time.Second;
-                int millisecond = Time.Millisecond;
+        ////Backup
+        //public void Backup()
+        //{
+        //    try
+        //    {
+        //        DateTime Time = DateTime.Now;
+        //        int year = Time.Year;
+        //        int month = Time.Month;
+        //        int day = Time.Day;
+        //        int hour = Time.Hour;
+        //        int minute = Time.Minute;
+        //        int second = Time.Second;
+        //        int millisecond = Time.Millisecond;
 
-                //Save file to C:\ with the current date as a filename
-                string path;
-                path = "C:\\MySqlBackup" + year + "-" + month + "-" + day +
-            "-" + hour + "-" + minute + "-" + second + "-" + millisecond + ".sql";
-                StreamWriter file = new StreamWriter(path);
-
-
-                ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = "mysqldump";
-                psi.RedirectStandardInput = false;
-                psi.RedirectStandardOutput = true;
-                psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}",
-                    uid, password, server, database);
-                psi.UseShellExecute = false;
-
-                Process process = Process.Start(psi);
-
-                string output;
-                output = process.StandardOutput.ReadToEnd();
-                file.WriteLine(output);
-                process.WaitForExit();
-                file.Close();
-                process.Close();
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show("Error , unable to backup!");
-            }
-        }
-
-        //Restore
-        public void Restore()
-        {
-            try
-            {
-                //Read file from C:\
-                string path;
-                path = "C:\\MySqlBackup.sql";
-                StreamReader file = new StreamReader(path);
-                string input = file.ReadToEnd();
-                file.Close();
-
-                ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = "mysql";
-                psi.RedirectStandardInput = true;
-                psi.RedirectStandardOutput = false;
-                psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}",
-                    uid, password, server, database);
-                psi.UseShellExecute = false;
+        //        //Save file to C:\ with the current date as a filename
+        //        string path;
+        //        path = "C:\\MySqlBackup" + year + "-" + month + "-" + day +
+        //    "-" + hour + "-" + minute + "-" + second + "-" + millisecond + ".sql";
+        //        StreamWriter file = new StreamWriter(path);
 
 
-                Process process = Process.Start(psi);
-                process.StandardInput.WriteLine(input);
-                process.StandardInput.Close();
-                process.WaitForExit();
-                process.Close();
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show("Error , unable to Restore!");
-            }
-        }
+        //        ProcessStartInfo psi = new ProcessStartInfo();
+        //        psi.FileName = "mysqldump";
+        //        psi.RedirectStandardInput = false;
+        //        psi.RedirectStandardOutput = true;
+        //        psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}",
+        //            uid, password, server, database);
+        //        psi.UseShellExecute = false;
+
+        //        Process process = Process.Start(psi);
+
+        //        string output;
+        //        output = process.StandardOutput.ReadToEnd();
+        //        file.WriteLine(output);
+        //        process.WaitForExit();
+        //        file.Close();
+        //        process.Close();
+        //    }
+        //    catch (IOException ex)
+        //    {
+        //        MessageBox.Show("Error , unable to backup!");
+        //    }
+        //}
+
+        ////Restore
+        //public void Restore()
+        //{
+        //    try
+        //    {
+        //        //Read file from C:\
+        //        string path;
+        //        path = "C:\\MySqlBackup.sql";
+        //        StreamReader file = new StreamReader(path);
+        //        string input = file.ReadToEnd();
+        //        file.Close();
+
+        //        ProcessStartInfo psi = new ProcessStartInfo();
+        //        psi.FileName = "mysql";
+        //        psi.RedirectStandardInput = true;
+        //        psi.RedirectStandardOutput = false;
+        //        psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}",
+        //            uid, password, server, database);
+        //        psi.UseShellExecute = false;
+
+
+        //        Process process = Process.Start(psi);
+        //        process.StandardInput.WriteLine(input);
+        //        process.StandardInput.Close();
+        //        process.WaitForExit();
+        //        process.Close();
+        //    }
+        //    catch (IOException ex)
+        //    {
+        //        MessageBox.Show("Error , unable to Restore!");
+        //    }
+        //}
 
     }
 }
