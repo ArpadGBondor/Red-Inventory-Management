@@ -1,0 +1,29 @@
+﻿<Window x:Class="Red_software.Views.NewUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Red_software.Views"
+        mc:Ignorable="d"
+        Title="New User" Height="250" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Style="{StaticResource windowStyle}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="User name:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Password:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Confirm password:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBox Name="userIDTextBox" Text="{Binding UserID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="10" />
+        <TextBox Name="PasswordTextBox" Text="{Binding Password, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="10" />
+        <TextBox Name="ConfirmTextBox" Text="{Binding Confirm, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="10" />
+        <Button Command="{Binding Click_AddUser}" Grid.Row="3" Grid.ColumnSpan="2" Content="Add new user" Margin="10" />
+    </Grid>
+</Window>
