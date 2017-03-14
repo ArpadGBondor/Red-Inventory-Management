@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using BusinessLayer;
+using Red_software.Notifications;
 
 namespace Red_software.ViewModel
 {
@@ -16,10 +17,13 @@ namespace Red_software.ViewModel
         {
             get
             {
+                if (userID == null)
+                    userID = "";
                 return userID;
             }
             set
             {
+                if (userID == value) return;
                 userID = value;
                 RaisePropertyChanged("UserID");
             }
@@ -28,10 +32,13 @@ namespace Red_software.ViewModel
         {
             get
             {
+                if (password == null)
+                    password = "";
                 return password;
             }
             set
             {
+                if (password == value) return;
                 password = value;
                 RaisePropertyChanged("Password");
             }
@@ -40,10 +47,13 @@ namespace Red_software.ViewModel
         {
             get
             {
+                if (confirm == null)
+                    confirm = "";
                 return confirm;
             }
             set
             {
+                if (confirm == value) return;
                 confirm = value;
                 RaisePropertyChanged("Confirm");
             }
@@ -64,19 +74,20 @@ namespace Red_software.ViewModel
         {
             if (UserID == "" || Password == "" || Confirm == "")
             {
-                MessageBox.Show("Please fill the Username and Password fieleds!");
+                NotificationProvider.Error("New user error", "Please fill the Username and Password fieleds.");
             }
             else if(Password != Confirm)
             {
-                MessageBox.Show("Password does not match the confirm password");
+                NotificationProvider.Error("New user error", "Password does not match the confirm password.");
             }
             else if (UserLogin.IsValidUserID(UserID))
             {
-                MessageBox.Show("Username already exist.");
+                NotificationProvider.Error("New user error", "Username already exist.");
             }
             else
             {
                 UserLogin.AddUser(UserID, Password);
+                NotificationProvider.Info("New user added", String.Format("Username: {0}",UserID));
                 NewUserWindow.Close();
             }
         }

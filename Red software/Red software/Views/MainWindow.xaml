@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Red_software"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Style="{StaticResource windowStyle}" WindowState="Maximized">
+        Title="MainWindow" Height="350" Width="525" Style="{StaticResource windowStyle}" WindowState="Maximized" Closing="Window_Closing" Icon="/Red software;component/Resources/Icon.png">
 
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="51*"/>
-            <RowDefinition Height="269*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
+        <Button Grid.Row="3" Click="Button_Click" Margin="10">Notification test button</Button>
 
     </Grid>
 

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using BusinessLayer;
+using Red_software.Notifications;
 
 namespace Red_software.Views
 {
@@ -25,6 +26,7 @@ namespace Red_software.Views
             // New user
             if (UserLogin.IsEmptyUserDatabase())
             {
+                NotificationProvider.Info("Welcome First User!", "Please, set a username and a password.");
                 NewUserWindow NUW = new NewUserWindow();
                 NUW.ShowDialog();
                 if (UserLogin.IsEmptyUserDatabase())
@@ -36,6 +38,18 @@ namespace Red_software.Views
             LW.ShowDialog();
             if (UserLogin.UserID == "") // Not logged in
                 this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            NotificationProvider.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NotificationProvider.Error("Error!", "Error text");
+            NotificationProvider.Alert("Alert!", "Alert text");
+            NotificationProvider.Info("Info!", "Info text");
         }
     }
 }

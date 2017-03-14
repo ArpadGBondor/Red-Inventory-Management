@@ -85,6 +85,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Notifications\GrowlNotifiactions.xaml.cs">
+      <DependentUpon>GrowlNotifiactions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\NotificationProvider.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\NewUserViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
@@ -94,6 +99,14 @@
     <Compile Include="Views\SetupConnectionWindow.xaml.cs">
       <DependentUpon>SetupConnectionWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Notifications\GrowlNotifiactions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Notifications\Resources\ButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -172,6 +185,11 @@
       <DependentUpon>Database.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Icon.png" />
+    <Resource Include="Notifications\Resources\close.png" />
+    <Resource Include="Notifications\Resources\alert.png" />
+    <Resource Include="Notifications\Resources\info.png" />
+    <Resource Include="Notifications\Resources\error.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">

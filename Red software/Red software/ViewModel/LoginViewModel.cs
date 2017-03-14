@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows;
 using BusinessLayer;
 using Red_software.Views;
+using Red_software.Notifications;
 
 namespace Red_software.ViewModel
 {
@@ -65,19 +66,20 @@ namespace Red_software.ViewModel
             Password = pwBox.Password;
             if (!DatabaseConnection.TestConnection())
             {
-                MessageBox.Show("Database connection error.");
+                NotificationProvider.Alert("Database connection error", "Please set the database connection, before login.");
             }
             else if (UserID == "" || !UserLogin.IsValidUserID(UserID))
             {
-                MessageBox.Show("Wrong username.");
+                NotificationProvider.Error("Login error", "Wrong username.");
             }
             else if (Password == "" || !UserLogin.IsValidPassword(UserID,Password))
             {
-                MessageBox.Show("Wrong password.");
+                NotificationProvider.Error("Login error", "Wrong password.");
             }
             else
             {
                 UserLogin.UserID = UserID;
+                NotificationProvider.Info(String.Format("Welcome, {0}!", UserID), "You have succesfully logged in.");
                 LoginWindow.Close();
             }
         }
