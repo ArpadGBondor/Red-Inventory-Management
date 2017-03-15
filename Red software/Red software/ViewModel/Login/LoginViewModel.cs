@@ -27,6 +27,7 @@ namespace Red_software.ViewModel
             }
             set
             {
+                if (userID == value) return;
                 userID = value;
                 RaisePropertyChanged("UserID");
             }
@@ -39,6 +40,7 @@ namespace Red_software.ViewModel
             }
             set
             {
+                if (password == value) return;
                 password = value;
                 RaisePropertyChanged("Password");
             }
@@ -55,6 +57,7 @@ namespace Red_software.ViewModel
             }
             set
             {
+                if (click_Login == value) return;
                 click_Login = value;
                 RaisePropertyChanged("Click_Login");
             }
@@ -64,23 +67,23 @@ namespace Red_software.ViewModel
         {
             PasswordBox pwBox = (PasswordBox)parameter;
             Password = pwBox.Password;
+
             if (!DatabaseConnection.TestConnection())
             {
                 NotificationProvider.Alert("Database connection error", "Please set the database connection, before login.");
             }
-            else if (UserID == "" || !UserLogin.IsValidUserID(UserID))
-            {
-                NotificationProvider.Error("Login error", "Wrong username.");
-            }
-            else if (Password == "" || !UserLogin.IsValidPassword(UserID,Password))
-            {
-                NotificationProvider.Error("Login error", "Wrong password.");
-            }
             else
             {
-                UserLogin.UserID = UserID;
-                NotificationProvider.Info(String.Format("Welcome, {0}!", UserID), "You have succesfully logged in.");
-                LoginWindow.Close();
+                try
+                {
+                    UserLogin.Login(UserID, Password);
+                    NotificationProvider.Info(String.Format("Welcome, {0}!", UserID), "You have succesfully logged in.");
+                    LoginWindow.Close();
+                }
+                catch (ArgumentException e)
+                {
+                    NotificationProvider.Error("Login error", e.Message);
+                }
             }
         }
 
@@ -95,6 +98,7 @@ namespace Red_software.ViewModel
             }
             set
             {
+                if (click_Setup == value) return;
                 click_Setup = value;
                 RaisePropertyChanged("Click_Setup");
             }

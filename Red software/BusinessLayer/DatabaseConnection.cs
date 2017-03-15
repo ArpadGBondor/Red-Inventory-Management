@@ -9,6 +9,13 @@ namespace BusinessLayer
 {
     public class DatabaseConnection
     {
+        public static string File
+        {
+            get
+            {
+                return Database.Get_File;
+            }
+        }
         public static bool TestConnection()
         {
             return Database.Test();

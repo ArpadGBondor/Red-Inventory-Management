@@ -36,7 +36,7 @@ namespace Red_software.Views
             // Login
             LoginWindow LW = new LoginWindow();
             LW.ShowDialog();
-            if (UserLogin.UserID == "") // Not logged in
+            if (UserLogin.LoginedUser == "") // Not logged in
                 this.Close();
         }
 

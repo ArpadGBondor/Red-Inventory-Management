@@ -72,23 +72,28 @@ namespace Red_software.ViewModel
         }
         private void AddUser(object parameter)
         {
-            if (UserID == "" || Password == "" || Confirm == "")
-            {
-                NotificationProvider.Error("New user error", "Please fill the Username and Password fieleds.");
-            }
-            else if(Password != Confirm)
+            if(Password != Confirm)
             {
                 NotificationProvider.Error("New user error", "Password does not match the confirm password.");
             }
-            else if (UserLogin.IsValidUserID(UserID))
-            {
-                NotificationProvider.Error("New user error", "Username already exist.");
-            }
             else
             {
-                UserLogin.AddUser(UserID, Password);
-                NotificationProvider.Info("New user added", String.Format("Username: {0}",UserID));
-                NewUserWindow.Close();
+                try
+                {
+                    if (UserLogin.AddUser(UserID, Password))
+                    {
+                        NotificationProvider.Info("New user added", String.Format("Username: {0}", UserID));
+                        NewUserWindow.Close();
+                    }
+                    else
+                    {
+                        NotificationProvider.Error("New user error", "Username already exist.");
+                    }
+                }
+                catch
+                {
+                    NotificationProvider.Error("New user error", "Please fill the Username and Password fieleds.");
+                }
             }
         }
 

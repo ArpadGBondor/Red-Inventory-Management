@@ -24,7 +24,7 @@ namespace BusinessLayer.Tests
         public void IsEmptyUserDatabaseTest()
         {
             Assert.IsTrue(UserLogin.IsEmptyUserDatabase());
-            string[] good_parameters = { "", "a", "1234567890" };
+            string[] good_parameters = { "a", "1234567890", "god", "qwerty" };
             foreach (var p in good_parameters)
             {
                 Assert.IsTrue(UserLogin.AddUser(p, p));
@@ -37,12 +37,19 @@ namespace BusinessLayer.Tests
         [TestMethod()]
         public void AddRemoveUserTest()
         {
-            string[] good_parameters = { "", "a", "1234567890" };
+            string[] good_parameters = { "a", "1234567890", "god", "qwerty" };
             string[] bad_parameters = { "", " ", "a", "1234567890", null };
             foreach (var p in good_parameters)
                 Assert.IsTrue(UserLogin.AddUser(p, p));
             foreach (var p in good_parameters)
-                Assert.IsFalse(UserLogin.AddUser(p, p));
+                try
+                {
+                    Assert.IsFalse(UserLogin.AddUser(p, p));
+                }
+                catch
+                {
+                    Assert.IsTrue(string.IsNullOrWhiteSpace(p));
+                }
             foreach (var p in good_parameters)
                 Assert.IsTrue(UserLogin.RemoveUser(p));
         }
@@ -50,7 +57,7 @@ namespace BusinessLayer.Tests
         [TestMethod()]
         public void IsValidUserIDTest()
         {
-            string[] parameters = { "", "a", "1234567890" };
+            string[] parameters = { "a", "1234567890", "god", "qwerty" };
             foreach (var p in parameters)
             {
                 Assert.IsFalse(UserLogin.IsValidUserID(p));
@@ -64,7 +71,7 @@ namespace BusinessLayer.Tests
         [TestMethod()]
         public void IsValidPasswordTest()
         {
-            string[] parameters = { "", "a", "1234567890" };
+            string[] parameters = { "a", "1234567890", "god", "qwerty" };
             foreach (var p in parameters)
             {
                 Assert.IsTrue(UserLogin.AddUser(p, p));
@@ -80,15 +87,47 @@ namespace BusinessLayer.Tests
                     }
                 }
             }
-
+            foreach (var p in parameters)
+                Assert.IsTrue(UserLogin.RemoveUser(p));
         }
+
         [TestMethod()]
-        public void PropertyTest()
+        public void LoginTest()
         {
-            Assert.AreEqual(UserLogin.UserID,"");
-            UserLogin.UserID = "XXX";
-            Assert.AreEqual(UserLogin.UserID, "XXX");
+            Assert.AreEqual(UserLogin.LoginedUser, "");
+            string[] parameters = {"", " ", "a", "1234567890", "god", "qwerty", null };
+            foreach (var p in parameters)
+            {
+                try
+                {
+                    Assert.IsFalse(UserLogin.IsValidUserID(p));
+                    Assert.IsTrue(UserLogin.AddUser(p, p));
+                }
+                catch { }
+            }
+            foreach (var p1 in parameters)
+                foreach (var p2 in parameters)
+                {
+                    try
+                    {
+                        UserLogin.Login(p1, p2);
+                        Assert.AreEqual(UserLogin.LoginedUser, p1);
+                    }
+                    catch
+                    {
+                        if(string.IsNullOrWhiteSpace(p1) || string.IsNullOrWhiteSpace(p1))
+                        {
+                            //Assert.IsTrue(true);
+                        }
+                        else
+                        {
+                            Assert.AreNotEqual(p1, p2);
+                        }
+                    }
+                }
+            foreach (var p in parameters)
+                if (!string.IsNullOrWhiteSpace(p))
+                    Assert.IsTrue(UserLogin.RemoveUser(p));
         }
-
     }
 }

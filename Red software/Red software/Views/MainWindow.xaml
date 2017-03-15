@@ -14,6 +14,7 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <Label Grid.Row="1" Content="Under construction" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42"/>
         <Button Grid.Row="3" Click="Button_Click" Margin="10">Notification test button</Button>
 
     </Grid>

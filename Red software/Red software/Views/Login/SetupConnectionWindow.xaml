@@ -19,13 +19,13 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Connection state:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <Label x:Name="ConnectionStateLabel" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Label Content="{Binding ConnectionState}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" />
         
         <Label Grid.Row="1" Grid.Column="0" Content="Database file:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <TextBox x:Name="FileNameTextBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10"  />
+        <TextBox Text="{Binding File}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"  />
 
 
-        <Button x:Name="SelectFileButton" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Select database file" Margin="10" Click="SelectFileButton_Click" />
+        <Button x:Name="SelectFileButton" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Select database file" Margin="10" Command="{Binding Change_Database_File}" />
         <Button x:Name="BackButton" Grid.Column="2" Grid.Row="2" Content="Back" Margin="10" Click="BackButton_Click" />
 
 

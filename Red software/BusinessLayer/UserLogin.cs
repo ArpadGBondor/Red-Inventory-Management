@@ -9,17 +9,13 @@ namespace BusinessLayer
 {
     public class UserLogin
     {
-        private static string userID;
-        public static string UserID
+        private static string loginedUser;
+        public static string LoginedUser
         {
             get
             {
-                if (userID == null) userID = "";
-                return userID;
-            }
-            set
-            {
-                userID = value;
+                if (loginedUser == null) loginedUser = "";
+                return loginedUser;
             }
         } 
         public static bool IsEmptyUserDatabase()
@@ -36,11 +32,31 @@ namespace BusinessLayer
         }
         public static bool AddUser(string userID, string password)
         {
+            if (string.IsNullOrWhiteSpace(userID))
+            {
+                throw new System.ArgumentException("Wrong username.", "userID");
+            }
+            else if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new System.ArgumentException("Wrong password.", "userID");
+            }
             return UsersProvider.NewUser(userID, password);
         }
         public static bool RemoveUser(string userID)
         {
             return UsersProvider.DeleteUser(userID);
+        }
+        public static void Login(string userID, string password)
+        {
+            if (string.IsNullOrWhiteSpace(userID) || !UserLogin.IsValidUserID(userID))
+            {
+                throw new System.ArgumentException("Wrong username.", "userID");
+            }
+            else if (string.IsNullOrWhiteSpace(password) || !UserLogin.IsValidPassword(userID, password))
+            {
+                throw new System.ArgumentException("Wrong password.", "userID");
+            }
+            loginedUser = userID;
         }
     }
 }

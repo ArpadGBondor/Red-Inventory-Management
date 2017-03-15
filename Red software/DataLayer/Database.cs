@@ -22,6 +22,13 @@ namespace DataLayer
         //private static string uid;
         //private static string password;
         private static string file;
+        public static string Get_File
+        {
+            get
+            {
+                return file;
+            }
+        }
         public static SqlConnection get_connection { get { return connection; } }
         public static string get_connectionString { get { return connectionString; } }
 
