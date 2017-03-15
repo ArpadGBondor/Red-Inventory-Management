@@ -54,12 +54,13 @@ namespace DataLayer
             {
                 DataContext db = new DataContext(Database.get_connectionString);
                 Table<UserEntity> Users = db.GetTable<UserEntity>();
-
-                string EncriptedPassword = EncriptionProvider.Encrypt(pw);
                 var q = from u in Users
-                        where (u.Username == userID && u.Password == EncriptedPassword)
+                        where (u.Username == userID)
                         select u;
-                lExist = (0 < q.Count());
+                foreach(var user in q)
+                {
+                    lExist = lExist || EncriptionProvider.Confirm(pw, user.Password, EncriptionProvider.Supported_HA.SHA256);
+                }
 
                 Database.CloseConnection();
             }
@@ -74,7 +75,11 @@ namespace DataLayer
                 {
                     DataContext db = new DataContext(Database.get_connectionString);
                     Table<UserEntity> Users = db.GetTable<UserEntity>();
-                    Users.InsertOnSubmit(new UserEntity(userID, EncriptionProvider.Encrypt(password)));
+                    Users.InsertOnSubmit(
+                        new UserEntity(
+                            userID,
+                            EncriptionProvider.ComputeHash(password, EncriptionProvider.Supported_HA.SHA256, null)));
+
                     try
                     {
                         db.SubmitChanges();
