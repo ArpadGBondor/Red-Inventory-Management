@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace DataLayer
 {
-    class EncriptionProvider
+    public class EncriptionProvider
     {
         public enum Supported_HA
         {
@@ -16,6 +16,8 @@ namespace DataLayer
 
         public static string ComputeHash(string plainText, Supported_HA hash, byte[] salt)
         {
+            if (plainText == null) plainText = "";
+
             int minSaltLength = 4, maxSaltLength = 16;
 
             byte[] SaltBytes = null;
@@ -73,6 +75,7 @@ namespace DataLayer
 
         public static bool Confirm(string plainText, string hashValue, Supported_HA hash)
         {
+            if (plainText == null) plainText = "";
             byte[] hashBytes = Convert.FromBase64String(hashValue);
             int hashSize = 0;
 

@@ -68,7 +68,7 @@
         </DataTemplate>
     </Window.Resources>
     <ItemsControl x:Name="NotificationsControl" FocusVisualStyle="{x:Null}"  ItemsSource="{Binding .}" ItemTemplate="{StaticResource MessageTemplate}">
-        <ItemsControl.DataContext>
+        <!--<ItemsControl.DataContext>
             <NotificationCollection xmlns="clr-namespace:Red_software.Notifications">
                 <Notification Id="1" Title="Notification #1" ImageUrl="pack://application:,,,/Notifications/Resources/error.png" Message="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
                 <Notification Id="2" Title="Notification #2" ImageUrl="pack://application:,,,/Notifications/Resources/error.png" Message="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
@@ -77,6 +77,6 @@
                 <Notification Id="4" Title="Notification #5" ImageUrl="pack://application:,,,/Notifications/Resources/alert.png" Message="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
                 <Notification Id="4" Title="Notification #6" ImageUrl="pack://application:,,,/Notifications/Resources/alert.png" Message="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
             </NotificationCollection>
-        </ItemsControl.DataContext>
+        </ItemsControl.DataContext>-->
     </ItemsControl>
 </Window>

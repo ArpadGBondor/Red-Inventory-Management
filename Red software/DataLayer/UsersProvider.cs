@@ -94,6 +94,39 @@ namespace DataLayer
             return lSuccess;
         }
 
+        public static bool DeleteUser(string userID)
+        {
+            bool lSuccess = false;
+            bool lExist = false;
+            if (Database.OpenConnection())
+            {
+                DataContext db = new DataContext(Database.get_connectionString);
+                Table<UserEntity> Users = db.GetTable<UserEntity>();
+                var q = from u in Users
+                        where (u.Username == userID)
+                        select u;
+                foreach (var user in q)
+                {
+                    lExist = true;
+                    Users.DeleteOnSubmit(user);
+                }
+                if (lExist)
+                {
+                    try
+                    {
+                        db.SubmitChanges();
+                        lSuccess = true;
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                Database.CloseConnection();
+            }
+            return lSuccess;
+        }
+
 
         //Table<Customer> Customers = db.GetTable<Customer>();
 

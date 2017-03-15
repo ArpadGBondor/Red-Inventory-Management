@@ -56,16 +56,15 @@ namespace DataLayer
                 //The two most common error numbers when connecting are as follows:
                 //0: Cannot connect to server.
                 //1045: Invalid user name and/or password.
-                switch (ex.Number)
-                {
-
-                    //case 1045:
-                    //    MessageBox.Show("Invalid username/password, please try again");
-                    //    break;
-                    //default:
-                    //    MessageBox.Show("Cannot connect to database. \nSelect the Database.mdf file, or contact an administrator."/* + ex.Number.ToString()*/);
-                    //    break;
-                }
+                //switch (ex.Number)
+                //{
+                //    //case 1045:
+                //    //    MessageBox.Show("Invalid username/password, please try again");
+                //    //    break;
+                //    //default:
+                //    //    MessageBox.Show("Cannot connect to database. \nSelect the Database.mdf file, or contact an administrator."/* + ex.Number.ToString()*/);
+                //    //    break;
+                //}
                 return false;
             }
         }
@@ -111,7 +110,7 @@ namespace DataLayer
             tempDc.ExecuteCommand(sqlAsString);
         }
 
-        private static bool TableExists(Type linqTableClass)
+        public static bool TableExists(Type linqTableClass)
         {        
             try
             {
