@@ -22,12 +22,19 @@ namespace DataLayer.Tests
         [TestMethod()]
         public void IsEmptyUserDatabaseTest()
         {
-            bool IsEmpty = UsersProvider.IsEmptyUserDatabase();
-            Assert.IsTrue(IsEmpty);
+            Assert.IsTrue(UsersProvider.IsEmptyUserDatabase());
+            string[] good_parameters = { "", "a", "1234567890" };
+            foreach (var p in good_parameters)
+            {
+                Assert.IsTrue(UsersProvider.NewUser(p, p));
+                Assert.IsFalse(UsersProvider.IsEmptyUserDatabase());
+                Assert.IsTrue(UsersProvider.DeleteUser(p));
+            }
+            Assert.IsTrue(UsersProvider.IsEmptyUserDatabase());
         }
 
         [TestMethod()]
-        public void AddDeleteUserTest()
+        public void NewDeleteUserTest()
         {
             string[] good_parameters = { "", "a", "1234567890" };
             string[] bad_parameters = { "", " ", "a", "1234567890", null };

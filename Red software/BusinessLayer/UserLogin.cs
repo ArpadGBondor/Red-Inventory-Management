@@ -9,12 +9,19 @@ namespace BusinessLayer
 {
     public class UserLogin
     {
-        static UserLogin()
-        {
-            userID = "";
-        }
         private static string userID;
-        public static string UserID { get { return userID; } set { userID = value;} } 
+        public static string UserID
+        {
+            get
+            {
+                if (userID == null) userID = "";
+                return userID;
+            }
+            set
+            {
+                userID = value;
+            }
+        } 
         public static bool IsEmptyUserDatabase()
         {
             return UsersProvider.IsEmptyUserDatabase();
@@ -30,6 +37,10 @@ namespace BusinessLayer
         public static bool AddUser(string userID, string password)
         {
             return UsersProvider.NewUser(userID, password);
+        }
+        public static bool RemoveUser(string userID)
+        {
+            return UsersProvider.DeleteUser(userID);
         }
     }
 }

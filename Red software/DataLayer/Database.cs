@@ -18,9 +18,9 @@ namespace DataLayer
         private static SqlConnection connection;
         private static string connectionString;
         private static string server;
-        private static string database;
-        private static string uid;
-        private static string password;
+        //private static string database;
+        //private static string uid;
+        //private static string password;
         private static string file;
         public static SqlConnection get_connection { get { return connection; } }
         public static string get_connectionString { get { return connectionString; } }
@@ -49,7 +49,7 @@ namespace DataLayer
                 connection.Open();
                 return true;
             }
-            catch (SqlException ex)
+            catch /*(SqlException ex)*/
             {
                 //When handling errors, you can your application's response based 
                 //on the error number.
@@ -77,7 +77,7 @@ namespace DataLayer
                 connection.Close();
                 return true;
             }
-            catch (SqlException ex)
+            catch /*(SqlException ex)*/
             {
                 return false;
             }
@@ -125,7 +125,7 @@ namespace DataLayer
                 else
                     return false;
             }
-            catch (Exception e)
+            catch /*(Exception e)*/
             {
                 return false;
             }
