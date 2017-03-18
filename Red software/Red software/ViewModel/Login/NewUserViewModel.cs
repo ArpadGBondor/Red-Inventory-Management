@@ -4,10 +4,11 @@ using System.Windows;
 using System.Windows.Input;
 using BusinessLayer;
 using Red_software.Notifications;
+using Red_software.Model;
 
 namespace Red_software.ViewModel
 {
-    class NewUserViewModel : INotifyPropertyChanged
+    class NewUserViewModel : BindableBase
     {
         private string userID;
         private string password;
@@ -17,58 +18,40 @@ namespace Red_software.ViewModel
         {
             get
             {
-                if (userID == null)
-                    userID = "";
+                if (userID == null) userID = "";
                 return userID;
             }
-            set
-            {
-                if (userID == value) return;
-                userID = value;
-                RaisePropertyChanged("UserID");
-            }
+            set { SetProperty(ref userID, value); }
         }
         public string Password
         {
             get
             {
-                if (password == null)
-                    password = "";
+                if (password == null) password = "";
                 return password;
             }
-            set
-            {
-                if (password == value) return;
-                password = value;
-                RaisePropertyChanged("Password");
-            }
+            set { SetProperty(ref password, value); }
         }
         public string Confirm
         {
             get
             {
-                if (confirm == null)
-                    confirm = "";
+                if (confirm == null) confirm = "";
                 return confirm;
             }
-            set
-            {
-                if (confirm == value) return;
-                confirm = value;
-                RaisePropertyChanged("Confirm");
-            }
+            set { SetProperty(ref confirm, value); }
         }
 
-        private ICommand click_AddUser;
+        private ICommand click_AddUserCommand;
 
-        public ICommand Click_AddUser
+        public ICommand Click_AddUserCommand
         {
             get
             {
-                if (click_AddUser == null)
-                    click_AddUser = new RelayCommand(new Action<object>(AddUser));
-                return click_AddUser;
+                if (click_AddUserCommand == null) click_AddUserCommand = new RelayCommand(new Action<object>(AddUser));
+                return click_AddUserCommand;
             }
+            set { SetProperty(ref click_AddUserCommand, value); }
         }
         private void AddUser(object parameter)
         {
@@ -96,13 +79,5 @@ namespace Red_software.ViewModel
                 }
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-
     }
 }

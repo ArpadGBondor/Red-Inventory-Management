@@ -5,19 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Red_software"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Style="{StaticResource windowStyle}" WindowState="Maximized" Closing="Window_Closing" Icon="/Red software;component/Resources/Icon.png">
+        Title="MainWindow" Height="600" Width="800" 
+        Style="{StaticResource windowStyle}" 
+        WindowState="Maximized" Closing="Window_Closing" 
+        Icon="/Red software;component/Resources/Icon.png">
 
-    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="1" Content="Under construction" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42"/>
-        <Button Grid.Row="3" Click="Button_Click" Margin="10">Notification test button</Button>
-
+        <Border Margin="10" CornerRadius="10" Background="#FFCEF3D5">
+            <WrapPanel Grid.Row="0">
+                <Button Content="Tables" Style="{StaticResource MainMenuButton}" Command="{Binding SwitchViewCommand}" CommandParameter="TablesMenu" />
+                <Button Content="Transactions" Style="{StaticResource MainMenuButton}"/>
+                <Button Content="Settings" Style="{StaticResource MainMenuButton}" Command="{Binding SwitchViewCommand}" CommandParameter="SettingsMenu" />
+            </WrapPanel>
+        </Border>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"/>
+        <Label Grid.Row="2" FontSize="10" FontFamily="Comic Sans MS" Foreground="White">Copyright © 2017 Arpad Gabor Bondor. All rights reserved.</Label>
     </Grid>
-
-
 </Window>

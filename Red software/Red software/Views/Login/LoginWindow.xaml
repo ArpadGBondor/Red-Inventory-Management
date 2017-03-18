@@ -24,7 +24,7 @@
 
         <TextBox x:Name="usernameTextBox" Text="{Binding UserID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="10" />
         <PasswordBox x:Name="passwordPasswordBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10"  />
-        <Button x:Name="LoginButton" Command="{Binding Click_Login}" CommandParameter="{Binding ElementName=passwordPasswordBox}" Grid.Column="2" Grid.Row="2" Content="Login" Margin="10" />
-        <Button x:Name="SetupButton" Command="{Binding Click_Setup}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Setup connection" Margin="10" />
+        <Button x:Name="LoginButton" Command="{Binding Click_LoginCommand}" CommandParameter="{Binding ElementName=passwordPasswordBox}" Grid.Column="2" Grid.Row="2" Content="Login" Margin="10" />
+        <Button x:Name="SetupButton" Command="{Binding Click_SetupCommand}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Setup connection" Margin="10" />
     </Grid>
 </Window>

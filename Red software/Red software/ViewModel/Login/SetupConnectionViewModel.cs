@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using Microsoft.Win32;
+using Red_software.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ using System.Windows.Input;
 
 namespace Red_software.ViewModel
 {
-    class SetupConnectionViewModel : INotifyPropertyChanged
+    class SetupConnectionViewModel : BindableBase
     {
         public string File
         {
@@ -34,21 +35,15 @@ namespace Red_software.ViewModel
             }
         }
 
-        private ICommand change_database_file;
-        public ICommand Change_Database_File
+        private ICommand change_database_fileCommand;
+        public ICommand Change_Database_FileCommand
         {
             get
             {
-                if (change_database_file == null)
-                    change_database_file = new RelayCommand(new Action<object>(Change_File));
-                return change_database_file;
+                if (change_database_fileCommand == null) change_database_fileCommand = new RelayCommand(new Action<object>(Change_File));
+                return change_database_fileCommand;
             }
-            set
-            {
-                if (change_database_file == value) return;
-                change_database_file = value;
-                RaisePropertyChanged("Change_Database_File");
-            }
+            set { SetProperty(ref change_database_fileCommand, value); }
         }
 
         private void Change_File(object parameter)
@@ -60,13 +55,6 @@ namespace Red_software.ViewModel
                 RaisePropertyChanged("File");
                 RaisePropertyChanged("ConnectionState");
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

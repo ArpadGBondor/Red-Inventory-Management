@@ -85,6 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\BindableBase.cs" />
     <Compile Include="Notifications\GrowlNotifiactions.xaml.cs">
       <DependentUpon>GrowlNotifiactions.xaml</DependentUpon>
     </Compile>
@@ -92,13 +93,26 @@
     <Compile Include="Notifications\NotificationProvider.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Login\NewUserViewModel.cs" />
-    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="ViewModel\Login\SetupConnectionViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\Settings\SettingsMenuViewModel.cs" />
+    <Compile Include="ViewModel\Tables\TablesMenuViewModel.cs" />
+    <Compile Include="ViewModel\Settings\UsersViewModel.cs" />
     <Compile Include="Views\Login\NewUserWindow.xaml.cs">
       <DependentUpon>NewUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login\SetupConnectionWindow.xaml.cs">
       <DependentUpon>SetupConnectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsMenuView.xaml.cs">
+      <DependentUpon>SettingsMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\TablesMenuView.xaml.cs">
+      <DependentUpon>TablesMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
     <Page Include="Notifications\GrowlNotifiactions.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +121,14 @@
     <Page Include="Notifications\Resources\ButtonStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewModel\ViewModels.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\MainResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Login\LoginWindow.xaml">
       <SubType>Designer</SubType>
@@ -132,6 +154,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Login\SetupConnectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\SettingsMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\TablesMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\UsersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,10 +231,12 @@
       <Project>{4a53006b-d0ba-4069-8322-60cb6ab87393}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EntityLayer\EntityLayer.csproj">
+      <Project>{9a9da9f8-9527-4ddf-adeb-c10831c494b0}</Project>
+      <Name>EntityLayer</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

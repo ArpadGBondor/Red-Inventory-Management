@@ -1,98 +1,61 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Red_software;
+using Red_software.Model;
 
 namespace Red_software.Notifications
 {
-    public class Notification : INotifyPropertyChanged
+    public class Notification : BindableBase
     {
-        public Notification()
-        {
-            BGColor = "#2a3345";
-            TextColor = "White";
-        }
         private string message;
         public string Message
         {
             get { return message; }
-
-            set
-            {
-                if (message == value) return;
-                message = value;
-                OnPropertyChanged("Message");
-            }
+            set { SetProperty(ref message, value); }
         }
 
         private int id;
         public int Id
         {
             get { return id; }
-
-            set
-            {
-                if (id == value) return;
-                id = value;
-                OnPropertyChanged("Id");
-            }
+            set { SetProperty(ref id, value); }
         }
 
         private string imageUrl;
         public string ImageUrl
         {
             get { return imageUrl; }
-
-            set
-            {
-                if (imageUrl == value) return;
-                imageUrl = value;
-                OnPropertyChanged("ImageUrl");
-            }
+            set { SetProperty(ref imageUrl, value); }
         }
 
         private string title;
         public string Title
         {
             get { return title; }
-
-            set
-            {
-                if (title == value) return;
-                title = value;
-                OnPropertyChanged("Title");
-            }
+            set { SetProperty(ref title, value); }
         }
 
         private string bgcolor;
         public string BGColor
         {
-            get { return bgcolor; }
-            set
+            get
             {
-                if (bgcolor == value) return;
-                bgcolor = value;
-                OnPropertyChanged("BGColor");
+                if (bgcolor == null) bgcolor = "#2a3345";
+                return bgcolor;
             }
+            set { SetProperty(ref bgcolor, value); }
         }
 
         private string textcolor;
         public string TextColor
         {
-            get { return textcolor; }
-            set
+            get
             {
-                if (textcolor == value) return;
-                textcolor = value;
-                OnPropertyChanged("TextColor");
+                if (textcolor == null) textcolor = "White";
+                return textcolor;
             }
+            set { SetProperty(ref textcolor, value); }
         }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public class NotificationCollection : ObservableCollection<Notification> { }

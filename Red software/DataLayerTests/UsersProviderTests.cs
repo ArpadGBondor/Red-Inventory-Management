@@ -68,11 +68,11 @@ namespace DataLayer.Tests
             foreach (var p in parameters)
             {
                 UsersProvider.NewUser(p, p);
-                foreach(var pw in parameters)
+                foreach (var pw in parameters)
                 {
                     if (p == pw)
                     {
-                        Assert.IsTrue(UsersProvider.IsValidPassword(p,pw));
+                        Assert.IsTrue(UsersProvider.IsValidPassword(p, pw));
                     }
                     else
                     {
@@ -80,6 +80,13 @@ namespace DataLayer.Tests
                     }
                 }
             }
+        }
+
+        [TestMethod()]
+        public void ListUsersTest()
+        {
+            UsersProvider.ListUsers();
+
         }
     }
 }

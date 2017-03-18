@@ -25,7 +25,7 @@
         <TextBox Text="{Binding File}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"  />
 
 
-        <Button x:Name="SelectFileButton" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Select database file" Margin="10" Command="{Binding Change_Database_File}" />
+        <Button x:Name="SelectFileButton" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Select database file" Margin="10" Command="{Binding Change_Database_FileCommand}" />
         <Button x:Name="BackButton" Grid.Column="2" Grid.Row="2" Content="Back" Margin="10" Click="BackButton_Click" />
 
 

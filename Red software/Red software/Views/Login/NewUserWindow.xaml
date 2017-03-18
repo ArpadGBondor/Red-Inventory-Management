@@ -24,6 +24,6 @@
         <TextBox Name="userIDTextBox" Text="{Binding UserID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="10" />
         <TextBox Name="PasswordTextBox" Text="{Binding Password, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="10" />
         <TextBox Name="ConfirmTextBox" Text="{Binding Confirm, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="10" />
-        <Button Command="{Binding Click_AddUser}" Grid.Row="3" Grid.ColumnSpan="2" Content="Add new user" Margin="10" />
+        <Button Command="{Binding Click_AddUserCommand}" Grid.Row="3" Grid.ColumnSpan="2" Content="Add new user" Margin="10" />
     </Grid>
 </Window>

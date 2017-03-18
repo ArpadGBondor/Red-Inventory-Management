@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer;
+using EntityLayer;
 
 namespace BusinessLayer
 {
@@ -57,6 +58,13 @@ namespace BusinessLayer
                 throw new System.ArgumentException("Wrong password.", "userID");
             }
             loginedUser = userID;
+        }
+        public static List<UserEntity> ListUsers()
+        {
+            var list = UsersProvider.ListUsers();
+            foreach (var u in list)
+                u.Password = "******";
+            return list;
         }
     }
 }

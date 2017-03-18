@@ -5,17 +5,13 @@ using System.Windows.Controls;
 using System.Windows;
 using BusinessLayer;
 using Red_software.Views;
+using Red_software.Model;
 using Red_software.Notifications;
 
 namespace Red_software.ViewModel
 {
-    class LoginViewModel : INotifyPropertyChanged
+    class LoginViewModel : BindableBase
     {
-        public LoginViewModel()
-        {
-            UserID = "";
-            Password = "";
-        }
         private string userID;
         private string password;
         public Window LoginWindow { get; set; }
@@ -23,46 +19,32 @@ namespace Red_software.ViewModel
         {
             get
             {
+                if (userID == null) userID = "";
                 return userID;
             }
-            set
-            {
-                if (userID == value) return;
-                userID = value;
-                RaisePropertyChanged("UserID");
-            }
+            set { SetProperty(ref userID, value); }
         }
         public string Password
         {
             get
             {
+                if (password == null) password = "";
                 return password;
             }
-            set
-            {
-                if (password == value) return;
-                password = value;
-                RaisePropertyChanged("Password");
-            }
+            set { SetProperty(ref password, value); }
         }
 
-        private ICommand click_Login;
-        public ICommand Click_Login
+        private ICommand click_LoginCommand;
+        public ICommand Click_LoginCommand
         {
             get
             {
-                if (click_Login == null)
-                    click_Login = new RelayCommand(new Action<object>(Login));
-                return click_Login;
+                if (click_LoginCommand == null) click_LoginCommand = new RelayCommand(new Action<object>(Login));
+                return click_LoginCommand;
             }
-            set
-            {
-                if (click_Login == value) return;
-                click_Login = value;
-                RaisePropertyChanged("Click_Login");
-            }
+            set { SetProperty(ref click_LoginCommand, value); }
         }
-        
+
         private void Login(object parameter)
         {
             PasswordBox pwBox = (PasswordBox)parameter;
@@ -87,34 +69,21 @@ namespace Red_software.ViewModel
             }
         }
 
-        private ICommand click_Setup;
-        public ICommand Click_Setup
+        private ICommand click_SetupCommand;
+        public ICommand Click_SetupCommand
         {
             get
             {
-                if (click_Setup == null)
-                    click_Setup = new RelayCommand(new Action<object>(Setup));
-                return click_Setup;
+                if (click_SetupCommand == null) click_SetupCommand = new RelayCommand(new Action<object>(Setup));
+                return click_SetupCommand;
             }
-            set
-            {
-                if (click_Setup == value) return;
-                click_Setup = value;
-                RaisePropertyChanged("Click_Setup");
-            }
+            set { SetProperty(ref click_SetupCommand, value); }
         }
 
         private void Setup(object parameter)
         {
             Views.SetupConnectionWindow setupWindow = new SetupConnectionWindow();
             setupWindow.ShowDialog();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace Red_software.ViewModel
+namespace Red_software.Model
 {
     public class RelayCommand : ICommand
     {
@@ -31,6 +31,10 @@ namespace Red_software.ViewModel
         public void Execute(object parameter)
         {
             _execute(parameter);
+        }
+        public void CheckAndExecute(object parameter)
+        {
+            if (CanExecute(parameter)) Execute(parameter);
         }
         #endregion
         // ICommand Members

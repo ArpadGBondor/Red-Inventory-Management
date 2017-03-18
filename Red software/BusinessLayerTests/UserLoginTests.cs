@@ -95,7 +95,7 @@ namespace BusinessLayer.Tests
         public void LoginTest()
         {
             Assert.AreEqual(UserLogin.LoginedUser, "");
-            string[] parameters = {"", " ", "a", "1234567890", "god", "qwerty", null };
+            string[] parameters = { "", " ", "a", "1234567890", "god", "qwerty", null };
             foreach (var p in parameters)
             {
                 try
@@ -115,7 +115,7 @@ namespace BusinessLayer.Tests
                     }
                     catch
                     {
-                        if(string.IsNullOrWhiteSpace(p1) || string.IsNullOrWhiteSpace(p1))
+                        if (string.IsNullOrWhiteSpace(p1) || string.IsNullOrWhiteSpace(p1))
                         {
                             //Assert.IsTrue(true);
                         }
@@ -128,6 +128,12 @@ namespace BusinessLayer.Tests
             foreach (var p in parameters)
                 if (!string.IsNullOrWhiteSpace(p))
                     Assert.IsTrue(UserLogin.RemoveUser(p));
+        }
+
+        [TestMethod()]
+        public void ListUsersTest()
+        {
+            UserLogin.ListUsers();
         }
     }
 }

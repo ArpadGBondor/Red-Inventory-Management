@@ -127,32 +127,17 @@ namespace DataLayer
             return lSuccess;
         }
 
+        public static List<UserEntity> ListUsers()
+        {
+            List<UserEntity> list = new List<UserEntity>(); ;
+            if (Database.OpenConnection())
+            {
+                DataContext db = new DataContext(Database.get_connectionString);
+                list.AddRange(db.GetTable<UserEntity>());
+                Database.CloseConnection();
+            }
 
-        //Table<Customer> Customers = db.GetTable<Customer>();
-
-        //Customers.InsertOnSubmit(new Customer("ID007", "London"));
-        //// Submit the change to the database.
-        //try
-        //{
-        //    db.SubmitChanges();
-        //}
-        //catch (Exception e)
-        //{
-        //    MessageBox.Show(e.ToString());
-        //}
-
-
-        //// Query for customers from London
-        //var q =
-        //   from c in Customers
-        //   where c.City == "London"
-        //   select c;
-        //foreach (var cust in q)
-        //    MessageBox.Show(String.Format("id = {0}, City = {1}", cust.CustomerID, cust.City));
-
-
-
-
-
+            return list;
+        }
     }
 }
