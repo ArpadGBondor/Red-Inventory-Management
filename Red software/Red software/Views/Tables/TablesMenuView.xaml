@@ -11,7 +11,16 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label>String String String String String String String String String String String</Label>
-        
+        <Border  Grid.Column="0" Margin="10" CornerRadius="10" Background="#FFFFFFB9">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource MainMenuButton}" Content="Products" Command="{Binding SwitchViewCommand}" CommandParameter="Products"/>
+            </Grid>
+        </Border>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}"/>
     </Grid>
 </UserControl>

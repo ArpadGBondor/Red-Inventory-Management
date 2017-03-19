@@ -11,17 +11,9 @@
         <views:SettingsMenuView/>
     </DataTemplate>
     <DataTemplate DataType = "{x:Type viewModels:UsersViewModel}">
-        <views:UsersView/>
+        <views:TableView/>
     </DataTemplate>
-
-    <!--<DataTemplate DataType = "{x:Type entities:UserEntity}">
-
-        <StackPanel Orientation = "Horizontal">
-
-            <TextBlock Text = "{Binding Path = Username, Mode = OneWay}" Width = "100" Margin = "3 5 3 5"/>
-
-            <TextBlock Text = "******" Width = "100" Margin = "0 5 3 5"/>
-        </StackPanel>
-    </DataTemplate>-->
-
+    <DataTemplate DataType = "{x:Type viewModels:ProductsViewModel}">
+        <views:TableView/>
+    </DataTemplate>
 </ResourceDictionary>

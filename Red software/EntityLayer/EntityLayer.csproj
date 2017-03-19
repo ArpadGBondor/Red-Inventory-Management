@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerEntity.cs" />
+    <Compile Include="EntityCloner.cs" />
+    <Compile Include="ProductEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserEntity.cs" />
   </ItemGroup>

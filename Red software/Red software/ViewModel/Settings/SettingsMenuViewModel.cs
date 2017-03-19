@@ -19,11 +19,7 @@ namespace Red_software.ViewModel
         private BindableBase currentViewModel;
         public BindableBase CurrentViewModel
         {
-            get
-            {
-                //if (currentViewModel == null) currentViewModel = new TablesMenuViewModel();
-                return currentViewModel;
-            }
+            get { return currentViewModel; }
             set { SetProperty(ref currentViewModel, value); }
         }
         private ICommand switchViewCommand;
@@ -39,7 +35,6 @@ namespace Red_software.ViewModel
         private void Navigate(object parameter)
         {
             string destination = (string)parameter;
-            NotificationProvider.Info("Navigate", destination);
             switch (destination)
             {
                 case "Users":

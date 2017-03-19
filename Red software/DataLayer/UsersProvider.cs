@@ -129,15 +129,7 @@ namespace DataLayer
 
         public static List<UserEntity> ListUsers()
         {
-            List<UserEntity> list = new List<UserEntity>(); ;
-            if (Database.OpenConnection())
-            {
-                DataContext db = new DataContext(Database.get_connectionString);
-                list.AddRange(db.GetTable<UserEntity>());
-                Database.CloseConnection();
-            }
-
-            return list;
+            return Database.ListTable<UserEntity>();
         }
     }
 }

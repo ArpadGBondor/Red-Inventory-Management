@@ -86,19 +86,26 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\EditItemModel.cs" />
+    <Compile Include="Model\TableModel.cs" />
     <Compile Include="Notifications\GrowlNotifiactions.xaml.cs">
       <DependentUpon>GrowlNotifiactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Notifications\NotificationProvider.cs" />
+    <Compile Include="ViewModel\EditProductViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Login\NewUserViewModel.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="ViewModel\Login\SetupConnectionViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\Tables\ProductsViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsMenuViewModel.cs" />
     <Compile Include="ViewModel\Tables\TablesMenuViewModel.cs" />
     <Compile Include="ViewModel\Settings\UsersViewModel.cs" />
+    <Compile Include="Views\Tables\EditItemView.xaml.cs">
+      <DependentUpon>EditItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login\NewUserWindow.xaml.cs">
       <DependentUpon>NewUserWindow.xaml</DependentUpon>
     </Compile>
@@ -111,8 +118,8 @@
     <Compile Include="Views\Tables\TablesMenuView.xaml.cs">
       <DependentUpon>TablesMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Settings\UsersView.xaml.cs">
-      <DependentUpon>UsersView.xaml</DependentUpon>
+    <Compile Include="Views\Tables\TableView.xaml.cs">
+      <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
     <Page Include="Notifications\GrowlNotifiactions.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\MainResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\EditItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,7 +176,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Settings\UsersView.xaml">
+    <Page Include="Views\Tables\TableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,69 @@
+﻿<Window x:Class="Red_software.Views.EditItemView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Red_software.Views"
+        xmlns:entities="clr-namespace:EntityLayer;assembly=EntityLayer"
+        mc:Ignorable="d"
+        Name="EditItemWindow"
+        Title="{Binding TitleText}" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"  Style="{StaticResource windowStyle}">
+    <Grid Width="Auto" Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Content="{Binding Item}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type entities:ProductEntity}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Product Id:" TextAlignment="Right" Margin="5"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Id, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Product name:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Name, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Product code:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Code, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Product category:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="3" Text="{Binding Category, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Cost price:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Cost_Price, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Sell price:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Sell_Price, Mode=TwoWay}" Margin="5" />
+                        
+                    </Grid>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+
+        <Grid Grid.Row="1" Width="Auto" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Content="{Binding OkButtonText}" Margin="10" FontSize="24" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=EditItemWindow}"/>
+            <Button Grid.Column="3" Content="Cancel" Margin="10" FontSize="24" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=EditItemWindow}" />
+        </Grid>
+    </Grid>
+</Window>

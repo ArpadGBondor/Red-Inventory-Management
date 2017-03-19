@@ -151,6 +151,19 @@ namespace DataLayer
             // TODO: automatic
         }
 
+        public static List<T> ListTable<T>() where T : class
+        {
+            List<T> list = new List<T>(); ;
+            if (Database.OpenConnection())
+            {
+                DataContext db = new DataContext(Database.get_connectionString);
+                list.AddRange(db.GetTable<T>());
+                Database.CloseConnection();
+            }
+
+            return list;
+        }
+
 
         //
         ////CreateTable(typeof(Customer), db);
