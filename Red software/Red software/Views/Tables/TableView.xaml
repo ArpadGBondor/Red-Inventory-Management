@@ -45,6 +45,17 @@
                             </ListView.View>
                         </ListView>
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:ProductCategoriesViewModel}">
+                        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                                    <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
+                                    <GridViewColumn Header="Subcategory" DisplayMemberBinding="{Binding SubCategory}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>

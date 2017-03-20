@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using EntityLayer;
+using System.Linq.Expressions;
 
 namespace DataLayer
 {
@@ -151,17 +152,127 @@ namespace DataLayer
             // TODO: automatic
         }
 
-        public static List<T> ListTable<T>() where T : class
+        public static List<Entity> ListTable<Entity>(Expression<Func<Entity, bool>> condition) where Entity : class
         {
-            List<T> list = new List<T>(); ;
+            List<Entity> list = new List<Entity>(); ;
             if (Database.OpenConnection())
             {
-                DataContext db = new DataContext(Database.get_connectionString);
-                list.AddRange(db.GetTable<T>());
+                DataContext db = new DataContext(Database.get_connectionString);                
+                Table<Entity> EntityTable = db.GetTable<Entity>();
+                var query = EntityTable.Where(condition);
+                list.AddRange(query);
                 Database.CloseConnection();
             }
 
             return list;
+        }
+
+        public static bool IsExist<Entity>(Expression<Func<Entity, bool>> condition) where Entity : class
+        {
+            bool lExist = false;
+            if (Database.OpenConnection())
+            {
+                DataContext db = new DataContext(Database.get_connectionString);
+                Table<Entity> EntityTable = db.GetTable<Entity>();
+                var query = EntityTable.Where(condition);
+                lExist = (query.Count() > 0); 
+                Database.CloseConnection();
+            }
+
+            return lExist;
+        }
+
+        public static bool Add<Entity>(Entity record) where Entity : class
+        {
+            bool lSuccess = false;
+
+            if (Database.OpenConnection())
+            {
+                DataContext db = new DataContext(Database.get_connectionString);
+                Table<Entity> EntityTable = db.GetTable<Entity>();
+                EntityTable.InsertOnSubmit(record);
+                try
+                {
+                    db.SubmitChanges();
+                    lSuccess = true;
+                }
+                catch
+                {
+
+                }
+                Database.CloseConnection();
+            }
+            return lSuccess;
+        }
+
+        public static bool Modify<Entity>(Entity record, Expression<Func<Entity,bool>> condition) where Entity : class
+        {
+            bool lSuccess = false;
+            bool lExist = false;
+
+            if (Database.OpenConnection())
+            {
+                DataContext db = new DataContext(Database.get_connectionString);
+                Table<Entity> EntityTable = db.GetTable<Entity>();
+                var query = EntityTable.Where(condition);
+                foreach (var rec in query)
+                {
+                    lExist = true;
+
+                    PropertyInfo[] properties = typeof(Entity).GetProperties();
+                    foreach (PropertyInfo property in properties)
+                    {
+                        property.SetValue(rec, property.GetValue(record));
+                    }
+                }
+                if (lExist)
+                {
+                    try
+                    {
+                        db.SubmitChanges();
+                        lSuccess = true;
+                    }
+                    catch /*(Exception e)*/
+                    {
+                        // Cannot modify primary key
+                    }
+                }
+                Database.CloseConnection();
+            }
+            return lSuccess;
+        }
+
+        public static bool Remove<Entity>(Expression<Func<Entity, bool>> condition) where Entity : class
+        {
+            bool lSuccess = false;
+            bool lExist = false;
+
+            if (Database.OpenConnection())
+            {
+                DataContext db = new DataContext(Database.get_connectionString);
+                Table<Entity> EntityTable = db.GetTable<Entity>();
+                var query = EntityTable.Where(condition);
+                   
+                foreach (var rec in query)
+                {
+                    lExist = true;
+                    EntityTable.DeleteOnSubmit(rec);
+                }
+                if (lExist)
+                {
+                    try
+                    {
+                        db.SubmitChanges();
+                        lSuccess = true;
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                Database.CloseConnection();
+            }
+            return lSuccess;
         }
 
 

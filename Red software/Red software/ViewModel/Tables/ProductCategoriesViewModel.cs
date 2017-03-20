@@ -1,37 +1,35 @@
-﻿using Red_software.Model;
-using Red_software.Notifications;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+using Red_software.Model;
 using EntityLayer;
 using BusinessLayer;
 using Red_software.Views;
+using Red_software.Notifications;
 
 namespace Red_software.ViewModel
 {
-    public class ProductsViewModel : TableModel<ProductEntity>
+    public class ProductCategoriesViewModel : TableModel<ProductCategoryEntity>
     {
         protected override void DeleteItem(object parameter)
         {
-            ManageProducts.DeleteProduct(SelectedItem);
+            ManageProducts.DeleteProductCategory(SelectedItem);
             RefreshList(parameter);
         }
 
         protected override void EditItem(object parameter)
         {
-            ProductEntity Item = new ProductEntity();
-            EntityCloner.CloneProperties<ProductEntity>(Item, SelectedItem);
-            EditProductViewModel EPVM = new EditProductViewModel(Item, false);
+            ProductCategoryEntity Item = new ProductCategoryEntity();
+            EntityCloner.CloneProperties<ProductCategoryEntity>(Item, SelectedItem);
+            EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, false);
             EditItemView EIV = new EditItemView() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {
                 Item = EPVM.Item;
-                ManageProducts.ModifyProduct(Item);
+                ManageProducts.ModifyProductCategory(Item);
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -41,13 +39,13 @@ namespace Red_software.ViewModel
 
         protected override void NewItem(object parameter)
         {
-            ProductEntity Item = new ProductEntity();
-            EditProductViewModel EPVM = new EditProductViewModel(Item, true);
+            ProductCategoryEntity Item = new ProductCategoryEntity();
+            EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, true);
             EditItemView EIV = new EditItemView() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {
-                ManageProducts.NewProduct(EPVM.Item);
+                ManageProducts.NewProductCategory(EPVM.Item);
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -57,8 +55,7 @@ namespace Red_software.ViewModel
 
         protected override void RefreshList(object parameter)
         {
-            this.List = ManageProducts.ListProducts();
+            List = ManageProducts.ListProductCategories();
         }
     }
-
 }

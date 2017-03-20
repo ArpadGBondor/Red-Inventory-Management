@@ -51,6 +51,30 @@
                         
                     </Grid>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type entities:ProductCategoryEntity}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Category Id:" TextAlignment="Right" Margin="5"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Id, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Category name:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Category, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Subcategory name:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding SubCategory, Mode=TwoWay}" Margin="5" />
+                    </Grid>
+                </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
 

@@ -69,67 +69,28 @@ namespace DataLayer
 
         public static bool NewUser(string userID,string password)
         {
-            bool lSuccess = false;
-            if (!IsValidUserID(userID))
-                if (Database.OpenConnection())
-                {
-                    DataContext db = new DataContext(Database.get_connectionString);
-                    Table<UserEntity> Users = db.GetTable<UserEntity>();
-                    Users.InsertOnSubmit(
-                        new UserEntity(
-                            userID,
-                            EncriptionProvider.ComputeHash(password, EncriptionProvider.Supported_HA.SHA256, null)));
-
-                    try
-                    {
-                        db.SubmitChanges();
-                        lSuccess = true;
-                    }
-                    catch
-                    {
-
-                    }
-                    Database.CloseConnection();
-                }
-            return lSuccess;
+            UserEntity User = new UserEntity( userID, EncriptionProvider.ComputeHash(password, EncriptionProvider.Supported_HA.SHA256, null));
+            return Database.Add<UserEntity>(User);
         }
 
         public static bool DeleteUser(string userID)
         {
-            bool lSuccess = false;
-            bool lExist = false;
-            if (Database.OpenConnection())
-            {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<UserEntity> Users = db.GetTable<UserEntity>();
-                var q = from u in Users
-                        where (u.Username == userID)
-                        select u;
-                foreach (var user in q)
-                {
-                    lExist = true;
-                    Users.DeleteOnSubmit(user);
-                }
-                if (lExist)
-                {
-                    try
-                    {
-                        db.SubmitChanges();
-                        lSuccess = true;
-                    }
-                    catch
-                    {
+            return Database.Remove<UserEntity>(p => p.Username == userID);
+        }
 
-                    }
-                }
-                Database.CloseConnection();
+        public static bool Modify(string oldUserID, string newUserId, string password)
+        {
+            UserEntity User = new UserEntity(newUserId, EncriptionProvider.ComputeHash(password, EncriptionProvider.Supported_HA.SHA256, null));
+            if (oldUserID != newUserId) 
+            {
+                return (DeleteUser(oldUserID) && NewUser(newUserId, password));
             }
-            return lSuccess;
+            return Database.Modify<UserEntity>(User, p => p.Username == oldUserID);
         }
 
         public static List<UserEntity> ListUsers()
         {
-            return Database.ListTable<UserEntity>();
+            return Database.ListTable<UserEntity>(p => true);
         }
     }
 }

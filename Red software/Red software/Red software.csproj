@@ -93,17 +93,23 @@
     </Compile>
     <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Notifications\NotificationProvider.cs" />
-    <Compile Include="ViewModel\EditProductViewModel.cs" />
+    <Compile Include="ViewModel\Tables\Edit\EditProductCategoryViewModel.cs" />
+    <Compile Include="ViewModel\Tables\Edit\EditProductViewModel.cs" />
+    <Compile Include="ViewModel\Login\EditUserViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Login\NewUserViewModel.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="ViewModel\Login\SetupConnectionViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\Tables\ProductCategoriesViewModel.cs" />
     <Compile Include="ViewModel\Tables\ProductsViewModel.cs" />
-    <Compile Include="ViewModel\Settings\SettingsMenuViewModel.cs" />
-    <Compile Include="ViewModel\Tables\TablesMenuViewModel.cs" />
-    <Compile Include="ViewModel\Settings\UsersViewModel.cs" />
-    <Compile Include="Views\Tables\EditItemView.xaml.cs">
+    <Compile Include="ViewModel\Menu\SettingsMenuViewModel.cs" />
+    <Compile Include="ViewModel\Menu\TablesMenuViewModel.cs" />
+    <Compile Include="ViewModel\Tables\UsersViewModel.cs" />
+    <Compile Include="Views\Login\EditUserView.xaml.cs">
+      <DependentUpon>EditUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\Edit\EditItemView.xaml.cs">
       <DependentUpon>EditItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login\NewUserWindow.xaml.cs">
@@ -112,10 +118,10 @@
     <Compile Include="Views\Login\SetupConnectionWindow.xaml.cs">
       <DependentUpon>SetupConnectionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Settings\SettingsMenuView.xaml.cs">
+    <Compile Include="Views\Menu\SettingsMenuView.xaml.cs">
       <DependentUpon>SettingsMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Tables\TablesMenuView.xaml.cs">
+    <Compile Include="Views\Menu\TablesMenuView.xaml.cs">
       <DependentUpon>TablesMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tables\TableView.xaml.cs">
@@ -137,7 +143,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Tables\EditItemView.xaml">
+    <Page Include="Views\Login\EditUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\Edit\EditItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,11 +178,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Settings\SettingsMenuView.xaml">
+    <Page Include="Views\Menu\SettingsMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Tables\TablesMenuView.xaml">
+    <Page Include="Views\Menu\TablesMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -61,6 +61,7 @@
       <DependentUpon>Database.cs</DependentUpon>
     </Compile>
     <Compile Include="EncriptionProvider.cs" />
+    <Compile Include="ProductCategoryProvider.cs" />
     <Compile Include="ProductProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsersProvider.cs" />

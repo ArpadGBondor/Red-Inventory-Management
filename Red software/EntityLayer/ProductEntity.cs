@@ -4,7 +4,7 @@ using System.Data.Linq.Mapping;
 namespace EntityLayer
 {
     [Table(Name = "Products")]
-    public class ProductEntity
+    public class ProductEntity 
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
         public int Id { get; set; }

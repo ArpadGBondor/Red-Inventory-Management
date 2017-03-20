@@ -16,8 +16,10 @@ namespace BusinessLayer.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            DatabaseConnection.ChangeDatabaseFile(AppDomain.CurrentDomain.BaseDirectory + "\\Database.mdf");
+            string file = AppDomain.CurrentDomain.BaseDirectory + "\\Database.mdf";
+            DatabaseConnection.ChangeDatabaseFile(file);
             Assert.IsTrue(DatabaseConnection.TestConnection());
+            Assert.AreEqual(DatabaseConnection.File,file);
         }
 
         [TestMethod()]
@@ -134,6 +136,45 @@ namespace BusinessLayer.Tests
         public void ListUsersTest()
         {
             UserLogin.ListUsers();
+        }
+
+        [TestMethod()]
+        public void ModifyUserTest()
+        {
+            // Empty table
+            if (!UserLogin.IsEmptyUserDatabase())
+            {
+                var records = UserLogin.ListUsers();
+                foreach (var rec in records)
+                    Assert.IsTrue(UserLogin.RemoveUser(rec.Username));
+            }
+
+
+            string user1 = "User 1";
+            string user2 = "User 2";
+            string password1 = "Password 1";
+            string password2 = "Password 2";
+
+            // Add user
+            Assert.IsTrue(UserLogin.AddUser(user1, password1));
+
+            Assert.IsTrue(UserLogin.IsValidUserID(user1));
+            Assert.IsTrue(UserLogin.IsValidPassword(user1,password1));
+
+            // Modify password
+            UserLogin.ModifyUser(user1,password1,user1,password2,password2);
+
+            Assert.IsTrue(UserLogin.IsValidUserID(user1));
+            Assert.IsFalse(UserLogin.IsValidPassword(user1, password1));
+            Assert.IsTrue(UserLogin.IsValidPassword(user1, password2));
+
+            // Modify username
+            UserLogin.ModifyUser(user1, password2, user2, password2, password2);
+
+            Assert.IsFalse(UserLogin.IsValidUserID(user1));
+            Assert.IsTrue(UserLogin.IsValidUserID(user2));
+            Assert.IsTrue(UserLogin.IsValidPassword(user2, password2));
+
         }
     }
 }

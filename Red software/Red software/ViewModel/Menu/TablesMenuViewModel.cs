@@ -13,6 +13,7 @@ namespace Red_software.ViewModel
 
         #region Views
         ProductsViewModel products = new ProductsViewModel();
+        ProductCategoriesViewModel productCategories = new ProductCategoriesViewModel();
         #endregion
         #region Change Views
         private BindableBase currentViewModel;
@@ -41,6 +42,9 @@ namespace Red_software.ViewModel
             {
                 case "Products":
                     CurrentViewModel = products;
+                    break;
+                case "Product categories":
+                    CurrentViewModel = productCategories;
                     break;
                 default:
                     break;

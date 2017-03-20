@@ -27,6 +27,23 @@ namespace BusinessLayer
         {
             return ProductProvider.Modify(product);
         }
-    }
 
+        public static List<ProductCategoryEntity> ListProductCategories()
+        {
+            return ProductCategoryProvider.List();
+        }
+
+        public static bool NewProductCategory(ProductCategoryEntity product)
+        {
+            return ProductCategoryProvider.Add(product);
+        }
+        public static bool DeleteProductCategory(ProductCategoryEntity product)
+        {
+            return ProductCategoryProvider.Remove(product);
+        }
+        public static bool ModifyProductCategory(ProductCategoryEntity product)
+        {
+            return ProductCategoryProvider.Modify(product);
+        }
+    }
 }

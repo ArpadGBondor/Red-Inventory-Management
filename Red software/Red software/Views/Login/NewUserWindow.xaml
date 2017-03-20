@@ -18,7 +18,7 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="User name:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Grid.Row="0" Grid.Column="0" Content="Username:" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Label Grid.Row="1" Grid.Column="0" Content="Password:" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Label Grid.Row="2" Grid.Column="0" Content="Confirm password:" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <TextBox Name="userIDTextBox" Text="{Binding UserID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="10" />

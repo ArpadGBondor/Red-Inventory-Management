@@ -55,7 +55,7 @@ namespace BusinessLayer
             }
             else if (string.IsNullOrWhiteSpace(password) || !UserLogin.IsValidPassword(userID, password))
             {
-                throw new System.ArgumentException("Wrong password.", "userID");
+                throw new System.ArgumentException("Wrong password.", "password");
             }
             loginedUser = userID;
         }
@@ -65,6 +65,37 @@ namespace BusinessLayer
             foreach (var u in list)
                 u.Password = "******";
             return list;
+        }
+
+        public static bool ModifyUser(string oldUserID, string oldPassword, string newUserId, string password, string confirm)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new System.ArgumentException("Wrong password.", "password");
+            }
+            else if (string.IsNullOrWhiteSpace(confirm) || password != confirm)
+            {
+                throw new System.ArgumentException("Wrong confirm password.", "confirm");
+            }
+            else if (string.IsNullOrWhiteSpace(oldUserID) || !UserLogin.IsValidUserID(oldUserID))
+            {
+                throw new System.ArgumentException("Wrong old username", "oldUserID");
+            }
+            else if (string.IsNullOrWhiteSpace(oldPassword) || !UserLogin.IsValidPassword(oldUserID, oldPassword))
+            {
+                throw new System.ArgumentException("Wrong old password.", "oldPassword");
+            }
+            else if (string.IsNullOrWhiteSpace(newUserId) || (oldUserID != newUserId && UserLogin.IsValidUserID(newUserId)))
+            {
+                throw new System.ArgumentException("Wrong new username.", "newUserId");
+            }
+            else if (UsersProvider.Modify(oldUserID, newUserId, password))
+            {
+                if (loginedUser == oldUserID) loginedUser = newUserId;
+                return true;
+            }
+            else
+                return false;
         }
     }
 }
