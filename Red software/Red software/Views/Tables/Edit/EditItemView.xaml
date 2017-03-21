@@ -7,7 +7,7 @@
         xmlns:viewModels="clr-namespace:Red_software.ViewModel"
         mc:Ignorable="d"
         Name="EditItemWindow"
-        Title="{Binding TitleText}" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"  Style="{StaticResource windowStyle}">
+        Title="{Binding TitleText}" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"  Style="{StaticResource windowStyle}">
     <Grid Width="Auto" Height="Auto">
         <Grid.RowDefinitions>
             <RowDefinition />

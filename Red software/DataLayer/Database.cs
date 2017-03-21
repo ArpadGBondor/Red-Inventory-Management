@@ -11,18 +11,20 @@ using System.Diagnostics;
 using System.Data.SqlClient;
 using EntityLayer;
 using System.Linq.Expressions;
+using System.Data.Linq.Mapping;
 
 namespace DataLayer
 {
     public class Database
     {
         private static SqlConnection connection;
-        private static string connectionString;
+
         private static string server;
         //private static string database;
         //private static string uid;
         //private static string password;
         private static string file;
+        private static string connectionString;
         public static string Get_File
         {
             get
@@ -35,17 +37,19 @@ namespace DataLayer
 
         static Database()
         {
+            server = "(LocalDB)\\MSSQLLocalDB";
             file = AppDomain.CurrentDomain.BaseDirectory + "Database.mdf";
+            connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + file + "\";Integrated Security=True;";
             InitializeConnection();
         }
 
         public static void InitializeConnection(string _file = "")
         {
-            server = "(LocalDB)\\MSSQLLocalDB";
             if (File.Exists(_file))
+            {
                 file = _file;
-            connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + file + "\";Integrated Security=True;";
-            //connectionString = "server=localhost;user id=software;database=software";
+                connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + file + "\";Integrated Security=True;";
+            }
             connection = new SqlConnection(connectionString);
         }
 
@@ -57,7 +61,7 @@ namespace DataLayer
                 connection.Open();
                 return true;
             }
-            catch (Exception ex)
+            catch /*(Exception ex)*/
             {
                 //When handling errors, you can your application's response based 
                 //on the error number.
@@ -108,61 +112,57 @@ namespace DataLayer
 
         public static void CreateTable(Type linqTableClass)
         {
-            DataContext tempDc = new DataContext(connectionString);
-            var metaTable = tempDc.Mapping.GetTable(linqTableClass);
+            MyDataContext db = new MyDataContext(connection);
+            var metaTable = db.Mapping.GetTable(linqTableClass);
             var typeName = "System.Data.Linq.SqlClient.SqlBuilder";
             var type = typeof(DataContext).Assembly.GetType(typeName);
             var bf = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod;
             var sql = type.InvokeMember("GetCreateTableCommand", bf, null, null, new[] { metaTable });
             var sqlAsString = sql.ToString();
-            tempDc.ExecuteCommand(sqlAsString);
+            db.ExecuteCommand(sqlAsString);
         }
 
         public static bool TableExists(Type linqTableClass)
-        {        
+        {
+            bool lSuccess = false;
+            connection.Open();
             try
             {
-                DataContext tempDc = new DataContext(connectionString);
+                MyDataContext db = new MyDataContext(Database.get_connectionString);
                 SqlTransaction tx = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
-                SqlCommand cmd = new SqlCommand("select case when exists((select * from information_schema.tables where table_name = '" + tempDc.Mapping.GetTable(linqTableClass).TableName + "')) then 1 else 0 end", connection, tx);               
+                SqlCommand cmd = new SqlCommand("select case when exists((select * from information_schema.tables where table_name = '" + db.Mapping.GetTable(linqTableClass).TableName + "')) then 1 else 0 end", connection, tx);               
                 SqlDataReader rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
-                    return rdr.GetInt32(0) == 1;
+                    lSuccess = rdr.GetInt32(0) == 1;
                 }
-                else
-                    return false;
             }
             catch /*(Exception e)*/
             {
-                return false;
+
             }
+            connection.Close();
+            return lSuccess;
         }
 
         public static void InitializeTable(Type linqTableClass)
         {
-            if (OpenConnection())
+
+            if (!TableExists(linqTableClass))
             {
-                if (!TableExists(linqTableClass))
-                {
-                    CreateTable(linqTableClass);
-                }
-                CloseConnection();
+                CreateTable(linqTableClass);
             }
+
             // TODO: automatic
         }
 
         public static List<Entity> ListTable<Entity>(Expression<Func<Entity, bool>> condition) where Entity : class
         {
             List<Entity> list = new List<Entity>(); ;
-            if (Database.OpenConnection())
-            {
-                DataContext db = new DataContext(Database.get_connectionString);                
-                Table<Entity> EntityTable = db.GetTable<Entity>();
-                var query = EntityTable.Where(condition);
-                list.AddRange(query);
-                Database.CloseConnection();
-            }
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            Table<Entity> EntityTable = db.GetTable<Entity>();
+            var query = EntityTable.Where(condition);
+            list.AddRange(query);
 
             return list;
         }
@@ -170,14 +170,10 @@ namespace DataLayer
         public static bool IsExist<Entity>(Expression<Func<Entity, bool>> condition) where Entity : class
         {
             bool lExist = false;
-            if (Database.OpenConnection())
-            {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<Entity> EntityTable = db.GetTable<Entity>();
-                var query = EntityTable.Where(condition);
-                lExist = (query.Count() > 0); 
-                Database.CloseConnection();
-            }
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            Table<Entity> EntityTable = db.GetTable<Entity>();
+            var query = EntityTable.Where(condition);
+            lExist = (query.Count() > 0); 
 
             return lExist;
         }
@@ -185,23 +181,16 @@ namespace DataLayer
         public static bool Add<Entity>(Entity record) where Entity : class
         {
             bool lSuccess = false;
-
-            if (Database.OpenConnection())
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            Table<Entity> EntityTable = db.GetTable<Entity>();
+            EntityTable.InsertOnSubmit(record);
+            try
             {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<Entity> EntityTable = db.GetTable<Entity>();
-                EntityTable.InsertOnSubmit(record);
-                try
-                {
-                    db.SubmitChanges();
-                    lSuccess = true;
-                }
-                catch
-                {
-
-                }
-                Database.CloseConnection();
+                db.SubmitChanges();
+                lSuccess = true;
             }
+            catch { }
+
             return lSuccess;
         }
 
@@ -209,36 +198,32 @@ namespace DataLayer
         {
             bool lSuccess = false;
             bool lExist = false;
-
-            if (Database.OpenConnection())
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            Table<Entity> EntityTable = db.GetTable<Entity>();
+            var query = EntityTable.Where(condition);
+            foreach (var rec in query)
             {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<Entity> EntityTable = db.GetTable<Entity>();
-                var query = EntityTable.Where(condition);
-                foreach (var rec in query)
-                {
-                    lExist = true;
+                lExist = true;
 
-                    PropertyInfo[] properties = typeof(Entity).GetProperties();
-                    foreach (PropertyInfo property in properties)
-                    {
-                        property.SetValue(rec, property.GetValue(record));
-                    }
-                }
-                if (lExist)
+                PropertyInfo[] properties = typeof(Entity).GetProperties();
+                foreach (PropertyInfo property in properties)
                 {
-                    try
-                    {
-                        db.SubmitChanges();
-                        lSuccess = true;
-                    }
-                    catch /*(Exception e)*/
-                    {
-                        // Cannot modify primary key
-                    }
+                    property.SetValue(rec, property.GetValue(record));
                 }
-                Database.CloseConnection();
             }
+            if (lExist)
+            {
+                try
+                {
+                    db.SubmitChanges();
+                    lSuccess = true;
+                }
+                catch /*(Exception e)*/
+                {
+                    // Cannot modify primary key
+                }
+            }
+
             return lSuccess;
         }
 
@@ -246,32 +231,28 @@ namespace DataLayer
         {
             bool lSuccess = false;
             bool lExist = false;
-
-            if (Database.OpenConnection())
-            {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<Entity> EntityTable = db.GetTable<Entity>();
-                var query = EntityTable.Where(condition);
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            Table<Entity> EntityTable = db.GetTable<Entity>();
+            var query = EntityTable.Where(condition);
                    
-                foreach (var rec in query)
-                {
-                    lExist = true;
-                    EntityTable.DeleteOnSubmit(rec);
-                }
-                if (lExist)
-                {
-                    try
-                    {
-                        db.SubmitChanges();
-                        lSuccess = true;
-                    }
-                    catch
-                    {
-
-                    }
-                }
-                Database.CloseConnection();
+            foreach (var rec in query)
+            {
+                lExist = true;
+                EntityTable.DeleteOnSubmit(rec);
             }
+            if (lExist)
+            {
+                try
+                {
+                    db.SubmitChanges();
+                    lSuccess = true;
+                }
+                catch /*(Exception e)*/
+                {
+
+                }
+            }
+
             return lSuccess;
         }
 

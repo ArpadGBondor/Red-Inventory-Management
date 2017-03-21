@@ -45,58 +45,49 @@ namespace DataLayer
         public static List<ProductListEntity> List(Expression<Func<ProductEntity, bool>> condition)
         {
             List<ProductListEntity> list = new List<ProductListEntity>();
-            if (Database.OpenConnection())
+
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+
+            var query1 = (from p in db.Products.Where(condition)
+                            join c in db.ProductCategories on p.Category_Id equals c.Id into CatJoin
+                            from subc in CatJoin.DefaultIfEmpty()
+                            select new { Product = p, Category = subc });
+            foreach(var rec in query1)
             {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<ProductEntity> ProductTable = db.GetTable<ProductEntity>();
-                Table<ProductCategoryEntity> CategoryTable = db.GetTable<ProductCategoryEntity>();
-
-
-                var query1 = (from p in ProductTable.Where(condition)
-                              join c in CategoryTable on p.Category_Id equals c.Id into CatJoin
-                              from subc in CatJoin.DefaultIfEmpty()
-                              select new { Product = p, Category = subc });
-                foreach(var rec in query1)
-                {
-                    if (rec.Category == null)
-                        list.Add(new ProductListEntity(rec.Product));
-                    else
-                        list.Add(new ProductListEntity(rec.Product, rec.Category));
-                }
-                list.Sort();
-                Database.CloseConnection();
+                if (rec.Category == null)
+                    list.Add(new ProductListEntity(rec.Product));
+                else
+                    list.Add(new ProductListEntity(rec.Product, rec.Category));
             }
+            list.Sort();
+
             return list;
+        }
+
+        public static bool IsExist(Expression<Func<ProductEntity, bool>> condition)
+        {
+            return Database.IsExist<ProductEntity>(condition);
         }
 
         public static bool ChangeCategory(int from,int to)
         {
             bool lSuccess = false;
             bool lExist = false;
-
-            if (Database.OpenConnection())
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            var query = db.Products.Where(p => p.Category_Id == from); 
+            foreach (var rec in query)
             {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<ProductEntity> EntityTable = db.GetTable<ProductEntity>();
-                var query = EntityTable.Where(p => p.Category_Id == from); 
-                foreach (var rec in query)
+                lExist = true;
+                rec.Category_Id = to;
+            }
+            if (lExist)
+            {
+                try
                 {
-                    lExist = true;
-                    rec.Category_Id = to;
+                    db.SubmitChanges();
+                    lSuccess = true;
                 }
-                if (lExist)
-                {
-                    try
-                    {
-                        db.SubmitChanges();
-                        lSuccess = true;
-                    }
-                    catch /*(Exception e)*/
-                    {
-                        // Cannot modify primary key
-                    }
-                }
-                Database.CloseConnection();
+                catch /*(Exception e)*/ { }
             }
             return lSuccess;
         }

@@ -12,6 +12,14 @@ namespace BusinessLayer.Tests
     public class ManageProductsTests
     {
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            string file = AppDomain.CurrentDomain.BaseDirectory + "\\Database.mdf";
+            DatabaseConnection.ChangeDatabaseFile(file);
+            Assert.IsTrue(DatabaseConnection.TestConnection());
+            Assert.AreEqual(DatabaseConnection.File, file);
+        }
 
         [TestMethod()]
         public void ListProductCategoriesTest1()

@@ -65,14 +65,16 @@
                                     <GridViewColumn Header="Customer" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <CheckBox IsChecked="{Binding Customer}" IsEnabled="False" />
+                                                <CheckBox IsChecked="{Binding Customer}" IsEnabled="False" HorizontalAlignment="Center" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                     <GridViewColumn Header="Dealer" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <CheckBox IsChecked="{Binding Dealer}" IsEnabled="False" />
+                                                <Grid>
+                                                    <CheckBox IsChecked="{Binding Dealer}" IsEnabled="False" HorizontalAlignment="Center" />
+                                                </Grid>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

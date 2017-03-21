@@ -55,10 +55,11 @@ namespace DataLayer.Tests
         [TestMethod()]
         public void TableCreationTest()
         {
-            Assert.IsTrue(Database.OpenConnection());
-            Assert.IsFalse(Database.TableExists(typeof(UserEntity)));
-            Assert.IsTrue(Database.CloseConnection());
 
+            Assert.IsFalse(Database.TableExists(typeof(UserEntity)));
+
+
+            Database.InitializeTable(typeof(UserEntity));
             Database.InitializeTable(typeof(UserEntity));
 
             Database.InitializeTable(typeof(ProductCategoryEntity));
@@ -68,9 +69,9 @@ namespace DataLayer.Tests
             Database.InitializeTable(typeof(ProductEntity));
 
 
-            Assert.IsTrue(Database.OpenConnection());
+
             Assert.IsTrue(Database.TableExists(typeof(UserEntity)));
-            Assert.IsTrue(Database.CloseConnection());
+
         }
 
         [TestMethod()]

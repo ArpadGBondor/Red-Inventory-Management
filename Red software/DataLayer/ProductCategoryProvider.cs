@@ -12,7 +12,6 @@ namespace DataLayer
         static ProductCategoryProvider()
         {
             Database.InitializeTable(typeof(ProductCategoryEntity));
-            Database.InitializeTable(typeof(ProductEntity));
         }
 
         public static int Get_ID(string category)
@@ -20,30 +19,23 @@ namespace DataLayer
             int id = 0;
 
             if (!string.IsNullOrWhiteSpace(category))
-                if (Database.OpenConnection())
+            {
+                MyDataContext db = new MyDataContext(Database.get_connectionString);
+                Table<ProductCategoryEntity> EntityTable = db.GetTable<ProductCategoryEntity>();
+                var query =  EntityTable.Where(p=>p.Category == category);
+                try { id = query.First().Id; }
+                catch
                 {
-                    DataContext db = new DataContext(Database.get_connectionString);
-                    Table<ProductCategoryEntity> EntityTable = db.GetTable<ProductCategoryEntity>();
-                    var query = EntityTable.Where(p=>p.Category == category);
-                    foreach (var rec in query)
+                    EntityTable.InsertOnSubmit(new ProductCategoryEntity() { Category = category });
+                    try
                     {
-                        id = rec.Id;
-                    }
-                    if (id == 0)
-                    {
-                        EntityTable.InsertOnSubmit(new ProductCategoryEntity() { Category = category });
-                        try
-                        {
-                            db.SubmitChanges();
-                            foreach (var rec in query)
-                            {
-                                id = rec.Id;
-                            }
-                        }
+                        db.SubmitChanges();
+                        try { id = query.First().Id; }
                         catch { }
                     }
-                    Database.CloseConnection();
+                    catch { }
                 }
+            }
             return id;
         }
 
@@ -67,7 +59,7 @@ namespace DataLayer
 
         public static bool Remove(ProductCategoryEntity category)
         {
-            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductEntity>(p => p.Category_Id == category.Id))
+            if (string.IsNullOrWhiteSpace(category.Category) || ProductProvider.IsExist(p => p.Category_Id == category.Id))
             {
                 return false;
             }

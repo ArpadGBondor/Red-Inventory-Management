@@ -18,52 +18,40 @@ namespace DataLayer
         public static bool IsEmptyUserDatabase()
         {
             bool lExist = false;
-            if (Database.OpenConnection())
-            {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<UserEntity> Users = db.GetTable<UserEntity>();
 
-                lExist = (0 < Users.Count());
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
 
-                Database.CloseConnection();
-            }
+            lExist = (0 < db.Users.Count());
+
             return !lExist;
         }
 
         public static bool IsValidUserID(string userID)
         {
             bool lExist = false;
-            if (Database.OpenConnection())
-            {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<UserEntity> Users = db.GetTable<UserEntity>();
-                var q = from u in Users
-                        where u.Username == userID
-                        select u;
-                lExist = (0 < q.Count());
 
-                Database.CloseConnection();
-            }
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            var q = from u in db.Users
+                    where u.Username == userID
+                    select u;
+            lExist = (0 < q.Count());
+
             return lExist;
         }
 
         public static bool IsValidPassword(string userID,string pw)
         {
             bool lExist = false;
-            if (Database.OpenConnection())
-            {
-                DataContext db = new DataContext(Database.get_connectionString);
-                Table<UserEntity> Users = db.GetTable<UserEntity>();
-                var q = from u in Users
-                        where (u.Username == userID)
-                        select u;
-                foreach(var user in q)
-                {
-                    lExist = lExist || EncriptionProvider.Confirm(pw, user.Password, EncriptionProvider.Supported_HA.SHA256);
-                }
 
-                Database.CloseConnection();
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            var q = from u in db.Users
+                    where (u.Username == userID)
+                    select u;
+            foreach(var user in q)
+            {
+                lExist = lExist || EncriptionProvider.Confirm(pw, user.Password, EncriptionProvider.Supported_HA.SHA256);
             }
+
             return lExist;
         }
 
