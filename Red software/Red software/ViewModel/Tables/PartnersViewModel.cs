@@ -1,33 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Red_software.Model;
-using EntityLayer;
+﻿using EntityLayer;
 using BusinessLayer;
 using Red_software.Views;
-using Red_software.Notifications;
+using Red_software.Model;
+using System;
 
 namespace Red_software.ViewModel
 {
-    public class ProductCategoriesViewModel : TableModel<ProductCategoryEntity>
+    public class PartnersViewModel : TableModel<PartnerEntity>
     {
         protected override void DeleteItem(object parameter)
         {
-            if (ManageProducts.DeleteProductCategory(SelectedItem))
-                RefreshList(parameter);
-            else
-            {
-                NotificationProvider.Error("Delete product category error", "This category is set to one or more product");
-            }
+            ManagePartners.DeletePartner(SelectedItem);
+            RefreshList(parameter);
         }
 
         protected override void EditItem(object parameter)
         {
-            ProductCategoryEntity Item = new ProductCategoryEntity();
-            EntityCloner.CloneProperties<ProductCategoryEntity>(Item, SelectedItem);
-            EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, false);
+            PartnerEntity Item = new PartnerEntity();
+            EntityCloner.CloneProperties<PartnerEntity>(Item, SelectedItem);
+            EditPartnerViewModel EPVM = new EditPartnerViewModel(Item, false);
             EditItemView EIV = new EditItemView() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
@@ -41,12 +32,12 @@ namespace Red_software.ViewModel
 
         protected override void NewItem(object parameter)
         {
-            ProductCategoryEntity Item = new ProductCategoryEntity();
-            EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, true);
+            PartnerEntity Item = new PartnerEntity();
+            EditPartnerViewModel EPVM = new EditPartnerViewModel(Item, true);
             EditItemView EIV = new EditItemView() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
-            {               
+            {
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -56,7 +47,7 @@ namespace Red_software.ViewModel
 
         protected override void RefreshList(object parameter)
         {
-            List = ManageProducts.ListProductCategories();
+            List = ManagePartners.ListPartners();
         }
     }
 }

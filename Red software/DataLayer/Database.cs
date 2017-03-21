@@ -57,7 +57,7 @@ namespace DataLayer
                 connection.Open();
                 return true;
             }
-            catch /*(SqlException ex)*/
+            catch (Exception ex)
             {
                 //When handling errors, you can your application's response based 
                 //on the error number.

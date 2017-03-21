@@ -19,4 +19,7 @@
     <DataTemplate DataType = "{x:Type viewModels:ProductCategoriesViewModel}">
         <views:TableView/>
     </DataTemplate>
+    <DataTemplate DataType = "{x:Type viewModels:PartnersViewModel}">
+        <views:TableView/>
+    </DataTemplate>
 </ResourceDictionary>

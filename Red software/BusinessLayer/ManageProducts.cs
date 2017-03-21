@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DataLayer;
 using EntityLayer;
 
@@ -10,40 +6,40 @@ namespace BusinessLayer
 {
     public class ManageProducts
     {
-        public static List<ProductEntity> ListProducts()
+        public static List<ProductListEntity> ListProducts()
         {
-            return ProductProvider.List();
+            return ProductProvider.List(p => true);
         }
 
-        public static bool NewProduct(ProductEntity product)
+        public static bool NewProduct(ProductListEntity product)
         {
             return ProductProvider.Add(product);
         }
-        public static bool DeleteProduct(ProductEntity product)
+        public static bool DeleteProduct(ProductListEntity product)
         {
             return ProductProvider.Remove(product);
         }
-        public static bool ModifyProduct(ProductEntity product)
+        public static bool ModifyProduct(ProductListEntity product)
         {
             return ProductProvider.Modify(product);
         }
 
         public static List<ProductCategoryEntity> ListProductCategories()
         {
-            return ProductCategoryProvider.List();
+            return ProductCategoryProvider.List(p => true);
         }
 
-        public static bool NewProductCategory(ProductCategoryEntity product)
+        public static bool NewProductCategory(ProductCategoryEntity category)
         {
-            return ProductCategoryProvider.Add(product);
+            return ProductCategoryProvider.Add(category);
         }
-        public static bool DeleteProductCategory(ProductCategoryEntity product)
+        public static bool DeleteProductCategory(ProductCategoryEntity category)
         {
-            return ProductCategoryProvider.Remove(product);
+            return ProductCategoryProvider.Remove(category);
         }
-        public static bool ModifyProductCategory(ProductCategoryEntity product)
+        public static bool ModifyProductCategory(ProductCategoryEntity category)
         {
-            return ProductCategoryProvider.Modify(product);
+            return ProductCategoryProvider.Modify(category);
         }
     }
 }

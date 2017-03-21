@@ -16,7 +16,7 @@ namespace EntityLayer
         public string Name { get; set; }
 
         [Column]
-        public string Category { get; set; }
+        public int Category_Id { get; set; }
 
         [Column]
         public decimal Cost_Price { get; set; }

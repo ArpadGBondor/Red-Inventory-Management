@@ -1,15 +1,36 @@
-﻿using EntityLayer;
+﻿using System;
+using EntityLayer;
 using Red_software.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessLayer;
+using Red_software.Notifications;
 
 namespace Red_software.ViewModel
 {
     public class EditProductCategoryViewModel : EditItemModel<ProductCategoryEntity>
     {
         public EditProductCategoryViewModel(ProductCategoryEntity _Item, bool _NewRecord) : base(_Item, _NewRecord) { }
+
+        protected override bool Save(object parameter)
+        {
+            bool lSuccess = false;
+            if (string.IsNullOrWhiteSpace(Item.Category))
+            {
+                NotificationProvider.Error((NewRecord ? "New" : "Edit") + " product category error", "Please fill the category field.");
+            }
+            else
+            {
+                if (NewRecord)
+                {
+                    lSuccess = ManageProducts.NewProductCategory(Item);
+                }
+                else
+                {
+                    lSuccess = ManageProducts.ModifyProductCategory(Item);
+                }
+                if (!lSuccess)
+                    NotificationProvider.Error((NewRecord ? "New" : "Edit") + " product category error", "Category name already exist.");
+            }
+            return lSuccess;
+        }
     }
 }

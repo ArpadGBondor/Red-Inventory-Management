@@ -61,6 +61,13 @@ namespace DataLayer.Tests
 
             Database.InitializeTable(typeof(UserEntity));
 
+            Database.InitializeTable(typeof(ProductCategoryEntity));
+            Database.InitializeTable(typeof(ProductEntity));
+
+            Database.InitializeTable(typeof(ProductCategoryEntity));
+            Database.InitializeTable(typeof(ProductEntity));
+
+
             Assert.IsTrue(Database.OpenConnection());
             Assert.IsTrue(Database.TableExists(typeof(UserEntity)));
             Assert.IsTrue(Database.CloseConnection());

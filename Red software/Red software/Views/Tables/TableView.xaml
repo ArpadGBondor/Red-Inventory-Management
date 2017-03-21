@@ -36,11 +36,11 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
-                                    <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
                                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
                                     <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
-                                    <GridViewColumn Header="Cost_Price" DisplayMemberBinding="{Binding Cost_Price}" />
-                                    <GridViewColumn Header="Sell_Price" DisplayMemberBinding="{Binding Sell_Price}" />
+                                    <GridViewColumn Header="Cost price" DisplayMemberBinding="{Binding Cost_Price}" />
+                                    <GridViewColumn Header="Sell price" DisplayMemberBinding="{Binding Sell_Price}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -50,8 +50,36 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
-                                    <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
-                                    <GridViewColumn Header="Subcategory" DisplayMemberBinding="{Binding SubCategory}" />
+                                    <GridViewColumn Header="Product category" DisplayMemberBinding="{Binding Category}" />
+                                    <!--<GridViewColumn Header="Subcategory" DisplayMemberBinding="{Binding SubCategory}" />-->
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:PartnersViewModel}">
+                        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                                    <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Header="Customer" >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding Customer}" IsEnabled="False" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Dealer" >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding Dealer}" IsEnabled="False" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}" />
+                                    <GridViewColumn Header="Phone number" DisplayMemberBinding="{Binding Phone}" />
+                                    <GridViewColumn Header="E-mail address" DisplayMemberBinding="{Binding Email}" />
+                                    <GridViewColumn Header="Bank account number" DisplayMemberBinding="{Binding AccountNumber}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>

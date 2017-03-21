@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace Red_software.Model
 {
-    public class EditItemModel<Entity> : BindableBase
+    public abstract class EditItemModel<Entity> : BindableBase
     {
 
         private EditItemModel() { }
@@ -42,12 +42,20 @@ namespace Red_software.Model
         {
             get
             {
-                if (saveCommand == null) saveCommand = new RelayCommand(new Action<object>(Save), new Predicate<object>(SaveCanExecute));
+                if (saveCommand == null) saveCommand = new RelayCommand(new Action<object>(Validate), new Predicate<object>(SaveCanExecute));
                 return saveCommand;
             }
             set { SetProperty(ref saveCommand, value); }
         }
-        protected virtual void Save(object parameter) { SaveEdit = true; Close(parameter); }
+        private void Validate(object parameter)
+        {
+            if (Save(parameter))
+            {
+                SaveEdit = true;
+                Close(parameter);
+
+            }
+        }
         protected virtual bool SaveCanExecute(object parameter) { return true; }
 
         private ICommand closeCommand;
@@ -60,8 +68,10 @@ namespace Red_software.Model
             }
             set { SetProperty(ref closeCommand, value); }
         }
-        protected virtual void Close(object parameter) { ((Window)parameter).Close(); }
+        private void Close(object parameter) { ((Window)parameter).Close(); }
         protected virtual bool CloseCanExecute(object parameter) { return true; }
+
+        protected abstract bool Save(object parameter);
 
     }
 

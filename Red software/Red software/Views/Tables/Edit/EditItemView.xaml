@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Red_software.Views"
-        xmlns:entities="clr-namespace:EntityLayer;assembly=EntityLayer"
+        xmlns:viewModels="clr-namespace:Red_software.ViewModel"
         mc:Ignorable="d"
         Name="EditItemWindow"
         Title="{Binding TitleText}" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"  Style="{StaticResource windowStyle}">
@@ -13,9 +13,9 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ContentControl Grid.Row="0" Content="{Binding Item}">
+        <ContentControl Name="ConCon1" Grid.Row="0" Content="{Binding}" >
             <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type entities:ProductEntity}">
+                <DataTemplate DataType="{x:Type viewModels:EditProductViewModel}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -32,26 +32,26 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="Product Id:" TextAlignment="Right" Margin="5"/>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Id, Mode=TwoWay}" Margin="5" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Item.Id, Mode=TwoWay}" Margin="5" />
 
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="Product name:" TextAlignment="Right" Margin="5"/>
-                        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Name, Mode=TwoWay}" Margin="5" />
+                        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Path=Item.Name, Mode=TwoWay}" Margin="5" />
 
                         <TextBlock Grid.Column="0" Grid.Row="2" Text="Product code:" TextAlignment="Right" Margin="5"/>
-                        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Code, Mode=TwoWay}" Margin="5" />
+                        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path=Item.Code, Mode=TwoWay}" Margin="5" />
 
                         <TextBlock Grid.Column="0" Grid.Row="3" Text="Product category:" TextAlignment="Right" Margin="5"/>
-                        <TextBox  Grid.Column="1" Grid.Row="3" Text="{Binding Category, Mode=TwoWay}" Margin="5" />
+                        <ComboBox  Grid.Column="1" Grid.Row="3" Text="{Binding Path=Item.Category, Mode=TwoWay}" ItemsSource="{Binding Path=CategoryList}" Margin="5" IsEditable="True" />
 
                         <TextBlock Grid.Column="0" Grid.Row="4" Text="Cost price:" TextAlignment="Right" Margin="5"/>
-                        <TextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Cost_Price, Mode=TwoWay}" Margin="5" />
+                        <TextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Path=Item.Cost_Price, Mode=TwoWay}" Margin="5" />
 
                         <TextBlock Grid.Column="0" Grid.Row="5" Text="Sell price:" TextAlignment="Right" Margin="5"/>
-                        <TextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Sell_Price, Mode=TwoWay}" Margin="5" />
+                        <TextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Path=Item.Sell_Price, Mode=TwoWay}" Margin="5" />
                         
                     </Grid>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type entities:ProductCategoryEntity}">
+                <DataTemplate DataType="{x:Type viewModels:EditProductCategoryViewModel}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -66,13 +66,58 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="Category Id:" TextAlignment="Right" Margin="5"/>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Id, Mode=TwoWay}" Margin="5" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Item.Id, Mode=TwoWay}" Margin="5" />
 
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="Category name:" TextAlignment="Right" Margin="5"/>
-                        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Category, Mode=TwoWay}" Margin="5" />
+                        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Path=Item.Category, Mode=TwoWay}" Margin="5" />
 
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Subcategory name:" TextAlignment="Right" Margin="5"/>
-                        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding SubCategory, Mode=TwoWay}" Margin="5" />
+                        <!--<TextBlock Grid.Column="0" Grid.Row="2" Text="Subcategory name:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path=Item.SubCategory, Mode=TwoWay}" Margin="5" />-->
+                    </Grid>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:EditPartnerViewModel}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Partner Id:" TextAlignment="Right" Margin="5"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Item.Id, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Parnter name:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Path=Item.Name, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Customer:" TextAlignment="Right" Margin="5"/>
+                        <CheckBox  Grid.Column="1" Grid.Row="2" IsChecked="{Binding Path=Item.Customer, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Dealer:" TextAlignment="Right" Margin="5"/>
+                        <CheckBox  Grid.Column="1" Grid.Row="3" IsChecked="{Binding Path=Item.Dealer, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Address:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Path=Item.Address, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Phone number:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Path=Item.Phone, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="6" Text="E-mail address:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="6" Text="{Binding Path=Item.Email, Mode=TwoWay}" Margin="5" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="7" Text="Bank account number:" TextAlignment="Right" Margin="5"/>
+                        <TextBox  Grid.Column="1" Grid.Row="7" Text="{Binding Path=Item.AccountNumber, Mode=TwoWay}" Margin="5" />
+
                     </Grid>
                 </DataTemplate>
             </ContentControl.Resources>

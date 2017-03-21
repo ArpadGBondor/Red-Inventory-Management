@@ -13,7 +13,7 @@ using Red_software.Views;
 
 namespace Red_software.ViewModel
 {
-    public class ProductsViewModel : TableModel<ProductEntity>
+    public class ProductsViewModel : TableModel<ProductListEntity>
     {
         protected override void DeleteItem(object parameter)
         {
@@ -23,15 +23,13 @@ namespace Red_software.ViewModel
 
         protected override void EditItem(object parameter)
         {
-            ProductEntity Item = new ProductEntity();
-            EntityCloner.CloneProperties<ProductEntity>(Item, SelectedItem);
+            ProductListEntity Item = new ProductListEntity();
+            EntityCloner.CloneProperties<ProductListEntity>(Item, SelectedItem);
             EditProductViewModel EPVM = new EditProductViewModel(Item, false);
             EditItemView EIV = new EditItemView() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {
-                Item = EPVM.Item;
-                ManageProducts.ModifyProduct(Item);
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -41,13 +39,12 @@ namespace Red_software.ViewModel
 
         protected override void NewItem(object parameter)
         {
-            ProductEntity Item = new ProductEntity();
+            ProductListEntity Item = new ProductListEntity();
             EditProductViewModel EPVM = new EditProductViewModel(Item, true);
             EditItemView EIV = new EditItemView() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {
-                ManageProducts.NewProduct(EPVM.Item);
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -57,7 +54,7 @@ namespace Red_software.ViewModel
 
         protected override void RefreshList(object parameter)
         {
-            this.List = ManageProducts.ListProducts();
+            List = ManageProducts.ListProducts();
         }
     }
 

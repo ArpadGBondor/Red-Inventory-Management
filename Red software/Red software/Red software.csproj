@@ -93,6 +93,8 @@
     </Compile>
     <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Notifications\NotificationProvider.cs" />
+    <Compile Include="ViewModel\Tables\Edit\EditPartnerViewModel.cs" />
+    <Compile Include="ViewModel\Tables\PartnersViewModel.cs" />
     <Compile Include="ViewModel\Tables\Edit\EditProductCategoryViewModel.cs" />
     <Compile Include="ViewModel\Tables\Edit\EditProductViewModel.cs" />
     <Compile Include="ViewModel\Login\EditUserViewModel.cs" />

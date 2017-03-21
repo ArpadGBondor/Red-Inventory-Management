@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
 using EntityLayer;
+using System.Linq.Expressions;
+using System;
+using System.Data.Linq;
+using System.Linq;
 
 namespace DataLayer
 {
@@ -8,28 +12,71 @@ namespace DataLayer
         static ProductCategoryProvider()
         {
             Database.InitializeTable(typeof(ProductCategoryEntity));
+            Database.InitializeTable(typeof(ProductEntity));
         }
 
-
-
-        public static bool Add(ProductCategoryEntity product)
+        public static int Get_ID(string category)
         {
-            return Database.Add<ProductCategoryEntity>(product);
+            int id = 0;
+
+            if (!string.IsNullOrWhiteSpace(category))
+                if (Database.OpenConnection())
+                {
+                    DataContext db = new DataContext(Database.get_connectionString);
+                    Table<ProductCategoryEntity> EntityTable = db.GetTable<ProductCategoryEntity>();
+                    var query = EntityTable.Where(p=>p.Category == category);
+                    foreach (var rec in query)
+                    {
+                        id = rec.Id;
+                    }
+                    if (id == 0)
+                    {
+                        EntityTable.InsertOnSubmit(new ProductCategoryEntity() { Category = category });
+                        try
+                        {
+                            db.SubmitChanges();
+                            foreach (var rec in query)
+                            {
+                                id = rec.Id;
+                            }
+                        }
+                        catch { }
+                    }
+                    Database.CloseConnection();
+                }
+            return id;
         }
 
-        public static bool Modify(ProductCategoryEntity product)
+        public static bool Add(ProductCategoryEntity category)
         {
-            return Database.Modify<ProductCategoryEntity>(product, p => p.Id == product.Id);
+            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductCategoryEntity>(p=>p.Category == category.Category))
+            {
+                return false;
+            }
+            return Database.Add<ProductCategoryEntity>(category);
         }
 
-        public static bool Remove(ProductCategoryEntity product)
+        public static bool Modify(ProductCategoryEntity category)
         {
-            return Database.Remove<ProductCategoryEntity>(p => p.Id == product.Id);
+            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductCategoryEntity>(p => p.Category == category.Category))
+            {
+                return false;
+            }
+            return Database.Modify<ProductCategoryEntity>(category, p => p.Id == category.Id);
         }
 
-        public static List<ProductCategoryEntity> List()
+        public static bool Remove(ProductCategoryEntity category)
         {
-            return Database.ListTable<ProductCategoryEntity>(p => true);
+            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductEntity>(p => p.Category_Id == category.Id))
+            {
+                return false;
+            }
+            return Database.Remove<ProductCategoryEntity>(p => p.Id == category.Id);
+        }
+
+        public static List<ProductCategoryEntity> List(Expression<Func<ProductCategoryEntity, bool>> condition)
+        {
+            return Database.ListTable<ProductCategoryEntity>(condition);
         }
     }
 }

@@ -16,10 +16,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" Style="{StaticResource MainMenuButton}" Content="Products" Command="{Binding SwitchViewCommand}" CommandParameter="Products"/>
-                <Button Grid.Row="1" Style="{StaticResource MainMenuButton}" Content="Product categories" Command="{Binding SwitchViewCommand}" CommandParameter="Product categories"/>
+                <Button Grid.Row="0" Style="{StaticResource MenuButton}" Content="Products" Command="{Binding SwitchViewCommand}" CommandParameter="Products"/>
+                <Button Grid.Row="1" Style="{StaticResource MenuButton}" Content="Product categories" Command="{Binding SwitchViewCommand}" CommandParameter="Product categories"/>
+                <Button Grid.Row="2" Style="{StaticResource MenuButton}" Content="Partners" Command="{Binding SwitchViewCommand}" CommandParameter="Partners"/>
             </Grid>
         </Border>
         <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}"/>

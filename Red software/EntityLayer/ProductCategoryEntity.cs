@@ -16,7 +16,7 @@ namespace EntityLayer
         [Column]
         public string Category { get; set; }
 
-        [Column]
-        public string SubCategory { get; set; }
+        //[Column]
+        //public string SubCategory { get; set; }
     }
 }

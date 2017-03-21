@@ -18,7 +18,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Button Style="{StaticResource MainMenuButton}" Content="Users" Command="{Binding SwitchViewCommand}" CommandParameter="Users"/>
+                <Button Style="{StaticResource MenuButton}" Content="Users" Command="{Binding SwitchViewCommand}" CommandParameter="Users"/>
             </Grid>
         </Border>
         <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}"/>
