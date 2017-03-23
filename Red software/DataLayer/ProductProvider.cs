@@ -11,8 +11,8 @@ namespace DataLayer
     {
         static ProductProvider()
         {
-            Database.InitializeTable(typeof(ProductEntity));
-            Database.InitializeTable(typeof(ProductCategoryEntity));
+            Database.InitializeTable<ProductEntity>();
+            Database.InitializeTable<ProductCategoryEntity>();
         }
 
         private static ProductEntity ConvertToProduct(ProductListEntity parameter)
@@ -40,8 +40,11 @@ namespace DataLayer
 
         public static bool Remove(ProductListEntity product)
         {
+            if (TransactionProvider.IsExistBody(p => p.Product_Id == product.Id))
+                return false;
             return Database.Remove<ProductEntity>(p => p.Id == product.Id);
         }
+
         public static List<ProductListEntity> List(Expression<Func<ProductEntity, bool>> condition)
         {
             List<ProductListEntity> list = new List<ProductListEntity>();

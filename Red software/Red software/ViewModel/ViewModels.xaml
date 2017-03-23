@@ -4,12 +4,7 @@
                     xmlns:viewModels = "clr-namespace:Red_software.ViewModel"
                     xmlns:entities ="clr-namespace:EntityLayer;assembly=EntityLayer">
 
-    <DataTemplate DataType = "{x:Type viewModels:TablesMenuViewModel}">
-        <views:TablesMenuView/>
-    </DataTemplate>
-    <DataTemplate DataType = "{x:Type viewModels:SettingsMenuViewModel}">
-        <views:SettingsMenuView/>
-    </DataTemplate>
+
     <DataTemplate DataType = "{x:Type viewModels:UsersViewModel}">
         <views:TableView/>
     </DataTemplate>

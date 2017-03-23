@@ -15,7 +15,7 @@ namespace Red_software.ViewModel
     public class MainWindowViewModel : BindableBase
     {
         #region Constructors
-        public MainWindowViewModel(Window _mainwindow = null)
+        public MainWindowViewModel(Window _mainwindow)
         {
             mainWindow = _mainwindow;
             // Set database connection
@@ -44,11 +44,59 @@ namespace Red_software.ViewModel
                 CloseWindow();
         }
         #endregion
-        #region Views
-        TablesMenuViewModel tablesMenu = new TablesMenuViewModel();
-        SettingsMenuViewModel settingsMenu = new SettingsMenuViewModel();
+        #region Menus and Views
+        private string[] mainMenu = new string[] { "Tables", "Transactions", "Settings" };
+        private string[] tablesMenu = new string[] { "Products", "Product categories", "Partners" };
+        private ProductsViewModel products = new ProductsViewModel();
+        private ProductCategoriesViewModel productCategories = new ProductCategoriesViewModel();
+        private PartnersViewModel partners = new PartnersViewModel();
+        private string[] transactionsMenu = new string[] {  };
+        private string[] settingsMenu = new string[] { "Users" };
+        private UsersViewModel users = new UsersViewModel();
         #endregion
-        #region Change Views
+        #region Change Menu
+        public string[] MainMenu { get { return mainMenu; } }
+
+        private string[] currentMenu;
+        public string[] CurrentMenu
+        {
+            get { return currentMenu; }
+            set { SetProperty(ref currentMenu, value); }
+        }
+
+        private ICommand switchMenuCommand;
+        public ICommand SwitchMenuCommand
+        {
+            get
+            {
+                if (switchMenuCommand == null) switchMenuCommand = new RelayCommand(new Action<object>(SwitchMenu));
+                return switchMenuCommand;
+            }
+            set { SetProperty(ref switchMenuCommand, value); }
+        }
+
+        private void SwitchMenu(object parameter)
+        {
+            string destination = (string)parameter;
+            //NotificationProvider.Info("Switch menu", destination);
+            switch (destination)
+            {
+                case "Tables":
+                    CurrentMenu = tablesMenu;
+                    break;
+                case "Transactions":
+                    CurrentMenu = transactionsMenu;
+                    break;
+                case "Settings":
+                    CurrentMenu = settingsMenu;
+                    break;
+                default:
+                    CurrentMenu = null;
+                    break;
+            }
+        }
+        #endregion
+        #region Change View
         private BindableBase currentViewModel;
         public BindableBase CurrentViewModel
         {
@@ -72,16 +120,23 @@ namespace Red_software.ViewModel
         private void Navigate(object parameter)
         {
             string destination = (string)parameter;
-            NotificationProvider.Info("Navigate", destination);
+            //NotificationProvider.Info("Navigate", destination);
             switch (destination)
             {
-                case "TablesMenu":
-                    CurrentViewModel = tablesMenu;
+                case "Products":
+                    CurrentViewModel = products;
                     break;
-                case "SettingsMenu":
-                    CurrentViewModel = settingsMenu;
+                case "Product categories":
+                    CurrentViewModel = productCategories;
+                    break;
+                case "Partners":
+                    CurrentViewModel = partners;
+                    break;
+                case "Users":
+                    CurrentViewModel = users;
                     break;
                 default:
+                    CurrentViewModel = null;
                     break;
             }
         }

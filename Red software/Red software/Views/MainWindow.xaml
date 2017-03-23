@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Red_software"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800" 
         Style="{StaticResource windowStyle}" 
@@ -16,14 +17,43 @@
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Margin="10" CornerRadius="10" Background="#FFCEF3D5">
-            <WrapPanel Grid.Row="0">
-                <Button Content="Tables" Style="{StaticResource MainMenuButton}" Command="{Binding SwitchViewCommand}" CommandParameter="TablesMenu" />
-                <Button Content="Transactions" Style="{StaticResource MainMenuButton}"/>
-                <Button Content="Settings" Style="{StaticResource MainMenuButton}" Command="{Binding SwitchViewCommand}" CommandParameter="SettingsMenu" />
-            </WrapPanel>
+        <Border Grid.Row="0" Margin="10" CornerRadius="10" Background="#FFCEF3D5">
+            <ItemsControl Name="MainMenuItemsControl"  ItemsSource="{Binding MainMenu}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Style="{StaticResource MainMenuButton}" Content="{Binding}" Command="{Binding ElementName=MainMenuItemsControl, Path=DataContext.SwitchMenuCommand}" CommandParameter="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Border>
-        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border  Grid.Column="0" Margin="10" CornerRadius="10" Background="#FFFFFFB9">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <ItemsControl Name="MenuItemsControl"  ItemsSource="{Binding CurrentMenu}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource MenuButton}" Content="{Binding}" Command="{Binding ElementName=MenuItemsControl, Path=DataContext.SwitchViewCommand}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Border>
+            <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}"/>
+        </Grid>
         <Label Grid.Row="2" FontSize="10" FontFamily="Comic Sans MS" Foreground="White">Copyright © 2017 Arpad Gabor Bondor. All rights reserved.</Label>
     </Grid>
 </Window>

@@ -9,7 +9,7 @@
             Body = _Body;
             Product = _Product;
         }
-        TransactionBodyEntity Body { get; set; }
-        ProductEntity Product { get; set; }
+        public TransactionBodyEntity Body { get; set; }
+        public ProductEntity Product { get; set; }
     }
 }

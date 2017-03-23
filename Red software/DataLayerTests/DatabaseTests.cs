@@ -30,12 +30,12 @@ namespace DataLayer.Tests
             }
         }
 
-        [TestMethod()]
-        public void ConnectionTest()
-        {
-            Assert.IsTrue(Database.OpenConnection());
-            Assert.IsTrue(Database.CloseConnection());
-        }
+        //[TestMethod()]
+        //public void ConnectionTest()
+        //{
+        //    Assert.IsTrue(Database.OpenConnection());
+        //    Assert.IsTrue(Database.CloseConnection());
+        //}
 
         [TestMethod()]
         public void TestTest()
@@ -46,7 +46,7 @@ namespace DataLayer.Tests
         [TestMethod()]
         public void PropertyTest()
         {
-            var x1 = Database.get_connection;
+            //var x1 = Database.get_connection;
             var x2 = Database.get_connectionString;
             var x3 = Database.Get_File;
         }
@@ -56,28 +56,27 @@ namespace DataLayer.Tests
         public void TableCreationTest()
         {
 
-            Assert.IsFalse(Database.TableExists(typeof(UserEntity)));
+            Assert.IsFalse(Database.TableExists<UserEntity>());
 
 
-            Database.InitializeTable(typeof(UserEntity));
-            Database.InitializeTable(typeof(UserEntity));
+            Database.InitializeTable<UserEntity>();
+            Database.InitializeTable<UserEntity>();
 
-            Database.InitializeTable(typeof(ProductCategoryEntity));
-            Database.InitializeTable(typeof(ProductEntity));
-
-            Database.InitializeTable(typeof(ProductCategoryEntity));
-            Database.InitializeTable(typeof(ProductEntity));
-
+            Database.InitializeTable<ProductCategoryEntity>();
+            Database.InitializeTable<ProductEntity>();
+            Database.InitializeTable<ProductCategoryEntity>();
+            Database.InitializeTable<UserEntity>();
 
 
-            Assert.IsTrue(Database.TableExists(typeof(UserEntity)));
+
+            Assert.IsTrue(Database.TableExists<UserEntity>());
 
         }
 
         [TestMethod()]
         public void AddRemoveTest()
         {
-            Database.InitializeTable(typeof(UserEntity));
+            Database.InitializeTable<UserEntity>();
             string[] usernames = { "username 1", "username 2", "username 3" };
             List<UserEntity> users = new List<UserEntity>();
             foreach (var name in usernames)
@@ -102,7 +101,7 @@ namespace DataLayer.Tests
         [TestMethod()]
         public void ModifyTest()
         {
-            Database.InitializeTable(typeof(UserEntity));
+            Database.InitializeTable<UserEntity>();
 
             UserEntity user1 = new UserEntity("username", "pw1");
             UserEntity user2 = new UserEntity("username", "pw2");

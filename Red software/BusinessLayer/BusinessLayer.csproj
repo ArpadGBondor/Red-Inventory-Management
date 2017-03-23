@@ -43,6 +43,7 @@
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="ManagePartners.cs" />
     <Compile Include="ManageProducts.cs" />
+    <Compile Include="ManageTransactions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserLogin.cs" />
   </ItemGroup>

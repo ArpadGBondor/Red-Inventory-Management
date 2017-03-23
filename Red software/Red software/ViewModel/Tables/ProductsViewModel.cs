@@ -16,9 +16,13 @@ namespace Red_software.ViewModel
     public class ProductsViewModel : TableModel<ProductListEntity>
     {
         protected override void DeleteItem(object parameter)
-        {
-            ManageProducts.DeleteProduct(SelectedItem);
-            RefreshList(parameter);
+        {        
+            if (ManageProducts.DeleteProduct(SelectedItem))
+                RefreshList(parameter);
+            else
+            {
+                NotificationProvider.Error("Delete product error", "This product is set to one or more transactions.");
+            }
         }
 
         protected override void EditItem(object parameter)

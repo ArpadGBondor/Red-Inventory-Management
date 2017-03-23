@@ -3,6 +3,7 @@ using BusinessLayer;
 using Red_software.Views;
 using Red_software.Model;
 using System;
+using Red_software.Notifications;
 
 namespace Red_software.ViewModel
 {
@@ -10,8 +11,13 @@ namespace Red_software.ViewModel
     {
         protected override void DeleteItem(object parameter)
         {
-            ManagePartners.DeletePartner(SelectedItem);
-            RefreshList(parameter);
+
+            if (ManagePartners.DeletePartner(SelectedItem))
+                RefreshList(parameter);
+            else
+            {
+                NotificationProvider.Error("Delete partner error", "This partner is set to one or more transactions.");
+            }
         }
 
         protected override void EditItem(object parameter)

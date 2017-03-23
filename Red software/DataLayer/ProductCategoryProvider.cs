@@ -11,7 +11,8 @@ namespace DataLayer
     {
         static ProductCategoryProvider()
         {
-            Database.InitializeTable(typeof(ProductCategoryEntity));
+            Database.InitializeTable<ProductCategoryEntity>();
+
         }
 
         public static int Get_ID(string category)

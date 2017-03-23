@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using Microsoft.Win32;
 using Red_software.Model;
+using Red_software.Notifications;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,9 +47,12 @@ namespace Red_software.ViewModel
             set { SetProperty(ref change_database_fileCommand, value); }
         }
 
+
+
         private void Change_File(object parameter)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ValidateNames = false;
             if (openFileDialog.ShowDialog() == true)
             {
                 DatabaseConnection.ChangeDatabaseFile(openFileDialog.FileName);

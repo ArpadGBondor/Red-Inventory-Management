@@ -17,8 +17,8 @@ namespace DataLayer.Tests
         public void TestInitialize()
         {
             Database.InitializeConnection(AppDomain.CurrentDomain.BaseDirectory + "\\Database.mdf");
-            Database.InitializeTable(typeof(ProductCategoryEntity));
-            Database.InitializeTable(typeof(ProductEntity));
+            Database.InitializeTable<ProductCategoryEntity>();
+            Database.InitializeTable<ProductEntity>();
         }
 
         [TestMethod()]

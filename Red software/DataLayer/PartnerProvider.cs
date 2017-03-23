@@ -7,7 +7,7 @@ namespace DataLayer
     {
         static PartnerProvider()
         {
-            Database.InitializeTable(typeof(PartnerEntity));
+            Database.InitializeTable<PartnerEntity>();
         }
 
         public static bool Add(PartnerEntity partner)
@@ -22,6 +22,8 @@ namespace DataLayer
 
         public static bool Remove(PartnerEntity partner)
         {
+            if (TransactionProvider.IsExistHead(p=>p.Partner_Id == partner.Id))
+                return false;
             return Database.Remove<PartnerEntity>(p => p.Id == partner.Id);
         }
 

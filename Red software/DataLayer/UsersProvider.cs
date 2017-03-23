@@ -12,7 +12,7 @@ namespace DataLayer
     {
         static UsersProvider()
         {
-            Database.InitializeTable(typeof(UserEntity));
+            Database.InitializeTable<UserEntity>();
         }
 
         public static bool IsEmptyUserDatabase()

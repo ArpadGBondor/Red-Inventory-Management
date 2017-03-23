@@ -1,21 +1,26 @@
-﻿using Red_software.Model;
-using Red_software.Notifications;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
-namespace Red_software.ViewModel
+namespace Red_software.Model
 {
-    public class SettingsMenuViewModel : BindableBase
+    public abstract class MenuModel : BindableBase
     {
-        #region Views
-        UsersViewModel users = new UsersViewModel();
-        #endregion
-        #region Change Views
+
+        private List<String> buttons;
+        public List<String> Buttons
+        {
+            get
+            {
+                if (buttons == null) buttons = new List<string>();
+                return buttons;
+            }
+            set { SetProperty(ref buttons, value); }
+        }
+
         private BindableBase currentViewModel;
         public BindableBase CurrentViewModel
         {
@@ -32,21 +37,7 @@ namespace Red_software.ViewModel
             }
             set { SetProperty(ref switchViewCommand, value); }
         }
-        private void Navigate(object parameter)
-        {
-            string destination = (string)parameter;
-            switch (destination)
-            {
-                case "Users":
-                    CurrentViewModel = users;
-                    break;
-                default:
-                    break;
-            }
-        }
-        #endregion
 
-
-
+        protected abstract void Navigate(object parameter);
     }
 }

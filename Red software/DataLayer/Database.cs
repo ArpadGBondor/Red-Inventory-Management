@@ -3,26 +3,14 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Reflection;
-using System.Diagnostics;
-using System.Data.SqlClient;
-using EntityLayer;
 using System.Linq.Expressions;
-using System.Data.Linq.Mapping;
 
 namespace DataLayer
 {
     public class Database
     {
-        private static SqlConnection connection;
-
         private static string server;
-        //private static string database;
-        //private static string uid;
-        //private static string password;
         private static string file;
         private static string connectionString;
         public static string Get_File
@@ -32,7 +20,6 @@ namespace DataLayer
                 return file;
             }
         }
-        public static SqlConnection get_connection { get { return connection; } }
         public static string get_connectionString { get { return connectionString; } }
 
         static Database()
@@ -42,7 +29,6 @@ namespace DataLayer
             connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + file + "\";Integrated Security=True;";
             InitializeConnection();
         }
-
         public static void InitializeConnection(string _file = "")
         {
             if (File.Exists(_file))
@@ -50,110 +36,38 @@ namespace DataLayer
                 file = _file;
                 connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + file + "\";Integrated Security=True;";
             }
-            connection = new SqlConnection(connectionString);
         }
-
-        //open connection to database
-        public static bool OpenConnection()
-        {
-            try
-            {
-                connection.Open();
-                return true;
-            }
-            catch /*(Exception ex)*/
-            {
-                //When handling errors, you can your application's response based 
-                //on the error number.
-                //The two most common error numbers when connecting are as follows:
-                //0: Cannot connect to server.
-                //1045: Invalid user name and/or password.
-                //switch (ex.Number)
-                //{
-                //    //case 1045:
-                //    //    MessageBox.Show("Invalid username/password, please try again");
-                //    //    break;
-                //    //default:
-                //    //    MessageBox.Show("Cannot connect to database. \nSelect the Database.mdf file, or contact an administrator."/* + ex.Number.ToString()*/);
-                //    //    break;
-                //}
-                return false;
-            }
-        }
-
-        //Close connection
-        public static bool CloseConnection()
-        {
-            try
-            {
-                connection.Close();
-                return true;
-            }
-            catch /*(SqlException ex)*/
-            {
-                return false;
-            }
-        }
-
 
         public static bool Test()
         {
-            if (OpenConnection())
-            {
-                CloseConnection();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            MyDataContext db = new MyDataContext(connectionString);
+            return db.DatabaseExists();
+        }
+        
+
+        public static void CreateTable<Entity>()
+        {
+            MyDataContext db = new MyDataContext(connectionString);
+            db.CreateTable<Entity>();
+        }
+
+        public static bool TableExists<Entity>()
+        {
+            MyDataContext db = new MyDataContext(connectionString);
+            return db.TableExists<Entity>();
         }
 
 
-        public static void CreateTable(Type linqTableClass)
-        {
-            MyDataContext db = new MyDataContext(connection);
-            var metaTable = db.Mapping.GetTable(linqTableClass);
-            var typeName = "System.Data.Linq.SqlClient.SqlBuilder";
-            var type = typeof(DataContext).Assembly.GetType(typeName);
-            var bf = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod;
-            var sql = type.InvokeMember("GetCreateTableCommand", bf, null, null, new[] { metaTable });
-            var sqlAsString = sql.ToString();
-            db.ExecuteCommand(sqlAsString);
-        }
 
-        public static bool TableExists(Type linqTableClass)
-        {
-            bool lSuccess = false;
-            connection.Open();
-            try
-            {
-                MyDataContext db = new MyDataContext(Database.get_connectionString);
-                SqlTransaction tx = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
-                SqlCommand cmd = new SqlCommand("select case when exists((select * from information_schema.tables where table_name = '" + db.Mapping.GetTable(linqTableClass).TableName + "')) then 1 else 0 end", connection, tx);               
-                SqlDataReader rdr = cmd.ExecuteReader();
-                if (rdr.Read())
-                {
-                    lSuccess = rdr.GetInt32(0) == 1;
-                }
-            }
-            catch /*(Exception e)*/
-            {
-
-            }
-            connection.Close();
-            return lSuccess;
-        }
-
-        public static void InitializeTable(Type linqTableClass)
+        public static void InitializeTable<Entity>()
         {
 
-            if (!TableExists(linqTableClass))
+            if (!TableExists<Entity>())
             {
-                CreateTable(linqTableClass);
+                CreateTable<Entity>();
             }
 
-            // TODO: automatic
+            // TODO: automatic structure change
         }
 
         public static List<Entity> ListTable<Entity>(Expression<Func<Entity, bool>> condition) where Entity : class
@@ -247,14 +161,55 @@ namespace DataLayer
                     db.SubmitChanges();
                     lSuccess = true;
                 }
-                catch /*(Exception e)*/
-                {
-
-                }
+                catch /*(Exception e)*/ { }
             }
 
             return lSuccess;
         }
+
+        // Garbage: 
+
+        //open connection to database
+        //public static bool OpenConnection()
+        //{
+        //    try
+        //    {
+        //        connection.Open();
+        //        return true;
+        //    }
+        //    catch /*(Exception ex)*/
+        //    {
+        //        //When handling errors, you can your application's response based 
+        //        //on the error number.
+        //        //The two most common error numbers when connecting are as follows:
+        //        //0: Cannot connect to server.
+        //        //1045: Invalid user name and/or password.
+        //        //switch (ex.Number)
+        //        //{
+        //        //    //case 1045:
+        //        //    //    MessageBox.Show("Invalid username/password, please try again");
+        //        //    //    break;
+        //        //    //default:
+        //        //    //    MessageBox.Show("Cannot connect to database. \nSelect the Database.mdf file, or contact an administrator."/* + ex.Number.ToString()*/);
+        //        //    //    break;
+        //        //}
+        //        return false;
+        //    }
+        //}
+
+        //Close connection
+        //public static bool CloseConnection()
+        //{
+        //    try
+        //    {
+        //        connection.Close();
+        //        return true;
+        //    }
+        //    catch /*(SqlException ex)*/
+        //    {
+        //        return false;
+        //    }
+        //}
 
 
         //

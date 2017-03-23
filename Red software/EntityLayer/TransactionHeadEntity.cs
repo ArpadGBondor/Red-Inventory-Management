@@ -14,6 +14,9 @@ namespace EntityLayer
         public int Id { get; set; }
 
         [Column]
+        public bool Incoming { get; set; }
+
+        [Column]
         public int Partner_Id { get; set; }
 
         [Column]
