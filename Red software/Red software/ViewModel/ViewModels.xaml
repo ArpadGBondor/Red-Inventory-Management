@@ -17,4 +17,10 @@
     <DataTemplate DataType = "{x:Type viewModels:PartnersViewModel}">
         <views:TableView/>
     </DataTemplate>
+    <DataTemplate DataType = "{x:Type viewModels:TransactionsViewModel}">
+        <views:TableView/>
+    </DataTemplate>
+    <DataTemplate DataType = "{x:Type viewModels:InventoryViewModel}">
+        <views:InventoryView/>
+    </DataTemplate>
 </ResourceDictionary>

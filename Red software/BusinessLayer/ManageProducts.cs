@@ -6,9 +6,12 @@ namespace BusinessLayer
 {
     public class ManageProducts
     {
-        public static List<ProductListEntity> ListProducts()
+        public static List<ProductListEntity> ListProducts(int Category_Id = 0)
         {
-            return ProductProvider.List(p => true);
+            if (Category_Id == 0)
+                return ProductProvider.List(p => true);
+            else
+                return ProductProvider.List(p => p.Category_Id == Category_Id);
         }
 
         public static bool NewProduct(ProductListEntity product)

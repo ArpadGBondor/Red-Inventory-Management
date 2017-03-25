@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using EntityLayer;
+using System.Linq.Expressions;
+using System;
 
 namespace DataLayer
 {
@@ -27,9 +29,11 @@ namespace DataLayer
             return Database.Remove<PartnerEntity>(p => p.Id == partner.Id);
         }
 
-        public static List<PartnerEntity> List()
+        public static List<PartnerEntity> List(Expression<Func<PartnerEntity,bool>> condition)
         {
-            return Database.ListTable<PartnerEntity>(p => true);
+            var list = Database.ListTable<PartnerEntity>(condition);
+            list.Sort();
+            return list;
         }
 
     }

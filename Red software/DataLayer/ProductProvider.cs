@@ -63,7 +63,6 @@ namespace DataLayer
                     list.Add(new ProductListEntity(rec.Product, rec.Category));
             }
             list.Sort();
-
             return list;
         }
 

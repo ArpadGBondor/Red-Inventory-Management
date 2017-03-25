@@ -22,5 +22,7 @@ namespace EntityLayer
         [Column]
         public string Date { get; set; }
 
+        [Column]
+        public decimal TotalPrice { get; set; }
     }
 }

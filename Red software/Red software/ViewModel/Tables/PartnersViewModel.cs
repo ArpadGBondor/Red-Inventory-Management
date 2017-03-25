@@ -29,6 +29,7 @@ namespace Red_software.ViewModel
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {
+                Item = EPVM.Item;
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -44,6 +45,7 @@ namespace Red_software.ViewModel
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {
+                Item = EPVM.Item;
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)

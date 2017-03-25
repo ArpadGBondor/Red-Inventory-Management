@@ -45,12 +45,16 @@ namespace Red_software.ViewModel
         }
         #endregion
         #region Menus and Views
-        private string[] mainMenu = new string[] { "Tables", "Transactions", "Settings" };
+        private string[] mainMenu = new string[] { "Tables", "Transactions", "Lists", "Settings" };
         private string[] tablesMenu = new string[] { "Products", "Product categories", "Partners" };
         private ProductsViewModel products = new ProductsViewModel();
         private ProductCategoriesViewModel productCategories = new ProductCategoriesViewModel();
         private PartnersViewModel partners = new PartnersViewModel();
-        private string[] transactionsMenu = new string[] {  };
+        private string[] transactionsMenu = new string[] { "Incoming", "Outgoing" };
+        private TransactionsViewModel incomingTransactions = new TransactionsViewModel(true);
+        private TransactionsViewModel outgoingTransactions = new TransactionsViewModel(false);
+        private string[] listsMenu = new string[] { "Inventory" };
+        private InventoryViewModel inventory = new InventoryViewModel();
         private string[] settingsMenu = new string[] { "Users" };
         private UsersViewModel users = new UsersViewModel();
         #endregion
@@ -87,6 +91,9 @@ namespace Red_software.ViewModel
                 case "Transactions":
                     CurrentMenu = transactionsMenu;
                     break;
+                case "Lists":
+                    CurrentMenu = listsMenu;
+                    break;
                 case "Settings":
                     CurrentMenu = settingsMenu;
                     break;
@@ -94,6 +101,7 @@ namespace Red_software.ViewModel
                     CurrentMenu = null;
                     break;
             }
+            CurrentViewModel = null;
         }
         #endregion
         #region Change View
@@ -134,6 +142,15 @@ namespace Red_software.ViewModel
                     break;
                 case "Users":
                     CurrentViewModel = users;
+                    break;
+                case "Incoming":
+                    CurrentViewModel = incomingTransactions;
+                    break;
+                case "Outgoing":
+                    CurrentViewModel = outgoingTransactions;
+                    break;
+                case "Inventory":
+                    CurrentViewModel = inventory;
                     break;
                 default:
                     CurrentViewModel = null;

@@ -87,14 +87,15 @@
     </ApplicationDefinition>
     <Compile Include="Model\BindableBase.cs" />
     <Compile Include="Model\EditItemModel.cs" />
-    <Compile Include="Model\MenuModel.cs" />
     <Compile Include="Model\TableModel.cs" />
     <Compile Include="Notifications\GrowlNotifiactions.xaml.cs">
       <DependentUpon>GrowlNotifiactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Notifications\NotificationProvider.cs" />
+    <Compile Include="ViewModel\Edit\EditTransactionViewModel.cs" />
     <Compile Include="ViewModel\Edit\EditPartnerViewModel.cs" />
+    <Compile Include="ViewModel\Lists\InventoryViewModel.cs" />
     <Compile Include="ViewModel\Tables\PartnersViewModel.cs" />
     <Compile Include="ViewModel\Edit\EditProductCategoryViewModel.cs" />
     <Compile Include="ViewModel\Edit\EditProductViewModel.cs" />
@@ -107,10 +108,14 @@
     <Compile Include="ViewModel\Tables\ProductCategoriesViewModel.cs" />
     <Compile Include="ViewModel\Tables\ProductsViewModel.cs" />
     <Compile Include="ViewModel\Tables\UsersViewModel.cs" />
+    <Compile Include="ViewModel\Tables\TransactionsViewModel.cs" />
+    <Compile Include="Views\Lists\InventoryView.xaml.cs">
+      <DependentUpon>InventoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login\EditUserView.xaml.cs">
       <DependentUpon>EditUserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Tables\Edit\EditItemView.xaml.cs">
+    <Compile Include="Views\Edit\EditItemView.xaml.cs">
       <DependentUpon>EditItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login\NewUserWindow.xaml.cs">
@@ -138,11 +143,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Lists\InventoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Login\EditUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Tables\Edit\EditItemView.xaml">
+    <Page Include="Views\Edit\EditItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,10 +9,13 @@ namespace EntityLayer
 {
 
     [Table(Name = "Partners")]
-    public class PartnerEntity
+    public class PartnerEntity : IComparable<PartnerEntity>
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
         public int Id { get; set; }
+
+        [Column]
+        public string Code { get; set; }
 
         [Column]
         public string Name { get; set; }
@@ -34,5 +37,10 @@ namespace EntityLayer
 
         [Column]
         public string Email { get; set; }
+
+        public int CompareTo(PartnerEntity other)
+        {
+            return Name.CompareTo(other.Name);
+        }
     }
 }

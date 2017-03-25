@@ -8,7 +8,17 @@ namespace BusinessLayer
     {
         public static List<PartnerEntity> ListPartners()
         {
-            return PartnerProvider.List();
+            return PartnerProvider.List(p => true);
+        }
+
+        public static List<PartnerEntity> ListCustomers()
+        {
+            return PartnerProvider.List(p => p.Customer);
+        }
+
+        public static List<PartnerEntity> ListDealers()
+        {
+            return PartnerProvider.List(p => p.Dealer);
         }
 
         public static bool NewPartner(PartnerEntity partner)

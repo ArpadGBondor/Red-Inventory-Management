@@ -28,6 +28,7 @@ namespace DataLayer
                             from subp in PartJoin.DefaultIfEmpty()
                             select new TransactionHeadListEntity(h, subp));
             list.AddRange(query);
+            list.Sort();
             return list;
         }
 
@@ -69,7 +70,7 @@ namespace DataLayer
             else // Insert
             {
                 Database.Add<TransactionHeadEntity>(head);
-                Transaction_Id = db.TransactionHead.Last(p=>true).Id;
+                Transaction_Id = head.Id;
             }
 
             // BODY records

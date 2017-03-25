@@ -39,8 +39,8 @@
                                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
                                     <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
                                     <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
-                                    <GridViewColumn Header="Cost price" DisplayMemberBinding="{Binding Cost_Price}" />
-                                    <GridViewColumn Header="Sell price" DisplayMemberBinding="{Binding Sell_Price}" />
+                                    <GridViewColumn Header="Cost price" DisplayMemberBinding="{Binding Path=Cost_Price,StringFormat={}{0:C} }" />
+                                    <GridViewColumn Header="Sell price" DisplayMemberBinding="{Binding Sell_Price,StringFormat={}{0:C} }" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -61,7 +61,8 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
-                                    <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
                                     <GridViewColumn Header="Customer" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -82,6 +83,19 @@
                                     <GridViewColumn Header="Phone number" DisplayMemberBinding="{Binding Phone}" />
                                     <GridViewColumn Header="E-mail address" DisplayMemberBinding="{Binding Email}" />
                                     <GridViewColumn Header="Bank account number" DisplayMemberBinding="{Binding AccountNumber}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:TransactionsViewModel}">
+                        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Head.Id}" />
+                                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Head.Date}" />
+                                    <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
+                                    <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
+                                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding Path=Head.TotalPrice}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>

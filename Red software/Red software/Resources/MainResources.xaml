@@ -44,4 +44,18 @@
         <Setter Property="Label.FontSize" Value="18"></Setter>
         <Setter Property="Label.Foreground" Value="#0066cc"></Setter>
     </Style>
+    <Style x:Key="editWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Window.Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FFA5FFB9" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
+        <Setter Property="Label.FontWeight" Value="Bold"></Setter>
+        <Setter Property="Label.FontSize" Value="18"></Setter>
+        <Setter Property="Label.Foreground" Value="#0066cc"></Setter>
+    </Style>
 </ResourceDictionary>

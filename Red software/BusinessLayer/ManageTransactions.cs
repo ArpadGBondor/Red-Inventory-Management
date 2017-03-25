@@ -23,5 +23,9 @@ namespace BusinessLayer
         {
             return TransactionProvider.AddOrModifyTransaction(head, body);
         }
+        public static bool RemoveTransaction(TransactionHeadEntity head)
+        {
+            return TransactionProvider.RemoveTransaction(p => p.Id == head.Id);
+        }
     }
 }
