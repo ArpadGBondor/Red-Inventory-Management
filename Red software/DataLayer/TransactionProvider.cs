@@ -44,6 +44,53 @@ namespace DataLayer
             return list;
         }
 
+        public static List<TransactionBodyListEntity> ListInventory(Expression<Func<TransactionBodyEntity, bool>> condition)
+        {
+            List<TransactionBodyListEntity> list = new List<TransactionBodyListEntity>();
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            var query1 = (from body in db.TransactionBody.Where(condition)
+                         join head in db.TransactionHead on body.Transaction_Id equals head.Id
+                         select new { Product_Id = body.Product_Id, Quantity = body.Quantity * (head.Incoming ? 1 :-1 ) });
+            var query2 = (from q1 in query1
+                          group q1 by q1.Product_Id into g
+                          join product in db.Products on g.First().Product_Id equals product.Id
+                          select new { Quantity = g.Sum(p => p.Quantity), Product = product });
+            foreach (var record in query2)
+            {
+                list.Add(
+                    new TransactionBodyListEntity(
+                        new TransactionBodyEntity() { Quantity = record.Quantity },
+                        record.Product));
+            }
+            return list;
+        }
+
+        public static List<TransactionHeadListEntity> ListInventoryDetails(int Product_Id)
+        {
+            List<TransactionHeadListEntity> list = new List<TransactionHeadListEntity>();
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            var query = (from body in db.TransactionBody.Where(p => p.Product_Id == Product_Id)
+                          group body by body.Transaction_Id into g
+                          join head in db.TransactionHead on g.First().Transaction_Id equals head.Id
+                          join partner in db.Partners on head.Partner_Id equals partner.Id
+                          select new TransactionHeadListEntity(head, partner, g.Sum(p => p.Quantity) * (head.Incoming ? 1 : -1)));
+
+            list.AddRange(query);
+            return list;
+        }
+
+        public static List<TransactionHeadListEntity> ListPartnerTransactions(Expression<Func<TransactionHeadEntity, bool>> condition)
+        {
+            List<TransactionHeadListEntity> list = new List<TransactionHeadListEntity>();
+            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            var query = (from head in db.TransactionHead.Where(condition)
+                         group head by head.Partner_Id into g
+                         join partner in db.Partners on g.First().Partner_Id equals partner.Id
+                         select new TransactionHeadListEntity(null, partner, g.Sum(p => p.TotalPrice * (p.Incoming ? -1 : 1))));
+            list.AddRange(query);
+            return list;
+        }
+
         public static bool IsExistHead(Expression<Func<TransactionHeadEntity, bool>> condition)
         {
             return Database.IsExist<TransactionHeadEntity>(condition);

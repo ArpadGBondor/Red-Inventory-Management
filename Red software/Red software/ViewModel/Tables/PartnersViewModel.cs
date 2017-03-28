@@ -9,6 +9,11 @@ namespace Red_software.ViewModel
 {
     public class PartnersViewModel : TableModel<PartnerEntity>
     {
+        public PartnersViewModel()
+        {
+            ItemName = "partner";
+            TableName = "Partners";
+        }
         protected override void DeleteItem(object parameter)
         {
 
@@ -24,8 +29,8 @@ namespace Red_software.ViewModel
         {
             PartnerEntity Item = new PartnerEntity();
             EntityCloner.CloneProperties<PartnerEntity>(Item, SelectedItem);
-            EditPartnerViewModel EPVM = new EditPartnerViewModel(Item, false);
-            EditItemView EIV = new EditItemView() { DataContext = EPVM };
+            EditPartnerViewModel EPVM = new EditPartnerViewModel(Item, false, ItemName);
+            EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {
@@ -40,8 +45,8 @@ namespace Red_software.ViewModel
         protected override void NewItem(object parameter)
         {
             PartnerEntity Item = new PartnerEntity();
-            EditPartnerViewModel EPVM = new EditPartnerViewModel(Item, true);
-            EditItemView EIV = new EditItemView() { DataContext = EPVM };
+            EditPartnerViewModel EPVM = new EditPartnerViewModel(Item, true, ItemName);
+            EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {

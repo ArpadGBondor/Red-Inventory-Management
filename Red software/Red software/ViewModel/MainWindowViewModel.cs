@@ -53,8 +53,9 @@ namespace Red_software.ViewModel
         private string[] transactionsMenu = new string[] { "Incoming", "Outgoing" };
         private TransactionsViewModel incomingTransactions = new TransactionsViewModel(true);
         private TransactionsViewModel outgoingTransactions = new TransactionsViewModel(false);
-        private string[] listsMenu = new string[] { "Inventory" };
+        private string[] listsMenu = new string[] { "Inventory", "Partner transactions" };
         private InventoryViewModel inventory = new InventoryViewModel();
+        private PartnerTransactionsViewModel partnerTransactions = new PartnerTransactionsViewModel();
         private string[] settingsMenu = new string[] { "Users" };
         private UsersViewModel users = new UsersViewModel();
         #endregion
@@ -151,6 +152,9 @@ namespace Red_software.ViewModel
                     break;
                 case "Inventory":
                     CurrentViewModel = inventory;
+                    break;
+                case "Partner transactions":
+                    CurrentViewModel = partnerTransactions;
                     break;
                 default:
                     CurrentViewModel = null;

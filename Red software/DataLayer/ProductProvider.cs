@@ -30,6 +30,7 @@ namespace DataLayer
         }
         public static bool Add(ProductListEntity product)
         {
+
             return Database.Add<ProductEntity>(ConvertToProduct(product));
         }
 

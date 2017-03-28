@@ -12,10 +12,17 @@ namespace Red_software.Model
     {
 
         private EditItemModel() { }
-        protected EditItemModel(Entity _Item, bool _NewRecord) { Item = _Item; NewRecord = _NewRecord; }
+        protected EditItemModel(Entity _Item, bool _NewRecord, string _ItemName/* = "record"*/) { Item = _Item; NewRecord = _NewRecord; ItemName = _ItemName; }
 
-        public string TitleText { get { return (NewRecord ? "New record" : "Edit record"); } }
-        public string OkButtonText { get { return (NewRecord ? "Add record" : "Save record"); } }
+        private string itemName;
+        public string ItemName
+        {
+            get { return itemName; }
+            set { SetProperty(ref itemName, value); }
+        }
+
+        public string TitleText { get { return (NewRecord ? "New " : "Edit ") + ItemName; } }
+        public string OkButtonText { get { return (NewRecord ? "Add " : "Save ") + ItemName; } }
 
         private Entity item;
         public Entity Item

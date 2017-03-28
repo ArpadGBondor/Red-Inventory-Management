@@ -86,19 +86,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\BindableTransactionBodyListEntity.cs" />
+    <Compile Include="Model\DecimalToPositiveConverter.cs" />
     <Compile Include="Model\EditItemModel.cs" />
+    <Compile Include="Model\ListModel.cs" />
     <Compile Include="Model\TableModel.cs" />
     <Compile Include="Notifications\GrowlNotifiactions.xaml.cs">
       <DependentUpon>GrowlNotifiactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Notifications\NotificationProvider.cs" />
-    <Compile Include="ViewModel\Edit\EditTransactionViewModel.cs" />
-    <Compile Include="ViewModel\Edit\EditPartnerViewModel.cs" />
+    <Compile Include="ViewModel\Lists\PartnerTransactionsViewModel.cs" />
+    <Compile Include="ViewModel\Lists\ListDetails\InventoryDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Lists\ListDetails\PartnerTransactionsDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Tables\Edit\EditTransactionViewModel.cs" />
+    <Compile Include="ViewModel\Tables\Edit\EditPartnerViewModel.cs" />
     <Compile Include="ViewModel\Lists\InventoryViewModel.cs" />
     <Compile Include="ViewModel\Tables\PartnersViewModel.cs" />
-    <Compile Include="ViewModel\Edit\EditProductCategoryViewModel.cs" />
-    <Compile Include="ViewModel\Edit\EditProductViewModel.cs" />
+    <Compile Include="ViewModel\Tables\Edit\EditProductCategoryViewModel.cs" />
+    <Compile Include="ViewModel\Tables\Edit\EditProductViewModel.cs" />
     <Compile Include="ViewModel\Login\EditUserViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Login\NewUserViewModel.cs" />
@@ -109,14 +115,17 @@
     <Compile Include="ViewModel\Tables\ProductsViewModel.cs" />
     <Compile Include="ViewModel\Tables\UsersViewModel.cs" />
     <Compile Include="ViewModel\Tables\TransactionsViewModel.cs" />
-    <Compile Include="Views\Lists\InventoryView.xaml.cs">
-      <DependentUpon>InventoryView.xaml</DependentUpon>
+    <Compile Include="Views\Lists\ListDetails\ListDetailsWindow.xaml.cs">
+      <DependentUpon>ListDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lists\ListView.xaml.cs">
+      <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login\EditUserView.xaml.cs">
       <DependentUpon>EditUserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Edit\EditItemView.xaml.cs">
-      <DependentUpon>EditItemView.xaml</DependentUpon>
+    <Compile Include="Views\Tables\Edit\EditItemWindow.xaml.cs">
+      <DependentUpon>EditItemWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login\NewUserWindow.xaml.cs">
       <DependentUpon>NewUserWindow.xaml</DependentUpon>
@@ -143,7 +152,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Lists\InventoryView.xaml">
+    <Page Include="Views\Lists\ListDetails\ListDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lists\ListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,7 +164,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Edit\EditItemView.xaml">
+    <Page Include="Views\Tables\Edit\EditItemWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

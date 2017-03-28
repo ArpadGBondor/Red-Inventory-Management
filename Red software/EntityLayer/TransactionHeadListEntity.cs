@@ -11,6 +11,12 @@ namespace EntityLayer
             Head = _Head;
             Partner = _Partner;
         }
+        public TransactionHeadListEntity(TransactionHeadEntity _Head, PartnerEntity _Partner, decimal _ListVariable)
+            : this(_Head,_Partner)
+        {
+            ListVariable = _ListVariable;
+        }
+
         public TransactionHeadEntity Head { get; set; }
         public PartnerEntity Partner { get; set; }
 
@@ -29,9 +35,13 @@ namespace EntityLayer
             }
         }
 
+        public decimal ListVariable { get; set; }
+
         public int CompareTo(TransactionHeadListEntity other)
         {
-            return Date.CompareTo(Date);
+            if (Head == null)
+                return Partner.CompareTo(other.Partner);
+            return Date.CompareTo(other.Date);
         }
     }
 }

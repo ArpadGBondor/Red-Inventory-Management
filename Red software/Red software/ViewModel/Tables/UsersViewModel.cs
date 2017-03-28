@@ -9,6 +9,11 @@ namespace Red_software.ViewModel
 {
     public class UsersViewModel : TableModel<UserEntity>
     {
+        public UsersViewModel()
+        {
+            ItemName = "user";
+            TableName = "Users";
+        }
         protected override void DeleteItem(object parameter)
         {
             string UserID = SelectedItem.Username;

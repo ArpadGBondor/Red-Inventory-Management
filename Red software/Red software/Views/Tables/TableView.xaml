@@ -12,14 +12,16 @@
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <WrapPanel Grid.Row="0">
-                <Button Content="New record" Command="{Binding NewItemCommand}" Margin="2"/>
-                <Button Content="Edit record" Command="{Binding EditItemCommand}" Margin="2"/>
-                <Button Content="Delete record" Command="{Binding DeleteItemCommand}" Margin="2"/>
+            <TextBlock Text="{Binding TableName}" HorizontalAlignment="Center"/>
+            <WrapPanel Grid.Row="1">
+                <Button Content="{Binding newButtonContent}" Command="{Binding NewItemCommand}" Margin="2"/>
+                <Button Content="{Binding editButtonContent}" Command="{Binding EditItemCommand}" Margin="2"/>
+                <Button Content="{Binding deleteButtonContent}" Command="{Binding DeleteItemCommand}" Margin="2"/>
             </WrapPanel>
-            <ContentControl  Grid.Row="1" Content="{Binding}">
+            <ContentControl  Grid.Row="2" Content="{Binding}">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
                         <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
@@ -95,7 +97,7 @@
                                     <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Head.Date}" />
                                     <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
                                     <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
-                                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding Path=Head.TotalPrice}" />
+                                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding Path=Head.TotalPrice,StringFormat={}{0:C}}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>

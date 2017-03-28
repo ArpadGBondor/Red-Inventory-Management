@@ -8,7 +8,7 @@ namespace Red_software.ViewModel
 {
     public class EditProductCategoryViewModel : EditItemModel<ProductCategoryEntity>
     {
-        public EditProductCategoryViewModel(ProductCategoryEntity _Item, bool _NewRecord) : base(_Item, _NewRecord) { }
+        public EditProductCategoryViewModel(ProductCategoryEntity _Item, bool _NewRecord, string _ItemName) : base(_Item, _NewRecord, _ItemName) { }
 
         protected override bool Save(object parameter)
         {

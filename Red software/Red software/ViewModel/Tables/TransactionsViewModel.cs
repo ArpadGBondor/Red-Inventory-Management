@@ -14,7 +14,12 @@ namespace Red_software.ViewModel
     public class TransactionsViewModel : TableModel<TransactionHeadListEntity>
     {
         private TransactionsViewModel() { }
-        public TransactionsViewModel(bool _Incoming) { incoming = _Incoming; }
+        public TransactionsViewModel(bool _Incoming)
+        {
+            incoming = _Incoming;
+            ItemName = "transaction";
+            TableName = (Incoming ? "Incoming" : "Outgoing") + " transactions";
+        }
         private bool incoming;
         public bool Incoming { get { return incoming; } }
 
@@ -32,8 +37,8 @@ namespace Red_software.ViewModel
         {
             TransactionHeadListEntity Item = new TransactionHeadListEntity();
             EntityCloner.CloneProperties<TransactionHeadListEntity>(Item, SelectedItem);
-            EditTransactionViewModel ETVM = new EditTransactionViewModel(Item, false);
-            EditItemView EIV = new EditItemView() { DataContext = ETVM };
+            EditTransactionViewModel ETVM = new EditTransactionViewModel(Item, false,ItemName);
+            EditItemWindow EIV = new EditItemWindow() { DataContext = ETVM };
             EIV.ShowDialog();
             if (ETVM.SaveEdit)
             {
@@ -51,8 +56,8 @@ namespace Red_software.ViewModel
             Item.Head = new TransactionHeadEntity();
             Item.Head.Incoming = this.Incoming;
             Item.Date = DateTime.Now;
-            EditTransactionViewModel ETVM = new EditTransactionViewModel(Item, false);
-            EditItemView EIV = new EditItemView() { DataContext = ETVM };
+            EditTransactionViewModel ETVM = new EditTransactionViewModel(Item, true, ItemName);
+            EditItemWindow EIV = new EditItemWindow() { DataContext = ETVM };
             EIV.ShowDialog();
             if (ETVM.SaveEdit)
             {

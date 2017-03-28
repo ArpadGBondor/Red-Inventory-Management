@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Red_software.Views.ListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Red_software.Views"
+             xmlns:viewModels="clr-namespace:Red_software.ViewModel"
+             xmlns:models="clr-namespace:Red_software.Model"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+    <Border Grid.Column="1" Margin="10" CornerRadius="10" Background="#FFFFE49A">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding TableName}" HorizontalAlignment="Center"/>
+            <ContentControl  Grid.Row="2" Content="{Binding}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewModels:InventoryViewModel}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <WrapPanel>
+                                <Button Content="Quantity details" Command="{Binding DetailsCommand}" />
+                            </WrapPanel>
+                            <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListViewItem}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Body.Quantity, Converter={StaticResource DecimalToPositiveConverter}}" Value="False">
+                                                <Setter Property="Background" Value="MistyRose"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Product.Id}" />
+                                        <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Path=Product.Name}" />
+                                        <GridViewColumn Header="Product code" DisplayMemberBinding="{Binding Path=Product.Code}" />
+                                        <GridViewColumn Header="Quantity on stock" DisplayMemberBinding="{Binding Path=Body.Quantity,StringFormat={}{0:F2}}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:PartnerTransactionsViewModel}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <WrapPanel>
+                                <Button Content="Partner transactions" Command="{Binding DetailsCommand}" />
+                            </WrapPanel>
+                            <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListViewItem}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=ListVariable, Converter={StaticResource DecimalToPositiveConverter}}" Value="False">
+                                                <Setter Property="Background" Value="MistyRose"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Partner.Id}" />
+                                        <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
+                                        <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
+                                        <GridViewColumn Header="Partner transactions" DisplayMemberBinding="{Binding Path=ListVariable,StringFormat={}{0:C}}" />
+                                        <GridViewColumn Header="Partner bank account" DisplayMemberBinding="{Binding Path=Partner.AccountNumber}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <TextBlock Grid.Row="2" Text="{Binding TotalTransactions, StringFormat=Total transactions: {0:C}}" TextAlignment="Left" FontSize="30" Margin="5" />
+                        </Grid>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+    </Border>
+</UserControl>

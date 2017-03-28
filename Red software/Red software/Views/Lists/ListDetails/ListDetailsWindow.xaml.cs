@@ -1,6 +1,4 @@
-﻿using Red_software.Model;
-using EntityLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Red_software.Views
 {
     /// <summary>
-    /// Interaction logic for TableView.xaml
+    /// Interaction logic for ListDetailsWindow.xaml
     /// </summary>
-    public partial class TableView : UserControl
+    public partial class ListDetailsWindow : Window
     {
-        public TableView()
+        public ListDetailsWindow()
         {
             InitializeComponent();
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            ((RelayCommand)((ListModelParent)DataContext).RefreshListCommand).CheckAndExecute(sender);               
         }
     }
 }

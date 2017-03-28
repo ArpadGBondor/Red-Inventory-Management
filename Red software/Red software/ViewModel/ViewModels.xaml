@@ -21,6 +21,9 @@
         <views:TableView/>
     </DataTemplate>
     <DataTemplate DataType = "{x:Type viewModels:InventoryViewModel}">
-        <views:InventoryView/>
+        <views:ListView/>
+    </DataTemplate>
+    <DataTemplate DataType = "{x:Type viewModels:PartnerTransactionsViewModel}">
+        <views:ListView/>
     </DataTemplate>
 </ResourceDictionary>

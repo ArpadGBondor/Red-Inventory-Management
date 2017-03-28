@@ -1,25 +1,35 @@
-﻿using Red_software.Model;
+﻿using BusinessLayer;
 using EntityLayer;
-using BusinessLayer;
+using Red_software.Model;
+using Red_software.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Red_software.Views;
 
 namespace Red_software.ViewModel
 {
-    public class InventoryViewModel : ListModel<TransactionBodyListEntity>
+    public class PartnerTransactionsViewModel : ListModel<TransactionHeadListEntity>
     {
-        public InventoryViewModel()
+        public PartnerTransactionsViewModel()
         {
-            TableName = "Inventory list";
+            TableName = "Partner transaction summary";
+        }
+
+        private decimal totalTransactions;
+        public decimal TotalTransactions
+        {
+            get { return totalTransactions; }
+            set { SetProperty(ref totalTransactions, value); }
         }
         protected override void RefreshList(object parameter)
         {
-            List = ManageTransactions.ListInventory();
+            List = ManageTransactions.ListPartnerTransactions();
+            TotalTransactions = 0;
+            foreach (var record in List)
+                TotalTransactions += record.ListVariable;
         }
 
         private ICommand detailsCommand;
@@ -40,8 +50,8 @@ namespace Red_software.ViewModel
 
         private void Details(object parameter)
         {
-            InventoryDetailsViewModel IDVM = new InventoryDetailsViewModel(SelectedItem.Product.Id);
-            ListDetailsWindow LDW = new ListDetailsWindow() { DataContext = IDVM };
+            PartnerTransactionsDetailsViewModel PTDVM = new PartnerTransactionsDetailsViewModel(SelectedItem.Partner.Id);
+            ListDetailsWindow LDW = new ListDetailsWindow() { DataContext = PTDVM };
             LDW.ShowDialog();
         }
     }

@@ -7,7 +7,7 @@ namespace Red_software.ViewModel
 {
     public class EditPartnerViewModel : EditItemModel<PartnerEntity>
     {
-        public EditPartnerViewModel(PartnerEntity _Item, bool _NewRecord) : base(_Item, _NewRecord) { }
+        public EditPartnerViewModel(PartnerEntity _Item, bool _NewRecord, string _ItemName) : base(_Item, _NewRecord, _ItemName) { }
 
         protected override bool Save(object parameter)
         {

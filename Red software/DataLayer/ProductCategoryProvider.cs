@@ -42,7 +42,7 @@ namespace DataLayer
 
         public static bool Add(ProductCategoryEntity category)
         {
-            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductCategoryEntity>(p=>p.Category == category.Category))
+            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductCategoryEntity>(p => p.Category == category.Category)) 
             {
                 return false;
             }
@@ -51,7 +51,7 @@ namespace DataLayer
 
         public static bool Modify(ProductCategoryEntity category)
         {
-            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductCategoryEntity>(p => p.Category == category.Category))
+            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductCategoryEntity>(p => p.Id != category.Id && p.Category == category.Category))
             {
                 return false;
             }

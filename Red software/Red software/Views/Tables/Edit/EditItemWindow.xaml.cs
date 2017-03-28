@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Red_software.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,19 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Red_software.Views
 {
     /// <summary>
-    /// Interaction logic for InventoryView.xaml
+    /// Interaction logic for EditItemWindow.xaml
     /// </summary>
-    public partial class InventoryView : UserControl
+    public partial class EditItemWindow : Window
     {
-        public InventoryView()
+        public EditItemWindow()
         {
             InitializeComponent();
+
         }
     }
 }

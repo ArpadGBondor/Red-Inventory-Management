@@ -13,6 +13,12 @@ namespace Red_software.ViewModel
 {
     public class ProductCategoriesViewModel : TableModel<ProductCategoryEntity>
     {
+        public ProductCategoriesViewModel()
+        {
+            ItemName = "category";
+            TableName = "Product categories";
+        }
+
         protected override void DeleteItem(object parameter)
         {
             if (ManageProducts.DeleteProductCategory(SelectedItem))
@@ -27,8 +33,8 @@ namespace Red_software.ViewModel
         {
             ProductCategoryEntity Item = new ProductCategoryEntity();
             EntityCloner.CloneProperties<ProductCategoryEntity>(Item, SelectedItem);
-            EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, false);
-            EditItemView EIV = new EditItemView() { DataContext = EPVM };
+            EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, false, ItemName);
+            EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {
@@ -43,8 +49,8 @@ namespace Red_software.ViewModel
         protected override void NewItem(object parameter)
         {
             ProductCategoryEntity Item = new ProductCategoryEntity();
-            EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, true);
-            EditItemView EIV = new EditItemView() { DataContext = EPVM };
+            EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, true, ItemName);
+            EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
             EIV.ShowDialog();
             if (EPVM.SaveEdit)
             {

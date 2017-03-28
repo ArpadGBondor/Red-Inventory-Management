@@ -1,4 +1,4 @@
-﻿using Red_software.ViewModel;
+﻿using Red_software.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +11,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Red_software.Views
 {
     /// <summary>
-    /// Interaction logic for EditItemView.xaml
+    /// Interaction logic for ListView.xaml
     /// </summary>
-    public partial class EditItemView : Window
+    public partial class ListView : UserControl
     {
-        public EditItemView()
+        public ListView()
         {
             InitializeComponent();
+        }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((RelayCommand)((ListModelParent)DataContext).RefreshListCommand).CheckAndExecute(sender);
         }
     }
 }

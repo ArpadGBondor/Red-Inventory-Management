@@ -16,7 +16,7 @@ namespace Red_software.ViewModel
     public class EditTransactionViewModel : EditItemModel<TransactionHeadListEntity>
     {
         // Constructor
-        public EditTransactionViewModel(TransactionHeadListEntity _Item, bool _NewRecord) : base(_Item, _NewRecord)
+        public EditTransactionViewModel(TransactionHeadListEntity _Item, bool _NewRecord, string _ItemName) : base(_Item, _NewRecord, _ItemName)
         {
             TransactionDate = Item.Date;
 
@@ -25,14 +25,16 @@ namespace Red_software.ViewModel
             {
                 var list = ManageTransactions.ListBody(Item.Head.Id);
                 foreach (var record in list)
-                    TransactionBody.Add(record);
+                    TransactionBody.Add(new BindableTransactionBodyListEntity(record));
             }
 
             if (Item.Head.Incoming)
                 Partners = ManagePartners.ListDealers();
             else
                 Partners = ManagePartners.ListCustomers();
-            selectedPartner = Item.Partner;
+            if (Item.Partner != null)
+                foreach(var record in Partners.Where(p=>p.Id == Item.Partner.Id))
+                    SelectedPartner = record;
 
             SelectedProductCategory = new ProductCategoryEntity() { Category = " - All product categories - ", Id = 0 };
             ProductCategories.Add(SelectedProductCategory);
@@ -118,19 +120,19 @@ namespace Red_software.ViewModel
         }
 
         // Transaction body
-        private ObservableCollection<TransactionBodyListEntity> transactionBody;
-        public ObservableCollection<TransactionBodyListEntity> TransactionBody
+        private ObservableCollection<BindableTransactionBodyListEntity> transactionBody;
+        public ObservableCollection<BindableTransactionBodyListEntity> TransactionBody
         { 
             get
             {
-                if (transactionBody == null) transactionBody = new ObservableCollection<TransactionBodyListEntity>();
+                if (transactionBody == null) transactionBody = new ObservableCollection<BindableTransactionBodyListEntity>();
                 return transactionBody;
             }
             set { SetProperty(ref transactionBody, value); }
         }
 
-        private TransactionBodyListEntity selectedBody;
-        public TransactionBodyListEntity SelectedBody
+        private BindableTransactionBodyListEntity selectedBody;
+        public BindableTransactionBodyListEntity SelectedBody
         {
             get { return selectedBody; }
             set { SetProperty(ref selectedBody, value); }
@@ -174,8 +176,8 @@ namespace Red_software.ViewModel
             rec.Body.Product_Id = SelectedProduct.Id;
             rec.Body.Price = ProductPrice;
             rec.Body.Quantity = ProductQuantity;
-            TransactionBody.Add(rec);
-            NotificationProvider.Info("Add", "Product");
+            TransactionBody.Add(new BindableTransactionBodyListEntity(rec));
+            //NotificationProvider.Info("Add", "Product");
             //RaisePropertyChanged("TransactionBody");
         }
         private bool CanAddProduct(object parameter)
@@ -214,7 +216,10 @@ namespace Red_software.ViewModel
                 Item.Head.Partner_Id = SelectedPartner.Id;
                 Item.Head.TotalPrice = TotalPrice;
                 Item.Date = TransactionDate;
-                return ManageTransactions.AddOrModifyTransaction(Item.Head, TransactionBody.ToList());
+                var list = new List<TransactionBodyListEntity>();
+                foreach (var record in TransactionBody)
+                    list.Add(record.Item);
+                return ManageTransactions.AddOrModifyTransaction(Item.Head, list);
             }
         }
     }

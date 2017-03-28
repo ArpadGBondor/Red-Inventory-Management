@@ -11,6 +11,7 @@ namespace Red_software.ViewModel
 {
     class EditProductViewModel : EditItemModel<ProductListEntity>
     {
+        public EditProductViewModel(ProductListEntity _Item, bool _NewRecord, string _ItemName) : base(_Item, _NewRecord, _ItemName) { }
 
         private List<string> categoryList;
         public List<string> CategoryList
@@ -30,8 +31,6 @@ namespace Red_software.ViewModel
             }
             set { SetProperty(ref categoryList, value); }
         }
-
-        public EditProductViewModel(ProductListEntity _Item, bool _NewRecord) : base(_Item, _NewRecord) { }
 
         protected override bool Save(object parameter)
         {

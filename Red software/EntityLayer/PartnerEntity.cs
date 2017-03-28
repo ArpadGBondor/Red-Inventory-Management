@@ -40,7 +40,9 @@ namespace EntityLayer
 
         public int CompareTo(PartnerEntity other)
         {
-            return Name.CompareTo(other.Name);
+            var compare1 = (Name != null ? Name : "");
+            var compare2 = (other.Name != null ? other.Name : "");
+            return compare1.CompareTo(compare2);
         }
     }
 }
