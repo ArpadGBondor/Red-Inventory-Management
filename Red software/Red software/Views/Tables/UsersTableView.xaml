@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Red_Inventory_Management.Views.UsersTableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Red_Inventory_Management.Views"
+             mc:Ignorable="d" 
+             Height="Auto"
+             Width="Auto"
+             d:DesignHeight="300">
+    <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}" />
+                <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}" />
+            </GridView>
+        </ListView.View>
+    </ListView>
+
+</UserControl>

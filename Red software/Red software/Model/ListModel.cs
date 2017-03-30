@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Red_software.Model
+namespace Red_Inventory_Management.Model
 {
     // Needed a base class without template parameter to call the RefreshListCommand from the view
     public abstract class ListModelParent : BindableBase

@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Red_software;
-using Red_software.Model;
+using Red_Inventory_Management;
+using Red_Inventory_Management.Model;
 
-namespace Red_software.Notifications
+namespace Red_Inventory_Management.Notifications
 {
     public class Notification : BindableBase
     {

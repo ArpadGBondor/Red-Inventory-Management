@@ -42,28 +42,34 @@ namespace DataLayer
 
         public static bool Add(ProductCategoryEntity category)
         {
-            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductCategoryEntity>(p => p.Category == category.Category)) 
-            {
+            if (category == null)
                 return false;
-            }
+            if (string.IsNullOrWhiteSpace(category.Category))
+                return false;
+            if (Database.IsExist<ProductCategoryEntity>(p => p.Category == category.Category)) 
+                return false;
             return Database.Add<ProductCategoryEntity>(category);
         }
 
         public static bool Modify(ProductCategoryEntity category)
         {
-            if (string.IsNullOrWhiteSpace(category.Category) || Database.IsExist<ProductCategoryEntity>(p => p.Id != category.Id && p.Category == category.Category))
-            {
+            if (category == null)
                 return false;
-            }
+            if (string.IsNullOrWhiteSpace(category.Category))
+                return false;
+            if (Database.IsExist<ProductCategoryEntity>(p => p.Id != category.Id && p.Category == category.Category))
+                return false;
             return Database.Modify<ProductCategoryEntity>(category, p => p.Id == category.Id);
         }
 
         public static bool Remove(ProductCategoryEntity category)
         {
-            if (string.IsNullOrWhiteSpace(category.Category) || ProductProvider.IsExist(p => p.Category_Id == category.Id))
-            {
+            if (category == null)
                 return false;
-            }
+            if (string.IsNullOrWhiteSpace(category.Category))
+                return false;
+            if (ProductProvider.IsExist(p => p.Category_Id == category.Id))
+                return false;
             return Database.Remove<ProductCategoryEntity>(p => p.Id == category.Id);
         }
 

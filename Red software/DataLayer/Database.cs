@@ -240,7 +240,7 @@ namespace DataLayer
 
 
 
-        //    string connectionstring = "server=localhost:3306; uid=" + '"' + "root" + '"' + "; pwd=" + '"' + "Red_software" + '"' + ";";
+        //    string connectionstring = "server=localhost:3306; uid=" + '"' + "root" + '"' + "; pwd=" + '"' + "Red_Inventory_Management" + '"' + ";";
 
 
         //    SqlConnection conn = new SqlConnection(connectionstring);
@@ -327,7 +327,7 @@ namespace DataLayer
 
         //        CloseConnection();
         //    }
-        //    //    string connectionstring = "server=localhost:3306; uid=" + '"' + "root" + '"' + "; pwd=" + '"' + "Red_software" + '"' + ";";
+        //    //    string connectionstring = "server=localhost:3306; uid=" + '"' + "root" + '"' + "; pwd=" + '"' + "Red_Inventory_Management" + '"' + ";";
 
 
         //    //    SqlConnection conn = new SqlConnection(connectionstring);

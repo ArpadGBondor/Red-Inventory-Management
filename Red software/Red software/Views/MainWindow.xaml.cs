@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using BusinessLayer;
-using Red_software.Notifications;
-using Red_software.ViewModel;
+using Red_Inventory_Management.Notifications;
+using Red_Inventory_Management.ViewModel;
 
-namespace Red_software.Views
+namespace Red_Inventory_Management.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

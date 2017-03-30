@@ -1,4 +1,4 @@
-﻿using Red_software.Model;
+﻿using Red_Inventory_Management.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Red_software.Views
+namespace Red_Inventory_Management.Views
 {
     /// <summary>
     /// Interaction logic for ListView.xaml

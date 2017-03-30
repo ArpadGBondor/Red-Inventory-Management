@@ -30,17 +30,22 @@ namespace DataLayer
         }
         public static bool Add(ProductListEntity product)
         {
-
+            if (product == null)
+                return false;
             return Database.Add<ProductEntity>(ConvertToProduct(product));
         }
 
         public static bool Modify(ProductListEntity product)
         {
+            if (product == null)
+                return false;
             return Database.Modify<ProductEntity>(ConvertToProduct(product),p=>p.Id==product.Id);
         }
 
         public static bool Remove(ProductListEntity product)
         {
+            if (product == null)
+                return false;
             if (TransactionProvider.IsExistBody(p => p.Product_Id == product.Id))
                 return false;
             return Database.Remove<ProductEntity>(p => p.Id == product.Id);
@@ -70,29 +75,6 @@ namespace DataLayer
         public static bool IsExist(Expression<Func<ProductEntity, bool>> condition)
         {
             return Database.IsExist<ProductEntity>(condition);
-        }
-
-        public static bool ChangeCategory(int from,int to)
-        {
-            bool lSuccess = false;
-            bool lExist = false;
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
-            var query = db.Products.Where(p => p.Category_Id == from); 
-            foreach (var rec in query)
-            {
-                lExist = true;
-                rec.Category_Id = to;
-            }
-            if (lExist)
-            {
-                try
-                {
-                    db.SubmitChanges();
-                    lSuccess = true;
-                }
-                catch /*(Exception e)*/ { }
-            }
-            return lSuccess;
         }
     }
 }

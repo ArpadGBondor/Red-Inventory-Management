@@ -2,9 +2,9 @@
 using System.Windows;
 using Microsoft.Win32;
 using BusinessLayer;
-using Red_software.ViewModel;
+using Red_Inventory_Management.ViewModel;
 
-namespace Red_software.Views
+namespace Red_Inventory_Management.Views
 {
     /// <summary>
     /// Interaction logic for SetupConnectionWindow.xaml

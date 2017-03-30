@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Red_Inventory_Management.Views.InventoryListDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Red_Inventory_Management.Views"
+             mc:Ignorable="d" 
+             Width="Auto"
+             Height="Auto"
+             d:DesignHeight="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch" Margin="5">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ListVariable, Converter={StaticResource DecimalToPositiveConverter}}" Value="False">
+                            <Setter Property="Background" Value="MistyRose"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Head.Id}" />
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Head.Date}" />
+                    <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
+                    <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
+                    <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Path=ListVariable,StringFormat={}{0:F2}}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Grid.Row="1" Text="{Binding TotalQuantity, StringFormat=Total quantity: {0:F}}" TextAlignment="Left" FontSize="30" Margin="5" />
+    </Grid>
+</UserControl>

@@ -1,4 +1,4 @@
-﻿using Red_software.Model;
+﻿using Red_Inventory_Management.Model;
 using EntityLayer;
 using BusinessLayer;
 using System;
@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Red_software.Views;
+using Red_Inventory_Management.Views;
 
-namespace Red_software.ViewModel
+namespace Red_Inventory_Management.ViewModel
 {
     public class InventoryViewModel : ListModel<TransactionBodyListEntity>
     {

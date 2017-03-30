@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 
-namespace Red_software
+namespace Red_Inventory_Management
 {
     /// <summary>
     /// Interaction logic for App.xaml

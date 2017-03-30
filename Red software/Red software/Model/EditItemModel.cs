@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Red_software.Model
+namespace Red_Inventory_Management.Model
 {
     public abstract class EditItemModel<Entity> : BindableBase
     {

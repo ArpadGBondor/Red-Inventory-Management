@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace Red_software.Model
+namespace Red_Inventory_Management.Model
 {
     public class RelayCommand : ICommand
     {

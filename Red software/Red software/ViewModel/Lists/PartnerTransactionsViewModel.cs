@@ -1,7 +1,7 @@
 ﻿using BusinessLayer;
 using EntityLayer;
-using Red_software.Model;
-using Red_software.Views;
+using Red_Inventory_Management.Model;
+using Red_Inventory_Management.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Red_software.ViewModel
+namespace Red_Inventory_Management.ViewModel
 {
     public class PartnerTransactionsViewModel : ListModel<TransactionHeadListEntity>
     {

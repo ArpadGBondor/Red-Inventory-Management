@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Red_Inventory_Management.Views.EditProductView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Red_Inventory_Management.Views"
+             mc:Ignorable="d" 
+             Height="Auto" 
+             Width="Auto">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Product Id:" TextAlignment="Right" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Item.Id, Mode=TwoWay}" Margin="5" />
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Product name:" TextAlignment="Right" Margin="5"/>
+        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Path=Item.Name, Mode=TwoWay}" Margin="5" />
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Product code:" TextAlignment="Right" Margin="5"/>
+        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path=Item.Code, Mode=TwoWay}" Margin="5" />
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Product category:" TextAlignment="Right" Margin="5"/>
+        <ComboBox  Grid.Column="1" Grid.Row="3" Text="{Binding Path=Item.Category, Mode=TwoWay}" ItemsSource="{Binding Path=CategoryList}" Margin="5" IsEditable="True" />
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Cost price:" TextAlignment="Right" Margin="5"/>
+        <TextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Path=Item.Cost_Price, Mode=TwoWay,StringFormat={}{0:F} }" Margin="5" />
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Sell price:" TextAlignment="Right" Margin="5"/>
+        <TextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Path=Item.Sell_Price, Mode=TwoWay,StringFormat={}{0:F} }" Margin="5" />
+
+    </Grid>
+</UserControl>

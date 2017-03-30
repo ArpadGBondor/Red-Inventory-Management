@@ -3,10 +3,10 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using BusinessLayer;
-using Red_software.Notifications;
-using Red_software.Model;
+using Red_Inventory_Management.Notifications;
+using Red_Inventory_Management.Model;
 
-namespace Red_software.ViewModel
+namespace Red_Inventory_Management.ViewModel
 {
     class NewUserViewModel : BindableBase
     {

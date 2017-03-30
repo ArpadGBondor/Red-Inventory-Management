@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EntityLayer;
-using Red_software.Model;
+using Red_Inventory_Management.Model;
 using System.Windows.Input;
 using System.Windows.Controls;
 using BusinessLayer;
-using Red_software.Notifications;
+using Red_Inventory_Management.Notifications;
 using System.Windows;
 
-namespace Red_software.ViewModel
+namespace Red_Inventory_Management.ViewModel
 {
     class EditUserViewModel : BindableBase
     {

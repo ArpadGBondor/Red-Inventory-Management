@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Red_software.Model
+namespace Red_Inventory_Management.Model
 {
     public class DecimalToPositiveConverter : IValueConverter
     {

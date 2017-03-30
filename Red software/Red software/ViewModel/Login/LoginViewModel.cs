@@ -4,11 +4,11 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows;
 using BusinessLayer;
-using Red_software.Views;
-using Red_software.Model;
-using Red_software.Notifications;
+using Red_Inventory_Management.Views;
+using Red_Inventory_Management.Model;
+using Red_Inventory_Management.Notifications;
 
-namespace Red_software.ViewModel
+namespace Red_Inventory_Management.ViewModel
 {
     class LoginViewModel : BindableBase
     {

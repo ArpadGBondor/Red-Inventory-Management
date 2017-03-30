@@ -1,11 +1,11 @@
-﻿using Red_software.Model;
-using Red_software.Notifications;
+﻿using Red_Inventory_Management.Model;
+using Red_Inventory_Management.Notifications;
 using System;
 using EntityLayer;
 using BusinessLayer;
-using Red_software.Views;
+using Red_Inventory_Management.Views;
 
-namespace Red_software.ViewModel
+namespace Red_Inventory_Management.ViewModel
 {
     public class UsersViewModel : TableModel<UserEntity>
     {

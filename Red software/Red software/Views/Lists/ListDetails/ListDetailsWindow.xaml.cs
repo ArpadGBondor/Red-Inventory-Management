@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Red_software.Views
+namespace Red_Inventory_Management.Views
 {
     /// <summary>
     /// Interaction logic for ListDetailsWindow.xaml

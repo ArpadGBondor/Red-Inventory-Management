@@ -1,11 +1,11 @@
 ﻿using EntityLayer;
 using BusinessLayer;
-using Red_software.Views;
-using Red_software.Model;
+using Red_Inventory_Management.Views;
+using Red_Inventory_Management.Model;
 using System;
-using Red_software.Notifications;
+using Red_Inventory_Management.Notifications;
 
-namespace Red_software.ViewModel
+namespace Red_Inventory_Management.ViewModel
 {
     public class PartnersViewModel : TableModel<PartnerEntity>
     {

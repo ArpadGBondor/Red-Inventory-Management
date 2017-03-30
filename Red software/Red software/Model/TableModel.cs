@@ -1,11 +1,11 @@
-﻿using Red_software.Model;
-using Red_software.Notifications;
+﻿using Red_Inventory_Management.Model;
+using Red_Inventory_Management.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Red_software.Model
+namespace Red_Inventory_Management.Model
 {
     public abstract class TableModel<Entity> : ListModel<Entity>
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Red_software.Notifications
+namespace Red_Inventory_Management.Notifications
 {
     class NotificationProvider
     {

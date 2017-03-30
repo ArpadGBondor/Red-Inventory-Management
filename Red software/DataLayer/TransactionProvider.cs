@@ -103,25 +103,41 @@ namespace DataLayer
 
         public static bool AddOrModifyTransaction(TransactionHeadEntity head, List<TransactionBodyListEntity> body)
         {
+            if (head == null || body == null)
+                return false;
             bool lSuccess = false;
+            bool lNewHead = (head.Id == 0);
             
             MyDataContext db = new MyDataContext(Database.get_connectionString);
             int Transaction_Id = head.Id;
 
             // HEAD record
 
-            if (head.Id > 0) // Modify
+            if (!lNewHead) // Modify
             {
-                Database.Modify<TransactionHeadEntity>(head,p=>p.Id==head.Id);
+                var headQuery = db.TransactionHead.Where(p => p.Id == head.Id);
+                foreach (var record in headQuery)
+                {
+                    lSuccess = true;
+
+                    PropertyInfo[] properties = typeof(TransactionHeadEntity).GetProperties();
+                    foreach (PropertyInfo property in properties)
+                    {
+                        property.SetValue(record, property.GetValue(head));
+                    }
+                }
             }
             else // Insert
             {
-                Database.Add<TransactionHeadEntity>(head);
+                lSuccess = Database.Add<TransactionHeadEntity>(head);
                 Transaction_Id = head.Id;
             }
 
-            // BODY records
+            if (!lSuccess)
+                return false;
 
+            // BODY records
+            lSuccess = false;
             // Set transaction ID
             foreach (var rec in body)
             {
@@ -159,7 +175,11 @@ namespace DataLayer
                 db.SubmitChanges();
                 lSuccess = true;
             }
-            catch /*(Exception e)*/ { }
+            catch /*(Exception e)*/
+            {
+                if (lNewHead)
+                    Database.Remove<TransactionHeadEntity>(p => p.Id == Transaction_Id);
+            }
 
             return lSuccess;
         }

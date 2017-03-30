@@ -1,10 +1,10 @@
 ﻿using System;
 using EntityLayer;
-using Red_software.Model;
+using Red_Inventory_Management.Model;
 using BusinessLayer;
-using Red_software.Notifications;
+using Red_Inventory_Management.Notifications;
 
-namespace Red_software.ViewModel
+namespace Red_Inventory_Management.ViewModel
 {
     public class EditProductCategoryViewModel : EditItemModel<ProductCategoryEntity>
     {

@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Red_software.ViewModel;
+using Red_Inventory_Management.ViewModel;
 
-namespace Red_software.Views
+namespace Red_Inventory_Management.Views
 {
     /// <summary>
     /// Interaction logic for EditUserView.xaml

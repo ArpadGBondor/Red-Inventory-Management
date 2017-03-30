@@ -7,8 +7,8 @@
     <ProjectGuid>{E13B7158-F733-4226-967F-43C989E7F5EC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Red_software</RootNamespace>
-    <AssemblyName>Red software</AssemblyName>
+    <RootNamespace>Red_Inventory_Management</RootNamespace>
+    <AssemblyName>Red Inventory Management</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -115,6 +115,39 @@
     <Compile Include="ViewModel\Tables\ProductsViewModel.cs" />
     <Compile Include="ViewModel\Tables\UsersViewModel.cs" />
     <Compile Include="ViewModel\Tables\TransactionsViewModel.cs" />
+    <Compile Include="Views\Lists\ListDetails\InventoryListDetailsView.xaml.cs">
+      <DependentUpon>InventoryListDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lists\InventoryListView.xaml.cs">
+      <DependentUpon>InventoryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lists\PartnerTransactionsListView.xaml.cs">
+      <DependentUpon>PartnerTransactionsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lists\ListDetails\PartnerTransactionsListDetailsView.xaml.cs">
+      <DependentUpon>PartnerTransactionsListDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\PartnersTableView.xaml.cs">
+      <DependentUpon>PartnersTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\ProductCategoriesTableView.xaml.cs">
+      <DependentUpon>ProductCategoriesTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\ProductsTableView.xaml.cs">
+      <DependentUpon>ProductsTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\Edit\EditProductView.xaml.cs">
+      <DependentUpon>EditProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\Edit\EditProductCategoryView.xaml.cs">
+      <DependentUpon>EditProductCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\Edit\EditPartnerView.xaml.cs">
+      <DependentUpon>EditPartnerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\Edit\EditTransactionView.xaml.cs">
+      <DependentUpon>EditTransactionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Lists\ListDetails\ListDetailsWindow.xaml.cs">
       <DependentUpon>ListDetailsWindow.xaml</DependentUpon>
     </Compile>
@@ -136,6 +169,12 @@
     <Compile Include="Views\Tables\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tables\UsersTableView.xaml.cs">
+      <DependentUpon>UsersTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tables\TransactionsTableView.xaml.cs">
+      <DependentUpon>TransactionsTableView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Notifications\GrowlNotifiactions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -149,6 +188,50 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\MainResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lists\ListDetails\InventoryListDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lists\InventoryListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lists\PartnerTransactionsListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lists\ListDetails\PartnerTransactionsListDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\PartnersTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\ProductCategoriesTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\ProductsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\Edit\EditProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\Edit\EditProductCategoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\Edit\EditPartnerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\Edit\EditTransactionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +279,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Tables\TableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\UsersTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tables\TransactionsTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

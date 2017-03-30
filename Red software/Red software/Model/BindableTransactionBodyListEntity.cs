@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Red_software.Model
+namespace Red_Inventory_Management.Model
 {
     public class BindableTransactionBodyListEntity : BindableBase
     {

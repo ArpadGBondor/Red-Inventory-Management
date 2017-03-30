@@ -14,16 +14,22 @@ namespace DataLayer
 
         public static bool Add(PartnerEntity partner)
         {
+            if (partner == null)
+                return false;
             return Database.Add<PartnerEntity>(partner);
         }
 
         public static bool Modify(PartnerEntity partner)
         {
+            if (partner == null)
+                return false;
             return Database.Modify<PartnerEntity>(partner, p => p.Id == partner.Id);
         }
 
         public static bool Remove(PartnerEntity partner)
         {
+            if (partner == null)
+                return false;
             if (TransactionProvider.IsExistHead(p=>p.Partner_Id == partner.Id))
                 return false;
             return Database.Remove<PartnerEntity>(p => p.Id == partner.Id);

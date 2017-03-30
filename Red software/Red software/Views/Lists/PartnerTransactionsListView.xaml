@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Red_Inventory_Management.Views.PartnerTransactionsListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Red_Inventory_Management.Views"
+             mc:Ignorable="d" 
+             Width="Auto"
+             Height="Auto"
+             d:DesignHeight="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <WrapPanel>
+            <Button Content="Partner transactions" Command="{Binding DetailsCommand}" />
+        </WrapPanel>
+        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ListVariable, Converter={StaticResource DecimalToPositiveConverter}}" Value="False">
+                            <Setter Property="Background" Value="MistyRose"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Partner.Id}" />
+                    <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
+                    <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
+                    <GridViewColumn Header="Partner transactions" DisplayMemberBinding="{Binding Path=ListVariable,StringFormat={}{0:C}}" />
+                    <GridViewColumn Header="Partner bank account" DisplayMemberBinding="{Binding Path=Partner.AccountNumber}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Grid.Row="2" Text="{Binding TotalTransactions, StringFormat=Total transactions: {0:C}}" TextAlignment="Left" FontSize="18" FontWeight="Bold" Margin="5" />
+    </Grid>
+
+</UserControl>

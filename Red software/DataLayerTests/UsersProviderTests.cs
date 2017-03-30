@@ -106,7 +106,6 @@ namespace DataLayer.Tests
             string password1 = "Password 1";
             string password2 = "Password 2";
 
-
             Assert.IsFalse(UsersProvider.IsValidUserID(user1));
 
             // Ad user

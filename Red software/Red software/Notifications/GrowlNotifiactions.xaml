@@ -1,6 +1,6 @@
-﻿<Window x:Class="Red_software.Notifications.GrowlNotifiactions"
+﻿<Window x:Class="Red_Inventory_Management.Notifications.GrowlNotifiactions"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Model="clr-namespace:Red_software.Notifications"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Model="clr-namespace:Red_Inventory_Management.Notifications"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         Title="GrowlNotifiactions" Height="800" Width="400" ShowActivated="False" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Background="Transparent" Topmost="True" UseLayoutRounding="True">
@@ -69,7 +69,7 @@
     </Window.Resources>
     <ItemsControl x:Name="NotificationsControl" FocusVisualStyle="{x:Null}"  ItemsSource="{Binding .}" ItemTemplate="{StaticResource MessageTemplate}">
         <ItemsControl.DataContext>
-            <NotificationCollection xmlns="clr-namespace:Red_software.Notifications">
+            <NotificationCollection xmlns="clr-namespace:Red_Inventory_Management.Notifications">
                 <Notification Id="1" Title="Notification #1" ImageUrl="pack://application:,,,/Notifications/Resources/error.png" Message="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
                 <Notification Id="2" Title="Notification #2" ImageUrl="pack://application:,,,/Notifications/Resources/error.png" Message="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
                 <Notification Id="3" Title="Notification #3" ImageUrl="pack://application:,,,/Notifications/Resources/info.png" Message="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />

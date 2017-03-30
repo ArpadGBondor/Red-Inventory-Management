@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="Red_software.Views.TableView"
+﻿<UserControl x:Class="Red_Inventory_Management.Views.TableView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Red_software.Views"
+             xmlns:local="clr-namespace:Red_Inventory_Management.Views"
              xmlns:entities="clr-namespace:EntityLayer;assembly=EntityLayer"
-             xmlns:viewModels="clr-namespace:Red_software.ViewModel"
+             xmlns:viewModels="clr-namespace:Red_Inventory_Management.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <Border Grid.Column="1" Margin="10" CornerRadius="10" Background="#FFB9D9FF">
@@ -15,7 +15,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding TableName}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding TableName}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
             <WrapPanel Grid.Row="1">
                 <Button Content="{Binding newButtonContent}" Command="{Binding NewItemCommand}" Margin="2"/>
                 <Button Content="{Binding editButtonContent}" Command="{Binding EditItemCommand}" Margin="2"/>
@@ -24,83 +24,19 @@
             <ContentControl  Grid.Row="2" Content="{Binding}">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
-                        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}" />
-                                    <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <local:UsersTableView DataContext="{Binding}" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModels:ProductsViewModel}">
-                        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
-                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                                    <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
-                                    <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
-                                    <GridViewColumn Header="Cost price" DisplayMemberBinding="{Binding Path=Cost_Price,StringFormat={}{0:C} }" />
-                                    <GridViewColumn Header="Sell price" DisplayMemberBinding="{Binding Sell_Price,StringFormat={}{0:C} }" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <local:ProductsTableView DataContext="{Binding}" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModels:ProductCategoriesViewModel}">
-                        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
-                                    <GridViewColumn Header="Product category" DisplayMemberBinding="{Binding Category}" />
-                                    <!--<GridViewColumn Header="Subcategory" DisplayMemberBinding="{Binding SubCategory}" />-->
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <local:ProductCategoriesTableView DataContext="{Binding}" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModels:PartnersViewModel}">
-                        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
-                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                                    <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
-                                    <GridViewColumn Header="Customer" >
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <CheckBox IsChecked="{Binding Customer}" IsEnabled="False" HorizontalAlignment="Center" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Dealer" >
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <CheckBox IsChecked="{Binding Dealer}" IsEnabled="False" HorizontalAlignment="Center" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}" />
-                                    <GridViewColumn Header="Phone number" DisplayMemberBinding="{Binding Phone}" />
-                                    <GridViewColumn Header="E-mail address" DisplayMemberBinding="{Binding Email}" />
-                                    <GridViewColumn Header="Bank account number" DisplayMemberBinding="{Binding AccountNumber}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <local:PartnersTableView DataContext="{Binding}" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModels:TransactionsViewModel}">
-                        <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Head.Id}" />
-                                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Head.Date}" />
-                                    <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
-                                    <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
-                                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding Path=Head.TotalPrice,StringFormat={}{0:C}}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <local:TransactionsTableView DataContext="{Binding}" />
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>

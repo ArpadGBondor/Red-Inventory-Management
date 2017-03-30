@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Red_software.Notifications
+namespace Red_Inventory_Management.Notifications
 {
     public partial class GrowlNotifiactions
     {
