@@ -1,20 +1,34 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DataLayer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using EntityLayer;
 
 namespace DataLayer.Tests
 {
     [TestClass()]
     public class TransactionProviderTests
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            string dir = AppDomain.CurrentDomain.BaseDirectory + "\\";
+            string dbname = "DataLayer_Tests";
+            if (File.Exists(dir + dbname + ".mdf"))
+                Database.InitializeConnection(dir, dbname);
+            else
+                Database.CreateDatabase(dir, dbname);
+            Assert.IsTrue(Database.Test());
+            Assert.AreEqual(Database.Directory, dir);
+            Assert.AreEqual(Database.DbName, dbname);
+        }
+
         [TestMethod()]
         public void ListHeadTest()
         {
-            throw new NotImplementedException();
+            //string
+            //PartnerEntity partner = new PartnerEntity() { }
+
+            //TransactionProvider.ListHead(p => true);
         }
 
         [TestMethod()]

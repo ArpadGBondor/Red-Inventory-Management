@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red Inventory Management", "Red software\Red Inventory Management.csproj", "{E13B7158-F733-4226-967F-43C989E7F5EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red Inventory Management", "Red Inventory Management\Red Inventory Management.csproj", "{E13B7158-F733-4226-967F-43C989E7F5EC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{4A53006B-D0BA-4069-8322-60CB6AB87393}"
 EndProject

@@ -13,23 +13,12 @@ namespace DataLayer
     public class Database
     {
         private static string server;
-        //private static string file;
         private static string connectionString;
-        //public static string Get_File
-        //{
-        //    get
-        //    {
-        //        return file;
-        //    }
-        //}
+        public static string ConnectionString { get { return connectionString; } }
         private static string directory;
         public static string Directory { get { return directory; } }
-
         private static string dbName;
         public static string DbName { get { return dbName; } }
-
-        public static string ConnectionString { get { return connectionString; } }
-
         static Database()
         {
             server = "(LocalDB)\\MSSQLLocalDB";

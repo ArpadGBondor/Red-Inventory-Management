@@ -42,16 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityCloner.cs" />
-    <Compile Include="PartnerEntity.cs" />
-    <Compile Include="ProductCategoryEntity.cs" />
-    <Compile Include="ProductEntity.cs" />
-    <Compile Include="ProductListEntity.cs" />
+    <Compile Include="TableEntity\PartnerEntity.cs" />
+    <Compile Include="TableEntity\ProductCategoryEntity.cs" />
+    <Compile Include="TableEntity\ProductEntity.cs" />
+    <Compile Include="ListEntity\ProductListEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransactionBodyEntity.cs" />
-    <Compile Include="TransactionBodyListEntity.cs" />
-    <Compile Include="TransactionHeadEntity.cs" />
-    <Compile Include="TransactionHeadListEntity.cs" />
-    <Compile Include="UserEntity.cs" />
+    <Compile Include="TableEntity\TransactionBodyEntity.cs" />
+    <Compile Include="ListEntity\TransactionBodyListEntity.cs" />
+    <Compile Include="TableEntity\TransactionHeadEntity.cs" />
+    <Compile Include="ListEntity\TransactionHeadListEntity.cs" />
+    <Compile Include="TableEntity\UserEntity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
