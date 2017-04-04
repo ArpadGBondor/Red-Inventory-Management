@@ -128,7 +128,7 @@
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Login\NewUserViewModel.cs" />
     <Compile Include="Model\CommandBase\RelayCommand.cs" />
-    <Compile Include="ViewModel\Login\SetupConnectionViewModel.cs" />
+    <Compile Include="ViewModel\Database\SetupConnectionViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Tables\ProductCategoriesViewModel.cs" />
     <Compile Include="ViewModel\Tables\ProductsViewModel.cs" />
@@ -146,10 +146,10 @@
     <Compile Include="Views\Lists\ListDetails\PartnerTransactionsListDetailsView.xaml.cs">
       <DependentUpon>PartnerTransactionsListDetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login\SetupConnectionView.xaml.cs">
+    <Compile Include="Views\Database\SetupConnectionView.xaml.cs">
       <DependentUpon>SetupConnectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SetupConnectionMenuView.xaml.cs">
+    <Compile Include="Views\Database\SetupConnectionMenuView.xaml.cs">
       <DependentUpon>SetupConnectionMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tables\PartnersTableView.xaml.cs">
@@ -188,7 +188,7 @@
     <Compile Include="Views\Login\NewUserWindow.xaml.cs">
       <DependentUpon>NewUserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login\SetupConnectionWindow.xaml.cs">
+    <Compile Include="Views\Database\SetupConnectionWindow.xaml.cs">
       <DependentUpon>SetupConnectionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tables\TableView.xaml.cs">
@@ -232,11 +232,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login\SetupConnectionView.xaml">
+    <Page Include="Views\Database\SetupConnectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SetupConnectionMenuView.xaml">
+    <Page Include="Views\Database\SetupConnectionMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,7 +307,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login\SetupConnectionWindow.xaml">
+    <Page Include="Views\Database\SetupConnectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -365,11 +365,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.SqlServer.SqlLocalDB.11.1">
-      <Visible>False</Visible>
-      <ProductName>SQL Server 2012 Express LocalDB</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icon.png" />
@@ -388,7 +383,9 @@
       <Name>EntityLayer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Read.Me" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

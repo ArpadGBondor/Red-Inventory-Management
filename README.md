@@ -1,2 +1,3 @@
-# Red
-GitHub test
+Red's Inventory Management
+==========================
+

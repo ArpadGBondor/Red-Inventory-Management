@@ -3,8 +3,6 @@
                     xmlns:views = "clr-namespace:Red_Inventory_Management.Views" 
                     xmlns:viewModels = "clr-namespace:Red_Inventory_Management.ViewModel"
                     xmlns:entities ="clr-namespace:EntityLayer;assembly=EntityLayer">
-
-
     <DataTemplate DataType = "{x:Type viewModels:UsersViewModel}">
         <views:TableView/>
     </DataTemplate>

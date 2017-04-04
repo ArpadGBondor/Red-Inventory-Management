@@ -29,12 +29,12 @@ namespace DataLayer
 
         }
 
-        public Table<UserEntity> Users { get { return this.GetTable<UserEntity>(); } }
-        public Table<PartnerEntity> Partners { get { return this.GetTable<PartnerEntity>(); } }
-        public Table<ProductEntity> Products { get { return this.GetTable<ProductEntity>(); } }
-        public Table<ProductCategoryEntity> ProductCategories { get { return this.GetTable<ProductCategoryEntity>(); } }
-        public Table<TransactionBodyEntity> TransactionBody { get { return this.GetTable<TransactionBodyEntity>(); } }
-        public Table<TransactionHeadEntity> TransactionHead { get { return this.GetTable<TransactionHeadEntity>(); } }
+        public Table<UserEntity> Users { get { return GetTable<UserEntity>(); } }
+        public Table<PartnerEntity> Partners { get { return GetTable<PartnerEntity>(); } }
+        public Table<ProductEntity> Products { get { return GetTable<ProductEntity>(); } }
+        public Table<ProductCategoryEntity> ProductCategories { get { return GetTable<ProductCategoryEntity>(); } }
+        public Table<TransactionBodyEntity> TransactionBody { get { return GetTable<TransactionBodyEntity>(); } }
+        public Table<TransactionHeadEntity> TransactionHead { get { return GetTable<TransactionHeadEntity>(); } }
 
         public bool TableExists<T>()
         {
