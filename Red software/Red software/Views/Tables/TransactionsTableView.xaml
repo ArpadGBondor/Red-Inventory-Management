@@ -15,7 +15,13 @@
                 <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Head.Date}" />
                 <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
                 <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
-                <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding Path=Head.TotalPrice,StringFormat={}{0:C}}" />
+                <GridViewColumn Header="Total price" Width="Auto">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Head.TotalPrice,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
             </GridView>
         </ListView.View>
     </ListView>

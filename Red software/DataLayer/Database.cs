@@ -5,37 +5,48 @@ using System.Linq;
 using System.Data.Linq;
 using System.Reflection;
 using System.Linq.Expressions;
+using EntityLayer;
+using System.Text.RegularExpressions;
 
 namespace DataLayer
 {
     public class Database
     {
         private static string server;
-        private static string file;
+        //private static string file;
         private static string connectionString;
-        public static string Get_File
-        {
-            get
-            {
-                return file;
-            }
-        }
-        public static string get_connectionString { get { return connectionString; } }
+        //public static string Get_File
+        //{
+        //    get
+        //    {
+        //        return file;
+        //    }
+        //}
+        private static string directory;
+        public static string Directory { get { return directory; } }
+
+        private static string dbName;
+        public static string DbName { get { return dbName; } }
+
+        public static string ConnectionString { get { return connectionString; } }
 
         static Database()
         {
             server = "(LocalDB)\\MSSQLLocalDB";
-            file = AppDomain.CurrentDomain.BaseDirectory + "Database.mdf";
-            connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + file + "\";Integrated Security=True;";
-            InitializeConnection();
+            directory = "";
+            dbName = "";
+            connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + Directory + DbName + ".mdf\";Initial Catalog = " + MyDataContext.Generate_Identifier_Name(Directory, dbName) + ";Integrated Security=True;";
         }
-        public static void InitializeConnection(string _file = "")
+        public static bool InitializeConnection(string _directory, string _dbName)
         {
-            if (File.Exists(_file))
+            bool lSuccess = File.Exists(_directory + _dbName + ".mdf");
+            if (lSuccess)
             {
-                file = _file;
-                connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + file + "\";Integrated Security=True;";
+                directory = _directory;
+                dbName = _dbName;
+                connectionString = "Data Source=" + server + ";AttachDbFilename=\"" + Directory + DbName + ".mdf\";Initial Catalog = " + MyDataContext.Generate_Identifier_Name(directory, dbName) + ";Integrated Security=True;";
             }
+            return lSuccess;
         }
 
         public static bool Test()
@@ -44,6 +55,28 @@ namespace DataLayer
             return db.DatabaseExists();
         }
         
+        public static bool CreateDatabase(string Directory, string Database)
+        {
+            bool lSuccess = false;
+            if (!File.Exists(Directory + Database + ".mdf"))
+            {
+                using (MyDataContext db = new MyDataContext("Data Source=" + server + ";"))
+                {
+                    lSuccess = db.CreateDatabase(Directory, Database);
+                }
+                if (lSuccess)
+                {
+                    InitializeConnection(Directory, Database);
+                    InitializeTable<PartnerEntity>();
+                    InitializeTable<ProductCategoryEntity>();
+                    InitializeTable<ProductEntity>();
+                    InitializeTable<TransactionBodyEntity>();
+                    InitializeTable<TransactionHeadEntity>();
+                    InitializeTable<UserEntity>();
+                }
+            }
+            return lSuccess;
+        }
 
         public static void CreateTable<Entity>()
         {
@@ -56,8 +89,6 @@ namespace DataLayer
             MyDataContext db = new MyDataContext(connectionString);
             return db.TableExists<Entity>();
         }
-
-
 
         public static void InitializeTable<Entity>()
         {
@@ -73,7 +104,7 @@ namespace DataLayer
         public static List<Entity> ListTable<Entity>(Expression<Func<Entity, bool>> condition) where Entity : class
         {
             List<Entity> list = new List<Entity>(); ;
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             Table<Entity> EntityTable = db.GetTable<Entity>();
             var query = EntityTable.Where(condition);
             list.AddRange(query);
@@ -84,7 +115,7 @@ namespace DataLayer
         public static bool IsExist<Entity>(Expression<Func<Entity, bool>> condition) where Entity : class
         {
             bool lExist = false;
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             Table<Entity> EntityTable = db.GetTable<Entity>();
             var query = EntityTable.Where(condition);
             lExist = (query.Count() > 0); 
@@ -95,7 +126,7 @@ namespace DataLayer
         public static bool Add<Entity>(Entity record) where Entity : class
         {
             bool lSuccess = false;
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             Table<Entity> EntityTable = db.GetTable<Entity>();
             EntityTable.InsertOnSubmit(record);
             try
@@ -112,7 +143,7 @@ namespace DataLayer
         {
             bool lSuccess = false;
             bool lExist = false;
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             Table<Entity> EntityTable = db.GetTable<Entity>();
             var query = EntityTable.Where(condition);
             foreach (var rec in query)
@@ -145,7 +176,7 @@ namespace DataLayer
         {
             bool lSuccess = false;
             bool lExist = false;
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             Table<Entity> EntityTable = db.GetTable<Entity>();
             var query = EntityTable.Where(condition);
                    

@@ -14,15 +14,8 @@ namespace Red_Inventory_Management.Views
         public SetupConnectionWindow()
         {
             InitializeComponent();
-            SetupConnectionViewModel context = new SetupConnectionViewModel();
+            SetupConnectionViewModel context = new SetupConnectionViewModel() { SetupWindow = this };
             this.DataContext = context;
-        }
-
-
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

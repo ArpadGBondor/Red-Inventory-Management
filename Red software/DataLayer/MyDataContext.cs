@@ -7,6 +7,8 @@ using System.Data.Linq;
 using EntityLayer;
 using System.Data.Linq.Mapping;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace DataLayer
 {
@@ -57,5 +59,56 @@ namespace DataLayer
             ExecuteCommand(sqlAsString);
         }
 
+        public bool DatabaseExists(string Directory, string Database)
+        {
+            string Identifier = Generate_Identifier_Name(Directory, Database);
+            var result = ExecuteQuery<bool>(
+              String.Format(
+                "IF DB_ID('{0}') IS NOT NULL SELECT CAST(1 AS BIT) ELSE SELECT CAST(0 AS BIT)", Identifier));
+            return result.First();
+        }
+
+        public bool CreateDatabase(string Directory,string Database)
+        {
+            string DbName = Regex.Replace(Database, "\\s+", "");
+            string Identifier = Generate_Identifier_Name(Directory, Database);
+            bool lSuccess = false;
+
+            if (DatabaseExists(Directory, Database))
+            {
+                if (!File.Exists(Directory + Database + ".MDF"))
+                {
+                    string sql = string.Format(@"DROP DATABASE [{0}]", Identifier);
+                    try
+                    {
+                        ExecuteCommand(sql);
+                        lSuccess = true;
+                    }
+                    catch /*(Exception e)*/ { }
+                }
+            }
+            else
+                lSuccess = true;
+
+            if (lSuccess)
+            {
+                string sql = string.Format(@"CREATE DATABASE [{3}] ON PRIMARY ( NAME={2}_data, FILENAME = '{0}{1}.MDF' ) LOG ON ( NAME={2}_log, FILENAME = '{0}{1}.ldf' )", Directory, Database, DbName, Identifier);
+                lSuccess = false;
+                try
+                {
+                    ExecuteCommand(sql);
+                    lSuccess = true;
+                }
+                catch /*(Exception e)*/ { }
+            }
+            return lSuccess;
+        }
+
+        public static string Generate_Identifier_Name(string Directory, string Database)
+        {
+            byte[] salt = { };
+            string Identifier = "Red_Inventory_Management@" + EncriptionProvider.ComputeHash(Directory + Database, EncriptionProvider.Supported_HA.SHA256, salt);
+            return Identifier;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace DataLayer
         {
             bool lExist = false;
 
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
 
             lExist = (0 < db.Users.Count());
 
@@ -30,7 +30,7 @@ namespace DataLayer
         {
             bool lExist = false;
 
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             var q = from u in db.Users
                     where u.Username == userID
                     select u;
@@ -43,7 +43,7 @@ namespace DataLayer
         {
             bool lExist = false;
 
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             var q = from u in db.Users
                     where (u.Username == userID)
                     select u;

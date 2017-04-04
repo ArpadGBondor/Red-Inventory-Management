@@ -26,4 +26,7 @@
     <DataTemplate DataType = "{x:Type viewModels:PartnerTransactionsViewModel}">
         <views:ListView/>
     </DataTemplate>
+    <DataTemplate DataType = "{x:Type viewModels:SetupConnectionViewModel}">
+        <views:SetupConnectionMenuView/>
+    </DataTemplate>
 </ResourceDictionary>

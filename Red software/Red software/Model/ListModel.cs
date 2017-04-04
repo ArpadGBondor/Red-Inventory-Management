@@ -8,7 +8,7 @@ using System.Windows.Input;
 namespace Red_Inventory_Management.Model
 {
     // Needed a base class without template parameter to call the RefreshListCommand from the view
-    public abstract class ListModelParent : BindableBase
+    public abstract class ListModel<Entity> : BindableBase
     {
         private ICommand refreshListCommand;
         public ICommand RefreshListCommand
@@ -33,19 +33,6 @@ namespace Red_Inventory_Management.Model
             set { SetProperty(ref tableName, value); }
         }
 
-        //public void ResizeGridViewColumn(GridViewColumn column)
-        //{
-        //    if (double.IsNaN(column.Width))
-        //    {
-        //        column.Width = column.ActualWidth;
-        //    }
-
-        //    column.Width = double.NaN;
-        //}
-    }
-
-    public abstract class ListModel<Entity> : ListModelParent
-    {
         private List<Entity> list;
         public List<Entity> List
         {

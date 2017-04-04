@@ -16,6 +16,7 @@
         <ListView Grid.Row="0" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch" Margin="5">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Path=ListVariable, Converter={StaticResource DecimalToPositiveConverter}}" Value="False">
                             <Setter Property="Background" Value="MistyRose"/>
@@ -29,7 +30,13 @@
                     <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Head.Date}" />
                     <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
                     <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
-                    <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Path=ListVariable,StringFormat={}{0:F2}}" />
+                    <GridViewColumn Header="Quantity" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=ListVariable,StringFormat={}{0:F} }" TextAlignment="Right" Width="Auto" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EntityLayer;
+using System.IO;
 
 namespace DataLayer.Tests
 {
@@ -15,8 +16,15 @@ namespace DataLayer.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            Database.InitializeConnection(AppDomain.CurrentDomain.BaseDirectory + "\\Database.mdf");
-            Database.InitializeTable<UserEntity>();
+            string dir = AppDomain.CurrentDomain.BaseDirectory + "\\";
+            string dbname = "DataLayer_Tests";
+            if (File.Exists(dir + dbname + ".mdf"))
+                Database.InitializeConnection(dir, dbname);
+            else
+                Database.CreateDatabase(dir, dbname);
+            Assert.IsTrue(Database.Test());
+            Assert.AreEqual(Database.Directory, dir);
+            Assert.AreEqual(Database.DbName, dbname);
         }
 
         [TestMethod()]

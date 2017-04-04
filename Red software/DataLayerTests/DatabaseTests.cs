@@ -17,17 +17,26 @@ namespace DataLayer.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            Database.InitializeConnection(AppDomain.CurrentDomain.BaseDirectory + "\\Database.mdf");
+            string dir = AppDomain.CurrentDomain.BaseDirectory + "\\";
+            string dbname = "DataLayer_Tests";
+            if (File.Exists(dir + dbname + ".mdf"))
+                Database.InitializeConnection(dir, dbname);
+            else
+                Database.CreateDatabase(dir, dbname);
+            Assert.IsTrue(Database.Test());
+            Assert.AreEqual(Database.Directory, dir);
+            Assert.AreEqual(Database.DbName, dbname);
         }
 
         [TestMethod()]
-        public void InitializeConnectionTest()
+        public void InitializeConnectionParameterTest()
         {
             string[] parameters = { "", " ", "a", "1234567890", null };
-            foreach (var p in parameters)
-            {
-                Database.InitializeConnection(p);
-            }
+            foreach (var p1 in parameters)
+                foreach (var p2 in parameters)
+                {
+                    Database.InitializeConnection(p1,p2);
+                }
         }
 
         //[TestMethod()]
@@ -47,18 +56,13 @@ namespace DataLayer.Tests
         public void PropertyTest()
         {
             //var x1 = Database.get_connection;
-            var x2 = Database.get_connectionString;
-            var x3 = Database.Get_File;
+            var x2 = Database.ConnectionString;
         }
 
 
         [TestMethod()]
         public void TableCreationTest()
         {
-
-            Assert.IsFalse(Database.TableExists<UserEntity>());
-
-
             Database.InitializeTable<UserEntity>();
             Database.InitializeTable<UserEntity>();
 
@@ -66,8 +70,6 @@ namespace DataLayer.Tests
             Database.InitializeTable<ProductEntity>();
             Database.InitializeTable<ProductCategoryEntity>();
             Database.InitializeTable<UserEntity>();
-
-
 
             Assert.IsTrue(Database.TableExists<UserEntity>());
 

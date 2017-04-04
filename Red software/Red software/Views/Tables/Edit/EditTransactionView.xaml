@@ -101,21 +101,27 @@
                 <GridView>
                     <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Path=ProductName}" />
                     <GridViewColumn Header="Product code" DisplayMemberBinding="{Binding Path=ProductCode}" />
-                    <GridViewColumn Header="Unit price" DisplayMemberBinding="{Binding Path=Price,Mode=TwoWay,StringFormat={}{0:C} }">
-                        <!--<GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Text="{Binding Path=Price,Mode=TwoWay,StringFormat={}{0:C} }" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>-->
+                    <GridViewColumn Header="Unit price" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Price,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Path=Quantity,Mode=TwoWay,StringFormat={}{0:C} }">
-                        <!--<GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Text="{Binding Path=Quantity,Mode=TwoWay,StringFormat={}{0:F} }" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>-->
+                    <GridViewColumn Header="Quantity" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Quantity,StringFormat={}{0:F} }" TextAlignment="Right" Width="Auto" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=SumPrice,StringFormat={}{0:C}}" />
+                    <GridViewColumn Header="Price" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=SumPrice,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -7,7 +7,7 @@
              xmlns:entities="clr-namespace:EntityLayer;assembly=EntityLayer"
              xmlns:viewModels="clr-namespace:Red_Inventory_Management.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+             d:DesignHeight="300" d:DesignWidth="300">
     <Border Grid.Column="1" Margin="10" CornerRadius="10" Background="#FFB9D9FF">
         <Grid Margin="10">
             <Grid.RowDefinitions>

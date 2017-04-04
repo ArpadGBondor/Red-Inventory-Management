@@ -1,6 +1,4 @@
-﻿using Red_Inventory_Management.Model;
-using EntityLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Red_Inventory_Management.Notifications;
 
 namespace Red_Inventory_Management.Views
 {
     /// <summary>
-    /// Interaction logic for TableView.xaml
+    /// Interaction logic for SetupConnectionView.xaml
     /// </summary>
-    public partial class TableView : UserControl
+    public partial class SetupConnectionView : UserControl
     {
-        public TableView()
+        public SetupConnectionView()
         {
             InitializeComponent();
         }

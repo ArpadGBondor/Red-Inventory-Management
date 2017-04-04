@@ -21,7 +21,7 @@ namespace DataLayer
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                MyDataContext db = new MyDataContext(Database.get_connectionString);
+                MyDataContext db = new MyDataContext(Database.ConnectionString);
                 Table<ProductCategoryEntity> EntityTable = db.GetTable<ProductCategoryEntity>();
                 var query =  EntityTable.Where(p=>p.Category == category);
                 try { id = query.First().Id; }

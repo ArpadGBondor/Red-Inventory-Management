@@ -20,6 +20,7 @@
         <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Path=ListVariable, Converter={StaticResource DecimalToPositiveConverter}}" Value="False">
                             <Setter Property="Background" Value="MistyRose"/>
@@ -32,7 +33,13 @@
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Partner.Id}" />
                     <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
                     <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
-                    <GridViewColumn Header="Partner transactions" DisplayMemberBinding="{Binding Path=ListVariable,StringFormat={}{0:C}}" />
+                    <GridViewColumn Header="Partner transactions" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=ListVariable,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Partner bank account" DisplayMemberBinding="{Binding Path=Partner.AccountNumber}" />
                 </GridView>
             </ListView.View>

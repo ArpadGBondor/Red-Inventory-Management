@@ -55,7 +55,7 @@ namespace DataLayer
         {
             List<ProductListEntity> list = new List<ProductListEntity>();
 
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
 
             var query1 = (from p in db.Products.Where(condition)
                             join c in db.ProductCategories on p.Category_Id equals c.Id into CatJoin

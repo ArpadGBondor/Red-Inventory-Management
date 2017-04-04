@@ -84,4 +84,9 @@
         <Setter Property="WindowStyle" Value="ToolWindow" />
         <Setter Property="Icon" Value="/Red Inventory Management;component/Resources/Icon.png" />
     </Style>
+
+    <Style TargetType="ListViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    
 </ResourceDictionary>

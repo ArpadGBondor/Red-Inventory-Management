@@ -24,7 +24,10 @@ namespace Red_Inventory_Management.ViewModel
                 SetupConnectionWindow SCW = new SetupConnectionWindow();
                 SCW.ShowDialog();
                 if (!DatabaseConnection.TestConnection())
+                {
                     CloseWindow();
+                    return;
+                }
             }
 
             // New user
@@ -34,14 +37,20 @@ namespace Red_Inventory_Management.ViewModel
                 NewUserWindow NUW = new NewUserWindow();
                 NUW.ShowDialog();
                 if (UserLogin.IsEmptyUserDatabase())
+                {
                     CloseWindow();
+                    return;
+                }
             }
 
             // Login
             LoginWindow LW = new LoginWindow();
             LW.ShowDialog();
             if (UserLogin.LoginedUser == "") // Not logged in
+            {
                 CloseWindow();
+                return;
+            }
         }
         #endregion
         #region Menus and Views
@@ -56,8 +65,9 @@ namespace Red_Inventory_Management.ViewModel
         private string[] listsMenu = new string[] { "Inventory", "Partner transactions" };
         private InventoryViewModel inventory = new InventoryViewModel();
         private PartnerTransactionsViewModel partnerTransactions = new PartnerTransactionsViewModel();
-        private string[] settingsMenu = new string[] { "Users" };
+        private string[] settingsMenu = new string[] { "Users", "Database" };
         private UsersViewModel users = new UsersViewModel();
+        private SetupConnectionViewModel setupConnection = new SetupConnectionViewModel();
         #endregion
         #region Change Menu
         public string[] MainMenu { get { return mainMenu; } }
@@ -134,27 +144,38 @@ namespace Red_Inventory_Management.ViewModel
             {
                 case "Products":
                     CurrentViewModel = products;
+                    ((RelayCommand)products.RefreshListCommand).CheckAndExecute(products);
                     break;
                 case "Product categories":
                     CurrentViewModel = productCategories;
+                    ((RelayCommand)productCategories.RefreshListCommand).CheckAndExecute(productCategories);
                     break;
                 case "Partners":
                     CurrentViewModel = partners;
+                    ((RelayCommand)partners.RefreshListCommand).CheckAndExecute(partners);
                     break;
                 case "Users":
                     CurrentViewModel = users;
+                    ((RelayCommand)users.RefreshListCommand).CheckAndExecute(users);
                     break;
                 case "Incoming":
                     CurrentViewModel = incomingTransactions;
+                    ((RelayCommand)incomingTransactions.RefreshListCommand).CheckAndExecute(incomingTransactions);
                     break;
                 case "Outgoing":
                     CurrentViewModel = outgoingTransactions;
+                    ((RelayCommand)outgoingTransactions.RefreshListCommand).CheckAndExecute(outgoingTransactions);
                     break;
                 case "Inventory":
                     CurrentViewModel = inventory;
+                    ((RelayCommand)inventory.RefreshListCommand).CheckAndExecute(inventory);
                     break;
                 case "Partner transactions":
                     CurrentViewModel = partnerTransactions;
+                    ((RelayCommand)partnerTransactions.RefreshListCommand).CheckAndExecute(partnerTransactions);
+                    break;
+                case "Database":
+                    CurrentViewModel = setupConnection;
                     break;
                 default:
                     CurrentViewModel = null;

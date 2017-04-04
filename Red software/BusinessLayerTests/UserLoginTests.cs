@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataLayer;
 using EntityLayer;
+using System.IO;
 
 namespace BusinessLayer.Tests
 {
@@ -16,10 +17,15 @@ namespace BusinessLayer.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            string file = AppDomain.CurrentDomain.BaseDirectory + "\\Database.mdf";
-            DatabaseConnection.ChangeDatabaseFile(file);
+            string dir = AppDomain.CurrentDomain.BaseDirectory + "\\";
+            string dbname = "BusinessLayer_Tests";
+            if (File.Exists(dir + dbname + ".mdf"))
+                Assert.IsTrue(DatabaseConnection.ChangeDatabase(dir, dbname));
+            else
+                Assert.IsTrue(DatabaseConnection.CreateDatabase(dir, dbname));
             Assert.IsTrue(DatabaseConnection.TestConnection());
-            Assert.AreEqual(DatabaseConnection.File,file);
+            Assert.AreEqual(DatabaseConnection.Directory, dir);
+            Assert.AreEqual(DatabaseConnection.DbName, dbname);
         }
 
         [TestMethod()]

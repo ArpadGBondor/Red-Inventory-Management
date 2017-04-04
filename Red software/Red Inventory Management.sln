@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red_Inventory_Management", "Red software\Red_Inventory_Management.csproj", "{E13B7158-F733-4226-967F-43C989E7F5EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red Inventory Management", "Red software\Red Inventory Management.csproj", "{E13B7158-F733-4226-967F-43C989E7F5EC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{4A53006B-D0BA-4069-8322-60CB6AB87393}"
 EndProject
@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayerTests", "DataLayer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayerTests", "BusinessLayerTests\BusinessLayerTests.csproj", "{281E3C97-267F-4D8B-8488-3AF4797158DF}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Red Inventory Management Setup", "Red Inventory Management Setup\Red Inventory Management Setup.vdproj", "{693CA5A2-E303-4D5A-ABC8-C7CD2A3FE699}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,7 @@ Global
 		{E13B7158-F733-4226-967F-43C989E7F5EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E13B7158-F733-4226-967F-43C989E7F5EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E13B7158-F733-4226-967F-43C989E7F5EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E13B7158-F733-4226-967F-43C989E7F5EC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{4A53006B-D0BA-4069-8322-60CB6AB87393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4A53006B-D0BA-4069-8322-60CB6AB87393}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A53006B-D0BA-4069-8322-60CB6AB87393}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +48,8 @@ Global
 		{281E3C97-267F-4D8B-8488-3AF4797158DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{281E3C97-267F-4D8B-8488-3AF4797158DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{281E3C97-267F-4D8B-8488-3AF4797158DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693CA5A2-E303-4D5A-ABC8-C7CD2A3FE699}.Debug|Any CPU.ActiveCfg = Debug
+		{693CA5A2-E303-4D5A-ABC8-C7CD2A3FE699}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

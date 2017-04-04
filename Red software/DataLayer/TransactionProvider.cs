@@ -22,7 +22,7 @@ namespace DataLayer
         public static List<TransactionHeadListEntity> ListHead(Expression<Func<TransactionHeadEntity,bool>> condition)
         {
             List<TransactionHeadListEntity> list = new List<TransactionHeadListEntity>();
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             var query = (from h in db.TransactionHead.Where(condition)
                          join p in db.Partners on h.Partner_Id equals p.Id into PartJoin
                             from subp in PartJoin.DefaultIfEmpty()
@@ -35,7 +35,7 @@ namespace DataLayer
         public static List<TransactionBodyListEntity> ListBody(Expression<Func<TransactionBodyEntity, bool>> condition)
         {
             List<TransactionBodyListEntity> list = new List<TransactionBodyListEntity>();
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             var query = (from b in db.TransactionBody.Where(condition)
                          join p in db.Products on b.Product_Id equals p.Id into ProdJoin
                          from subp in ProdJoin.DefaultIfEmpty()
@@ -47,7 +47,7 @@ namespace DataLayer
         public static List<TransactionBodyListEntity> ListInventory(Expression<Func<TransactionBodyEntity, bool>> condition)
         {
             List<TransactionBodyListEntity> list = new List<TransactionBodyListEntity>();
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             var query1 = (from body in db.TransactionBody.Where(condition)
                          join head in db.TransactionHead on body.Transaction_Id equals head.Id
                          select new { Product_Id = body.Product_Id, Quantity = body.Quantity * (head.Incoming ? 1 :-1 ) });
@@ -68,7 +68,7 @@ namespace DataLayer
         public static List<TransactionHeadListEntity> ListInventoryDetails(int Product_Id)
         {
             List<TransactionHeadListEntity> list = new List<TransactionHeadListEntity>();
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             var query = (from body in db.TransactionBody.Where(p => p.Product_Id == Product_Id)
                           group body by body.Transaction_Id into g
                           join head in db.TransactionHead on g.First().Transaction_Id equals head.Id
@@ -82,7 +82,7 @@ namespace DataLayer
         public static List<TransactionHeadListEntity> ListPartnerTransactions(Expression<Func<TransactionHeadEntity, bool>> condition)
         {
             List<TransactionHeadListEntity> list = new List<TransactionHeadListEntity>();
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             var query = (from head in db.TransactionHead.Where(condition)
                          group head by head.Partner_Id into g
                          join partner in db.Partners on g.First().Partner_Id equals partner.Id
@@ -108,7 +108,7 @@ namespace DataLayer
             bool lSuccess = false;
             bool lNewHead = (head.Id == 0);
             
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             int Transaction_Id = head.Id;
 
             // HEAD record
@@ -188,7 +188,7 @@ namespace DataLayer
         {
             bool lSuccess = false;
             List<int> DeletedTransactions = new List<int>();
-            MyDataContext db = new MyDataContext(Database.get_connectionString);
+            MyDataContext db = new MyDataContext(Database.ConnectionString);
             // Delete head
             var query = db.TransactionHead.Where(condition);
             foreach(var rec in query)

@@ -15,8 +15,20 @@
                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
                 <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
                 <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
-                <GridViewColumn Header="Cost price" DisplayMemberBinding="{Binding Path=Cost_Price,StringFormat={}{0:C} }" />
-                <GridViewColumn Header="Sell price" DisplayMemberBinding="{Binding Sell_Price,StringFormat={}{0:C} }" />
+                <GridViewColumn Header="Cost price" Width="Auto">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Cost_Price,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Sell price" Width="Auto">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Sell_Price,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
             </GridView>
         </ListView.View>
     </ListView>
