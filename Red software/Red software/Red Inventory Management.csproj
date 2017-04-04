@@ -103,12 +103,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\ViewModelBase\BindableBase.cs" />
     <Compile Include="Model\BindableTransactionBodyListEntity.cs" />
-    <Compile Include="Model\DecimalToPositiveConverter.cs" />
-    <Compile Include="Model\EditItemModel.cs" />
-    <Compile Include="Model\ListModel.cs" />
-    <Compile Include="Model\TableModel.cs" />
+    <Compile Include="Model\Control\ClickSelectTextBox .cs" />
+    <Compile Include="Model\Converter\DecimalToPositiveConverter.cs" />
+    <Compile Include="Model\ViewModelBase\EditItemModel.cs" />
+    <Compile Include="Model\ViewModelBase\ListModel.cs" />
+    <Compile Include="Model\ViewModelBase\TableModel.cs" />
     <Compile Include="Notifications\GrowlNotifiactions.xaml.cs">
       <DependentUpon>GrowlNotifiactions.xaml</DependentUpon>
     </Compile>
@@ -126,7 +127,7 @@
     <Compile Include="ViewModel\Login\EditUserViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Login\NewUserViewModel.cs" />
-    <Compile Include="Model\RelayCommand.cs" />
+    <Compile Include="Model\CommandBase\RelayCommand.cs" />
     <Compile Include="ViewModel\Login\SetupConnectionViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Tables\ProductCategoriesViewModel.cs" />

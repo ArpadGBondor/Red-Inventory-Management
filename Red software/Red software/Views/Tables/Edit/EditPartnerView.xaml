@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Red_Inventory_Management.Views"
+             xmlns:models="clr-namespace:Red_Inventory_Management.Model"
              mc:Ignorable="d" 
              Height="Auto" 
              Width="Auto">
@@ -30,10 +31,10 @@
         <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Item.Id, Mode=TwoWay}" Margin="5" />
 
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Parnter name:" TextAlignment="Right" Margin="5"/>
-        <TextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Path=Item.Name, Mode=TwoWay}" Margin="5" />
+        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="1" Text="{Binding Path=Item.Name, Mode=TwoWay}" Margin="5" />
 
         <TextBlock Grid.Column="0" Grid.Row="2" Text="Parnter code:" TextAlignment="Right" Margin="5"/>
-        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path=Item.Code, Mode=TwoWay}" Margin="5" />
+        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path=Item.Code, Mode=TwoWay}" Margin="5" />
 
         <TextBlock Grid.Column="0" Grid.Row="3" Text="Customer:" TextAlignment="Right" Margin="5"/>
         <CheckBox  Grid.Column="1" Grid.Row="3" IsChecked="{Binding Path=Item.Customer, Mode=TwoWay}" Margin="5" />
@@ -42,16 +43,16 @@
         <CheckBox  Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=Item.Dealer, Mode=TwoWay}" Margin="5" />
 
         <TextBlock Grid.Column="0" Grid.Row="5" Text="Address:" TextAlignment="Right" Margin="5"/>
-        <TextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Path=Item.Address, Mode=TwoWay}" Margin="5" />
+        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Path=Item.Address, Mode=TwoWay}" Margin="5" />
 
         <TextBlock Grid.Column="0" Grid.Row="6" Text="Phone number:" TextAlignment="Right" Margin="5"/>
-        <TextBox  Grid.Column="1" Grid.Row="6" Text="{Binding Path=Item.Phone, Mode=TwoWay}" Margin="5" />
+        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="6" Text="{Binding Path=Item.Phone, Mode=TwoWay}" Margin="5" />
 
         <TextBlock Grid.Column="0" Grid.Row="7" Text="E-mail address:" TextAlignment="Right" Margin="5"/>
-        <TextBox  Grid.Column="1" Grid.Row="7" Text="{Binding Path=Item.Email, Mode=TwoWay}" Margin="5" />
+        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="7" Text="{Binding Path=Item.Email, Mode=TwoWay}" Margin="5" />
 
         <TextBlock Grid.Column="0" Grid.Row="8" Text="Bank account number:" TextAlignment="Right" Margin="5"/>
-        <TextBox  Grid.Column="1" Grid.Row="8" Text="{Binding Path=Item.AccountNumber, Mode=TwoWay}" Margin="5" />
+        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="8" Text="{Binding Path=Item.AccountNumber, Mode=TwoWay}" Margin="5" />
 
     </Grid>
 </UserControl>
