@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Red_Inventory_Management.Views"
+             xmlns:models="clr-namespace:Red_Inventory_Management.Model"
              mc:Ignorable="d" 
              Width="Auto"
              Height="Auto"
@@ -28,7 +29,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
-                <GridView>
+                <models:AutoSizedGridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Product.Id}" />
                     <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Path=Product.Name}" />
                     <GridViewColumn Header="Product code" DisplayMemberBinding="{Binding Path=Product.Code}" />
@@ -39,7 +40,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                </GridView>
+                </models:AutoSizedGridView>
             </ListView.View>
         </ListView>
     </Grid>

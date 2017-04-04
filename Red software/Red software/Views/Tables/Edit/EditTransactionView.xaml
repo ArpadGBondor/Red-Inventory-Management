@@ -29,7 +29,7 @@
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Partner:" TextAlignment="Right" Margin="5"/>
         <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Partners}" SelectedItem="{Binding SelectedPartner,Mode=TwoWay}" Margin="5"  Height="130">
             <ListView.View>
-                <GridView>
+                <models:AutoSizedGridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
@@ -37,7 +37,7 @@
                     <GridViewColumn Header="Phone number" DisplayMemberBinding="{Binding Phone}" />
                     <GridViewColumn Header="E-mail address" DisplayMemberBinding="{Binding Email}" />
                     <GridViewColumn Header="Bank account number" DisplayMemberBinding="{Binding AccountNumber}" />
-                </GridView>
+                </models:AutoSizedGridView>
             </ListView.View>
         </ListView>
 
@@ -55,18 +55,18 @@
                 </Grid.ColumnDefinitions>
                 <ListView Grid.Column="0" ItemsSource="{Binding ProductCategories}" SelectedItem="{Binding SelectedProductCategory,Mode=TwoWay}" Margin="5"  Height="130">
                     <ListView.View>
-                        <GridView>
+                        <models:AutoSizedGridView>
                             <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
-                        </GridView>
+                        </models:AutoSizedGridView>
                     </ListView.View>
                 </ListView>
                 <ListView Grid.Column="1" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct,Mode=TwoWay}" Margin="5"  Height="130">
                     <ListView.View>
-                        <GridView>
+                        <models:AutoSizedGridView>
                             <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
                             <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Name}" />
                             <GridViewColumn Header="Product code" DisplayMemberBinding="{Binding Code}" />
-                        </GridView>
+                        </models:AutoSizedGridView>
                     </ListView.View>
                 </ListView>
             </Grid>
@@ -99,7 +99,7 @@
         <TextBlock Grid.Column="0" Grid.Row="3" Text="Transaction:" TextAlignment="Right" Margin="5"/>
         <ListView Grid.Column="1" Grid.Row="3" ItemsSource="{Binding TransactionBody}" SelectedItem="{Binding SelectedBody,Mode=TwoWay}" Margin="5"  Height="150">
             <ListView.View>
-                <GridView>
+                <models:AutoSizedGridView>
                     <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Path=ProductName}" />
                     <GridViewColumn Header="Product code" DisplayMemberBinding="{Binding Path=ProductCode}" />
                     <GridViewColumn Header="Unit price" Width="Auto">
@@ -123,7 +123,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                </GridView>
+                </models:AutoSizedGridView>
             </ListView.View>
         </ListView>
         <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding TotalPrice, StringFormat=Total price: {0:C}}" TextAlignment="Left" FontWeight="Bold" Margin="5" />

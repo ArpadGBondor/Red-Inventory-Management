@@ -34,13 +34,13 @@
         "Entry"
         {
         "MsmKey" = "8:_441C347FA10D394742B1AE1965F8006A"
-        "OwnerKey" = "8:_95E6743B224CEB794C06F0EC4F02DCBB"
+        "OwnerKey" = "8:_83DF160DD98C40DA8A87111016EB6F6D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_441C347FA10D394742B1AE1965F8006A"
-        "OwnerKey" = "8:_83DF160DD98C40DA8A87111016EB6F6D"
+        "OwnerKey" = "8:_95E6743B224CEB794C06F0EC4F02DCBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,31 +94,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F271FF82E254B4AB3187785B029FAE84"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_441C347FA10D394742B1AE1965F8006A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_35D4AADE55529DFC8E2172EC51B02124"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_95E6743B224CEB794C06F0EC4F02DCBB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BF86E334672F1CB007BA06C1FC7AFD61"
+        "OwnerKey" = "8:_83DF160DD98C40DA8A87111016EB6F6D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -130,7 +106,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_83DF160DD98C40DA8A87111016EB6F6D"
+        "OwnerKey" = "8:_BF86E334672F1CB007BA06C1FC7AFD61"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_95E6743B224CEB794C06F0EC4F02DCBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_35D4AADE55529DFC8E2172EC51B02124"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_441C347FA10D394742B1AE1965F8006A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F271FF82E254B4AB3187785B029FAE84"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -197,10 +197,10 @@
                     "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.5"
                     }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.SqlServer.SqlLocalDB.12.0"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.SqlServer.SqlLocalDB.12.1"
                     {
-                    "Name" = "8:SQL Server 2014 Express LocalDB"
-                    "ProductCode" = "8:Microsoft.SqlServer.SqlLocalDB.12.0"
+                    "Name" = "8:SQL Server 2014 SP1 Express LocalDB"
+                    "ProductCode" = "8:Microsoft.SqlServer.SqlLocalDB.12.1"
                     }
                 }
             }
@@ -240,6 +240,11 @@
             "AssemblyAsmDisplayName" = "8:DataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_35D4AADE55529DFC8E2172EC51B02124"
+                    {
+                    "Name" = "8:DataLayer.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:DataLayer.dll"
             "TargetName" = "8:"
@@ -266,6 +271,11 @@
             "AssemblyAsmDisplayName" = "8:EntityLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_441C347FA10D394742B1AE1965F8006A"
+                    {
+                    "Name" = "8:EntityLayer.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:EntityLayer.dll"
             "TargetName" = "8:"
@@ -292,6 +302,11 @@
             "AssemblyAsmDisplayName" = "8:EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_4806F8DB7537716728198C4C038A8F36"
+                    {
+                    "Name" = "8:EntityFramework.SqlServer.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:EntityFramework.SqlServer.dll"
             "TargetName" = "8:"
@@ -349,6 +364,11 @@
             "AssemblyAsmDisplayName" = "8:BusinessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_95E6743B224CEB794C06F0EC4F02DCBB"
+                    {
+                    "Name" = "8:BusinessLayer.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:BusinessLayer.dll"
             "TargetName" = "8:"
@@ -375,6 +395,11 @@
             "AssemblyAsmDisplayName" = "8:EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_BF86E334672F1CB007BA06C1FC7AFD61"
+                    {
+                    "Name" = "8:EntityFramework.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:EntityFramework.dll"
             "TargetName" = "8:"
@@ -401,6 +426,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_F271FF82E254B4AB3187785B029FAE84"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -488,7 +518,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Red Inventory Management"
         "ProductCode" = "8:{24477332-A061-46A8-A409-CE2A0954A17F}"
-        "PackageCode" = "8:{730F57D0-95D5-41D0-97CA-0A1862366A6B}"
+        "PackageCode" = "8:{054FAD0B-79D5-462F-A029-75CAAC60B8AE}"
         "UpgradeCode" = "8:{F3713AF5-90B4-4BD4-93A9-35B9762FF5D4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

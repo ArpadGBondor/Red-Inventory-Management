@@ -4,16 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Red_Inventory_Management.Views"
+             xmlns:models="clr-namespace:Red_Inventory_Management.Model"
              mc:Ignorable="d" 
              Height="Auto"
              Width="Auto"
              d:DesignHeight="300">
     <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
         <ListView.View>
-            <GridView>
+            <models:AutoSizedGridView>
                 <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}" />
                 <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}" />
-            </GridView>
+            </models:AutoSizedGridView>
         </ListView.View>
     </ListView>
 
