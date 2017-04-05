@@ -1,15 +1,23 @@
 # Red's Inventory Management
-This is a simple inventory management application.
+Contents
+  - [Program features](#program-features)
+    - [Database connection](#database-connection)
+    - [Login](#login) 
+    - [Notifications](#notifications)
+    - [Tables](#tables)
+    - [Lists](#lists)
+  - [Program structure](#program structure)
+    - [Entity Layer](#entity-layer)
+    - [Data Layer](#data-layer)
+    - [Business Layer](#business-layer)
+    - [UI Layer](#ui-layer)
 
 ## Program features
- - [Database connection](#database-connection)
- - [Login](#login) 
- - [Notifications](#notifications)
- - [Tables](#tables)
- - [Lists](#lists)
-
 ### Database connection
-The program connects to a database file with ".mdf" extension using MS SQL LocalDB. [Microsoft SQL Server 2014 Express LocalDB](https://github.com/kjbartel/SqlLocalDB2014-Bootstrapper) is set as prerequisite in the Setup project, but the program works with other versions of LocalDb as well. 
+The program   - [Entity Layer](#entity-layer)
+  - [Data Layer](#data-layer)
+  - [Business Layer](#business-layer)
+  - [UI Layer](#ui-layer)connects to a database file with ".mdf" extension using MS SQL LocalDB. [Microsoft SQL Server 2014 Express LocalDB](https://github.com/kjbartel/SqlLocalDB2014-Bootstrapper) is set as prerequisite in the Setup project, but the program works with other versions of LocalDb as well. 
 When the application starts first time, a small window pops up and you have to create a new database file, or connect to an existing. You can't use the program without database connection. The program automatically stores the path of the database folder and the name of the database file in the DatabaseSettings.txt file in the application folder. You can change the database connection settings under the Settings => Database menu.
 
 ### Login
@@ -36,12 +44,6 @@ You can list:
  - Partner's money transactions
 
 ## Program structure
-  - [Entity Layer](#entity-layer)
-  - [Data Layer](#data-layer)
-  - [Business Layer](#business-layer)
-  - [UI Layer](#ui-layer)
-  
-
 ### Entity Layer
 The Entity Layer contains the classes responsible for the structure of the database tables, and the structure of the lists passed between the layers.
 #### Datatable Entities
