@@ -44,54 +44,97 @@ You can list:
 ### Entity Layer
 The Entity Layer contains the classes responsible for the structure of the database tables, and the structure of the lists passed between the layers.
 #### Datatable Entities
- - PartnerEntity
- - ProductCategoryEntity
- - ProductEntity
- - TransactionBodyEntity
- - TransactionHeadEntity
- - UserEntity
+ - PartnerEntity class
+ - ProductCategoryEntity class
+ - ProductEntity class
+ - TransactionBodyEntity class
+ - TransactionHeadEntity class
+ - UserEntity class
 #### List Entities
- - ProductListEntity
- - TransactionBodyListEntity
- - TransactionHeadListEntity
+ - ProductListEntity class
+ - TransactionBodyListEntity class
+ - TransactionHeadListEntity class
 
 ### Data Layer
 The Data Layer contains the classes responsible for the Database connection, and the data provider classes responsible for the consistent database state.
 #### Database connection
- - Database
+ - Database class
    - Generates and holds the connectionstring to the mdf file.
    - Contains template "linq to sql" database manipulation functions, that can be used in the data provider classes
- - MyDataContext
+ - MyDataContext class
    - Derived from System.Data.Linq.DataContext.
    - Contains properties to get datatables easier
    - Contains template "sql" database manipulation functions, that can be used for database creation and datatable creation.
 #### Data providers
- - PartnerProvider
- - ProductCategoryProvider
- - ProductProvider
- - TransactionProvider
- - UsersProvider
+ - PartnerProvider class
+ - ProductCategoryProvider class
+ - ProductProvider class
+ - TransactionProvider class
+ - UsersProvider class
 
 ### Business Layer
 The classes in the Business Layer are providing services used by the UI Layer and connecting the Data Layer and the UI Layer.
- - DatabaseConnection
+ - DatabaseConnection class
    - Reads the default setting from the "DatabaseSettings.txt" and tries to connect to the default file when TestConnection() is called.
    - Connects the Database class in the Data Layer with the UI Layer.
- - UserLogin
+ - UserLogin class
    - User authentication
- - ManagePartners
- - ManageProducts
- - ManageTransactions
+   - Connects the UsersProvider class in the Data Layer with the UI Layer
+ - ManagePartners class
+   - Connects the PartnerProvider class in the Data Layer with the UI Layer
+ - ManageProducts class
+   - Connects the ProductCategoryProvider and ProductProvider classes in the Data Layer with the UI Layer
+ - ManageTransactions class
+   - Connects the TransactionProvider class in the Data Layer with the UI Layer
 ### UI Layer
 The UI Layer was made by using MVVM pattern.
- - Model
- - ViewModel
- - View
 
+#### Setup database connection
+ - ViewModel
+   - SetupConnectionViewModel
+ - View
+   - SetupConnectionWindow (Called from MainWindowViewModel constructor)
+   - SetupConnectionMenuView (Called from Settings => Database)
+   - SetupConnectionView
+   
+#### Login
+##### New User
+ - ViewModel
+   - NewUserViewModel
+ - View
+   - NewUserWindow (Called from MainWindowViewModel constructor and Settings => Users table)
+##### Edit User
+ - ViewModel
+   - EditUserViewModel
+ - View
+   - EditUserWindow (Called from Settings => Users table)
+##### Login
+ - ViewModel
+   - LoginViewModel
+ - View
+   - LoginWindow (Called from MainWindowViewModel constructor)
 
 #### Main Window
+ - ViewModel
+   - MainWindowViewModel
+ - View
+   - MainWindow
 
 #### Tables
+ - View
+   - TableView
+     - Every table uses the same view, which contains the basic table features: Title, New-, Edit- and Delete-button
+     - The middle of the view is a ContentControl, that shows different views for different ViewModels
+ - Model
+   - TableModel<Entity> (derived from ListModel<Entity>)
+     - Every TableViewModel is derived from this class.
+     - This class implements everything that connects the viewmodel with the TableView
+     - Every derived class have to implement only 4 functions:
+       - NewItem()
+       - EditItem()
+       - DeleteItem()
+       - RefreshList()
+
 
 ##### Edit records
 
