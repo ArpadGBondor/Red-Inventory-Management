@@ -34,3 +34,52 @@ If you Add/Edit a record a smaller window pops up in the center of the screen. Y
 You can list:
  - Product's stock quantities
  - Partner's money transactions
+
+## Program structure
+  - [Entity Layer](#entity-layer)
+  - [Data Layer](#data-layer)
+  - [Business Layer](#business-layer)
+  - [UI Layer](#ui-layer)
+  
+
+### Entity Layer
+The Entity Layer contains the classes responsible for the structure of the database tables, and the structure of the lists passed between the layers.
+#### Datatable Entities
+ - 
+#### List Entities
+ - 
+
+### Data Layer
+The Data Layer contains the classes responsible for the Database connection, and the data provider classes responsible for the consistent database state.
+#### Database connection
+ - 
+#### Data providers
+ - 
+
+### Business Layer
+The classes in the Business Layer are providing services used by the UI Layer and connecting the Data Layer and the UI Layer.
+ - Database Connection
+ - User authentication
+ - 
+### UI Layer
+The UI Layer was made by using MVVM pattern.
+ - Model
+ - ViewModel
+ - View
+
+
+#### Main Window
+
+#### Tables
+
+##### Edit records
+
+#### Lists
+
+##### List Details
+
+#### Notifications
+
+
+
+
