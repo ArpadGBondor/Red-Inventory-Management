@@ -6,7 +6,7 @@ Contents
     - [Notifications](#notifications)
     - [Tables](#tables)
     - [Lists](#lists)
-  - [Program structure](#program structure)
+  - [Program structure](#program-structure)
     - [Entity Layer](#entity-layer)
     - [Data Layer](#data-layer)
     - [Business Layer](#business-layer)
