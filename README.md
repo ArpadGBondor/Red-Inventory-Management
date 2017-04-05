@@ -127,9 +127,7 @@ The UI Layer was made by using MVVM pattern.
      - The middle of the view is a ContentControl, that shows different views for different ViewModels
  - Model
    - TableModel\<Entity> (derived from ListModel\<Entity>)
-     - Every TableViewModel is derived from this class.
-     - This class implements everything that connects the viewmodel with the TableView
-     - Every derived class have to implement only 4 functions:
+     - This is the base class of every TableViewModel class, and it implements everything that connects the viewmodel with the TableView, except 4 abstract function, that has to be implemented in the derived classes:
        - NewItem()
        - EditItem()
        - DeleteItem()
