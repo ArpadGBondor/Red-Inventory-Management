@@ -12,10 +12,10 @@ Contents
   - [Business Layer](#business-layer)
   - [UI Layer](#ui-layer)
     - [Setup database connection](#setup-database-connection)
-    - [Login](#login)
+    - [Login](#login-ui)
     - [Main Window](#main-Window)
-    - [Tables](#tables)
-    - [Lists](#lists)
+    - [Tables](#tables-ui)
+    - [Lists](#lists-ui)
 
 ## Program features
 ### Database connection
@@ -103,22 +103,22 @@ The UI Layer was made by using MVVM pattern.
   - SetupConnectionMenuView (Called from Settings => Database)
   - SetupConnectionView
 
-#### Login
-  ##### New User
-  - ViewModel
-    - NewUserViewModel
-  - View
-    - NewUserWindow (Called from MainWindowViewModel constructor and Settings => Users table)
-  ##### Edit User
-  - ViewModel
-    - EditUserViewModel
-  - View
-    - EditUserWindow (Called from Settings => Users table)
-  ##### Login
-  - ViewModel
-    - LoginViewModel
-  - View
-    - LoginWindow (Called from MainWindowViewModel constructor)
+#### Login UI
+  - New User
+    - ViewModel
+      - NewUserViewModel
+    - View
+      - NewUserWindow (Called from MainWindowViewModel constructor and Settings => Users table)
+  - Edit User
+    - ViewModel
+      - EditUserViewModel
+    - View
+      - EditUserWindow (Called from Settings => Users table)
+  - Login
+    - ViewModel
+      - LoginViewModel
+    - View
+      - LoginWindow (Called from MainWindowViewModel constructor)
 
 #### Main Window
 - ViewModel
@@ -126,7 +126,7 @@ The UI Layer was made by using MVVM pattern.
 - View
   - MainWindow
 
-#### Tables
+#### Tables UI
 - View
   - TableView
     - Every table uses the same view, which contains the basic table features: Title, New-, Edit- and Delete-button
@@ -157,12 +157,11 @@ The UI Layer was made by using MVVM pattern.
 
 ##### Edit records
 
-#### Lists
+#### Lists UI
 
 ##### List Details
 
 
-#### Models
 
 
 
