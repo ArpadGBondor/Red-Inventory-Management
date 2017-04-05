@@ -14,10 +14,7 @@ Contents
 
 ## Program features
 ### Database connection
-The program   - [Entity Layer](#entity-layer)
-  - [Data Layer](#data-layer)
-  - [Business Layer](#business-layer)
-  - [UI Layer](#ui-layer)connects to a database file with ".mdf" extension using MS SQL LocalDB. [Microsoft SQL Server 2014 Express LocalDB](https://github.com/kjbartel/SqlLocalDB2014-Bootstrapper) is set as prerequisite in the Setup project, but the program works with other versions of LocalDb as well. 
+The program connects to a database file with ".mdf" extension using MS SQL LocalDB. [Microsoft SQL Server 2014 Express LocalDB](https://github.com/kjbartel/SqlLocalDB2014-Bootstrapper) is set as prerequisite in the Setup project, but the program works with other versions of LocalDb as well. 
 When the application starts first time, a small window pops up and you have to create a new database file, or connect to an existing. You can't use the program without database connection. The program automatically stores the path of the database folder and the name of the database file in the DatabaseSettings.txt file in the application folder. You can change the database connection settings under the Settings => Database menu.
 
 ### Login
@@ -47,22 +44,44 @@ You can list:
 ### Entity Layer
 The Entity Layer contains the classes responsible for the structure of the database tables, and the structure of the lists passed between the layers.
 #### Datatable Entities
- - 
+ - PartnerEntity
+ - ProductCategoryEntity
+ - ProductEntity
+ - TransactionBodyEntity
+ - TransactionHeadEntity
+ - UserEntity
 #### List Entities
- - 
+ - ProductListEntity
+ - TransactionBodyListEntity
+ - TransactionHeadListEntity
 
 ### Data Layer
 The Data Layer contains the classes responsible for the Database connection, and the data provider classes responsible for the consistent database state.
 #### Database connection
- - 
+ - Database
+   - Generates and holds the connectionstring to the mdf file.
+   - Contains template "linq to sql" database manipulation functions, that can be used in the data provider classes
+ - MyDataContext
+   - Derived from System.Data.Linq.DataContext.
+   - Contains properties to get datatables easier
+   - Contains template "sql" database manipulation functions, that can be used for database creation and datatable creation.
 #### Data providers
- - 
+ - PartnerProvider
+ - ProductCategoryProvider
+ - ProductProvider
+ - TransactionProvider
+ - UsersProvider
 
 ### Business Layer
 The classes in the Business Layer are providing services used by the UI Layer and connecting the Data Layer and the UI Layer.
- - Database Connection
- - User authentication
- - 
+ - DatabaseConnection
+   - Reads the default setting from the "DatabaseSettings.txt" and tries to connect to the default file when TestConnection() is called.
+   - Connects the Database class in the Data Layer with the UI Layer.
+ - UserLogin
+   - User authentication
+ - ManagePartners
+ - ManageProducts
+ - ManageTransactions
 ### UI Layer
 The UI Layer was made by using MVVM pattern.
  - Model
@@ -80,7 +99,8 @@ The UI Layer was made by using MVVM pattern.
 
 ##### List Details
 
-#### Notifications
+
+#### Models
 
 
 
