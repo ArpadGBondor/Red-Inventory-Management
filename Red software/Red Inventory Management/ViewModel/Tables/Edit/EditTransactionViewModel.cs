@@ -177,8 +177,6 @@ namespace Red_Inventory_Management.ViewModel
             rec.Body.Price = ProductPrice;
             rec.Body.Quantity = ProductQuantity;
             TransactionBody.Add(new BindableTransactionBodyListEntity(rec));
-            //NotificationProvider.Info("Add", "Product");
-            //RaisePropertyChanged("TransactionBody");
         }
         private bool CanAddProduct(object parameter)
         {
@@ -216,6 +214,7 @@ namespace Red_Inventory_Management.ViewModel
                 Item.Head.Partner_Id = SelectedPartner.Id;
                 Item.Head.TotalPrice = TotalPrice;
                 Item.Date = TransactionDate;
+                Item.Partner = SelectedPartner;
                 var list = new List<TransactionBodyListEntity>();
                 foreach (var record in TransactionBody)
                     list.Add(record.Item);

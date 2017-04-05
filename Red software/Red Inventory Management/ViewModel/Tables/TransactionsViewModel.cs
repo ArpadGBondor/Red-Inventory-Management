@@ -25,8 +25,14 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void DeleteItem(object parameter)
         {
+            string date = SelectedItem.Date.ToString("d");
+            string PartnerName = SelectedItem.Partner.Name;
+            int id = SelectedItem.Head.Id;
             if (ManageTransactions.RemoveTransaction(SelectedItem.Head))
+            {
                 RefreshList(parameter);
+                NotificationProvider.Info("Transaction deleted", string.Format("Id: {0}\nDate: {1}\nPartner name: {2}",id,date, PartnerName));
+            }
             else
             {
                 NotificationProvider.Error("Delete transaction error", "Unknown reason.");
@@ -43,6 +49,7 @@ namespace Red_Inventory_Management.ViewModel
             if (ETVM.SaveEdit)
             {
                 Item = ETVM.Item;
+                NotificationProvider.Info("Transaction saved", string.Format("Id: {0}\nDate: {1}\nPartner name: {2}", Item.Head.Id, Item.Date.ToString("d"), Item.Partner.Name));
                 RefreshList(parameter);
                 foreach (var t in List)
                     if (Item.Head.Id == t.Head.Id)
@@ -62,6 +69,7 @@ namespace Red_Inventory_Management.ViewModel
             if (ETVM.SaveEdit)
             {
                 Item = ETVM.Item;
+                NotificationProvider.Info("Transaction added", string.Format("Id: {0}\nDate: {1}\nPartner name: {2}", Item.Head.Id, Item.Date.ToString("d"), Item.Partner.Name));
                 RefreshList(parameter);
                 foreach (var t in List)
                     if (Item.Head.Id == t.Head.Id)

@@ -66,6 +66,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -128,7 +131,7 @@
     <Compile Include="ViewModel\Login\EditUserViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Login\NewUserViewModel.cs" />
-    <Compile Include="Model\CommandBase\RelayCommand.cs" />
+    <Compile Include="Model\Command\RelayCommand.cs" />
     <Compile Include="ViewModel\Database\SetupConnectionViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Tables\ProductCategoriesViewModel.cs" />
@@ -373,7 +376,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icon.png" />
     <Resource Include="Notifications\Resources\close.png" />
     <Resource Include="Notifications\Resources\alert.png" />
     <Resource Include="Notifications\Resources\info.png" />
@@ -391,6 +393,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Microsoft SQL Server 2014 Express LocalDB Bootstrapper.link" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

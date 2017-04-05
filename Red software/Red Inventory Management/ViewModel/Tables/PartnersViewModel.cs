@@ -16,9 +16,12 @@ namespace Red_Inventory_Management.ViewModel
         }
         protected override void DeleteItem(object parameter)
         {
-
+            string name = SelectedItem.Name;
             if (ManagePartners.DeletePartner(SelectedItem))
+            {
                 RefreshList(parameter);
+                NotificationProvider.Info("Partner deleted", string.Format("Partner name:{0}", name));
+            }
             else
             {
                 NotificationProvider.Error("Delete partner error", "This partner is set to one or more transactions.");
@@ -35,6 +38,7 @@ namespace Red_Inventory_Management.ViewModel
             if (EPVM.SaveEdit)
             {
                 Item = EPVM.Item;
+                NotificationProvider.Info("Partner saved", string.Format("Partner name:{0}", Item.Name));
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -51,6 +55,7 @@ namespace Red_Inventory_Management.ViewModel
             if (EPVM.SaveEdit)
             {
                 Item = EPVM.Item;
+                NotificationProvider.Info("Partner added", string.Format("Partner name:{0}", Item.Name));
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)

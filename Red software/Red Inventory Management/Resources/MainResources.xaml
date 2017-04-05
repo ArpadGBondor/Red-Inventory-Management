@@ -48,7 +48,7 @@
         <Setter Property="Label.FontSize" Value="14" />
         <Setter Property="Label.Foreground" Value="#0066cc" />
         <Setter Property="WindowState" Value="Maximized" />
-        <Setter Property="Icon" Value="/Red Inventory Management;component/Resources/Icon.png" />
+        <Setter Property="Icon" Value="/Red Inventory Management;component/Resources/Icon.ico" />
     </Style>
 
     <Style x:Key="loginWindowStyle" TargetType="{x:Type Window}" >
@@ -65,7 +65,7 @@
         <Setter Property="Label.FontSize" Value="18" />
         <Setter Property="Label.Foreground" Value="#0066cc" />
         <Setter Property="WindowStyle" Value="ToolWindow" />
-        <Setter Property="Icon" Value="/Red Inventory Management;component/Resources/Icon.png" />
+        <Setter Property="Icon" Value="/Red Inventory Management;component/Resources/Icon.ico" />
     </Style>
 
     <Style x:Key="editWindowStyle" TargetType="{x:Type Window}">
@@ -82,7 +82,7 @@
         <Setter Property="Label.FontSize" Value="14" />
         <Setter Property="Label.Foreground" Value="#0066cc" />
         <Setter Property="WindowStyle" Value="ToolWindow" />
-        <Setter Property="Icon" Value="/Red Inventory Management;component/Resources/Icon.png" />
+        <Setter Property="Icon" Value="/Red Inventory Management;component/Resources/Icon.ico" />
     </Style>
 
     <Style TargetType="ListViewItem">

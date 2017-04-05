@@ -21,9 +21,13 @@ namespace Red_Inventory_Management.ViewModel
             TableName = "Products";
         }
         protected override void DeleteItem(object parameter)
-        {        
+        {
+            string name = SelectedItem.Name;
             if (ManageProducts.DeleteProduct(SelectedItem))
+            {
                 RefreshList(parameter);
+                NotificationProvider.Info("Product deleted", string.Format("Product name:{0}", name));
+            }
             else
             {
                 NotificationProvider.Error("Delete product error", "This product is set to one or more transactions.");
@@ -40,6 +44,7 @@ namespace Red_Inventory_Management.ViewModel
             if (EPVM.SaveEdit)
             {
                 Item = EPVM.Item;
+                NotificationProvider.Info("Product saved", string.Format("Product name:{0}", Item.Name));
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -56,6 +61,7 @@ namespace Red_Inventory_Management.ViewModel
             if (EPVM.SaveEdit)
             {
                 Item = EPVM.Item;
+                NotificationProvider.Info("Product added", string.Format("Product name:{0}", Item.Name));
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)

@@ -21,8 +21,12 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void DeleteItem(object parameter)
         {
+            string name = SelectedItem.Category;
             if (ManageProducts.DeleteProductCategory(SelectedItem))
+            {
                 RefreshList(parameter);
+                NotificationProvider.Info("Product category deleted", string.Format("Category name:{0}", name));
+            }
             else
             {
                 NotificationProvider.Error("Delete product category error", "This category is set to one or more product");
@@ -39,6 +43,7 @@ namespace Red_Inventory_Management.ViewModel
             if (EPVM.SaveEdit)
             {
                 Item = EPVM.Item;
+                NotificationProvider.Info("Product category saved", string.Format("Category name:{0}", Item.Category));
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
@@ -55,6 +60,7 @@ namespace Red_Inventory_Management.ViewModel
             if (EPVM.SaveEdit)
             {
                 Item = EPVM.Item;
+                NotificationProvider.Info("Product category added", string.Format("Category name:{0}", Item.Category));
                 RefreshList(parameter);
                 foreach (var p in List)
                     if (Item.Id == p.Id)
