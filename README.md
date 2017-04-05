@@ -2,7 +2,7 @@
 This is a simple inventory management application.
 
 ## Program features
- - Database connection
+ - [Database connection](#database-connection)
  - Login 
  - Notifications
  - Tables
