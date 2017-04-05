@@ -13,7 +13,7 @@ Contents
   - [UI Layer](#ui-layer)
     - [Setup database connection](#setup-database-connection)
     - [Login](#login-ui)
-    - [Main Window](#main-Window)
+    - [Main Window](#main-window)
     - [Tables](#tables-ui)
     - [Lists](#lists-ui)
 
@@ -138,21 +138,26 @@ The UI Layer was made by using MVVM pattern.
       - EditItem()
       - DeleteItem()
       - RefreshList()
-##### Partners table
-- ViewModel
-  - PartnersViewModel (derived from TableModel\<PartnerEntity>)
-- View
-  - PartnersTableView (in the ContontControl of TableView)
-##### Product Categories table
-- ViewModel
-  - ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
-- View
-  - ProductCategoriesTableView (in the ContontControl of TableView)
-##### Products table
-- ViewModel
-  - ProductsViewModel (derived from TableModel\<ProductEntity>)
-- View
-  - ProductsTableView (in the ContontControl of TableView)
+- Partners table
+  - ViewModel
+    - PartnersViewModel (derived from TableModel\<PartnerEntity>)
+  - View
+    - PartnersTableView (in the ContontControl of TableView)
+- Product Categories table
+  - ViewModel
+    - ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
+  - View
+    - ProductCategoriesTableView (in the ContontControl of TableView)
+- Products table
+  - ViewModel
+    - ProductsViewModel (derived from TableModel\<ProductListEntity>)
+  - View
+    - ProductsTableView (in the ContontControl of TableView)
+- Transactions table
+  - ViewModel
+    - TransactionsViewModel (derived from TableModel\<TransactionHeadListEntity>)
+  - View
+    - TransactionsTableView (in the ContontControl of TableView)
 
 
 ##### Edit records
