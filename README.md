@@ -47,122 +47,122 @@ You can list:
 
 ## Program structure
 ### Entity Layer
-  The Entity Layer contains the classes responsible for the structure of the database tables, and the structure of the lists passed between the layers.
-  #### Datatable Entities
-  - PartnerEntity class
-  - ProductCategoryEntity class
-  - ProductEntity class
-  - TransactionBodyEntity class
-  - TransactionHeadEntity class
-  - UserEntity class
-  #### List Entities
-  - ProductListEntity class
-  - TransactionBodyListEntity class
-  - TransactionHeadListEntity class
+The Entity Layer contains the classes responsible for the structure of the database tables, and the structure of the lists passed between the layers.
+#### Datatable Entities
+- PartnerEntity class
+- ProductCategoryEntity class
+- ProductEntity class
+- TransactionBodyEntity class
+- TransactionHeadEntity class
+- UserEntity class
+#### List Entities
+- ProductListEntity class
+- TransactionBodyListEntity class
+- TransactionHeadListEntity class
 
 ### Data Layer
-  The Data Layer contains the classes responsible for the Database connection, and the data provider classes responsible for the consistent database state.
-  #### Database connection
-  - Database class
-    - Generates and holds the connectionstring to the mdf file.
-    - Contains template "linq to sql" database manipulation functions, that can be used in the data provider classes
-  - MyDataContext class
-    - Derived from System.Data.Linq.DataContext.
-    - Contains properties to get datatables easier
-    - Contains template "sql" database manipulation functions, that can be used for database creation and datatable creation.
-  #### Data providers
-  - PartnerProvider class
-  - ProductCategoryProvider class
-  - ProductProvider class
-  - TransactionProvider class
-  - UsersProvider class
+The Data Layer contains the classes responsible for the Database connection, and the data provider classes responsible for the consistent database state.
+#### Database connection
+- Database class
+  - Generates and holds the connectionstring to the mdf file.
+  - Contains template "linq to sql" database manipulation functions, that can be used in the data provider classes
+- MyDataContext class
+  - Derived from System.Data.Linq.DataContext.
+  - Contains properties to get datatables easier
+  - Contains template "sql" database manipulation functions, that can be used for database creation and datatable creation.
+#### Data providers
+- PartnerProvider class
+- ProductCategoryProvider class
+- ProductProvider class
+- TransactionProvider class
+- UsersProvider class
 
 ### Business Layer
-  The classes in the Business Layer are providing services used by the UI Layer and connecting the Data Layer and the UI Layer.
-  - DatabaseConnection class
-    - Reads the default setting from the "DatabaseSettings.txt" and tries to connect to the default file when TestConnection() is called.
-    - Connects the Database class in the Data Layer with the UI Layer.
-  - UserLogin class
-    - User authentication
-    - Connects the UsersProvider class in the Data Layer with the UI Layer
-  - ManagePartners class
-    - Connects the PartnerProvider class in the Data Layer with the UI Layer
-  - ManageProducts class
-    - Connects the ProductCategoryProvider and ProductProvider classes in the Data Layer with the UI Layer
-  - ManageTransactions class
-    - Connects the TransactionProvider class in the Data Layer with the UI Layer
+The classes in the Business Layer are providing services used by the UI Layer and connecting the Data Layer and the UI Layer.
+- DatabaseConnection class
+  - Reads the default setting from the "DatabaseSettings.txt" and tries to connect to the default file when TestConnection() is called.
+  - Connects the Database class in the Data Layer with the UI Layer.
+- UserLogin class
+  - User authentication
+  - Connects the UsersProvider class in the Data Layer with the UI Layer
+- ManagePartners class
+  - Connects the PartnerProvider class in the Data Layer with the UI Layer
+- ManageProducts class
+  - Connects the ProductCategoryProvider and ProductProvider classes in the Data Layer with the UI Layer
+- ManageTransactions class
+  - Connects the TransactionProvider class in the Data Layer with the UI Layer
 
 ### UI Layer
-  The UI Layer was made by using MVVM pattern.
+The UI Layer was made by using MVVM pattern.
 
-  #### Setup database connection
+#### Setup database connection
+- ViewModel
+  - SetupConnectionViewModel
+- View
+  - SetupConnectionWindow (Called from MainWindowViewModel constructor)
+  - SetupConnectionMenuView (Called from Settings => Database)
+  - SetupConnectionView
+
+#### Login
+  ##### New User
   - ViewModel
-    - SetupConnectionViewModel
+    - NewUserViewModel
   - View
-    - SetupConnectionWindow (Called from MainWindowViewModel constructor)
-    - SetupConnectionMenuView (Called from Settings => Database)
-    - SetupConnectionView
-
-  #### Login
-    ##### New User
-    - ViewModel
-      - NewUserViewModel
-    - View
-      - NewUserWindow (Called from MainWindowViewModel constructor and Settings => Users table)
-    ##### Edit User
-    - ViewModel
-      - EditUserViewModel
-    - View
-      - EditUserWindow (Called from Settings => Users table)
-    ##### Login
-    - ViewModel
-      - LoginViewModel
-    - View
-      - LoginWindow (Called from MainWindowViewModel constructor)
-
-  #### Main Window
+    - NewUserWindow (Called from MainWindowViewModel constructor and Settings => Users table)
+  ##### Edit User
   - ViewModel
-    - MainWindowViewModel
+    - EditUserViewModel
   - View
-    - MainWindow
-
-  #### Tables
-  - View
-    - TableView
-      - Every table uses the same view, which contains the basic table features: Title, New-, Edit- and Delete-button
-      - The middle of the view is a ContentControl, that shows different views based on the different ViewModels
-  - Model
-    - TableModel\<Entity> (derived from ListModel\<Entity>)
-      - This is the base class of every TableViewModel class, and it implements everything that connects the viewmodel with the TableView, except 4 abstract function, that has to be implemented in the derived classes:
-        - NewItem()
-        - EditItem()
-        - DeleteItem()
-        - RefreshList()
-  ##### Partners table
+    - EditUserWindow (Called from Settings => Users table)
+  ##### Login
   - ViewModel
-    - PartnersViewModel (derived from TableModel\<PartnerEntity>)
+    - LoginViewModel
   - View
-    - PartnersTableView (in the ContontControl of TableView)
-  ##### Product Categories table
-  - ViewModel
-    - ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
-  - View
-    - ProductCategoriesTableView (in the ContontControl of TableView)
-  ##### Products table
-  - ViewModel
-    - ProductsViewModel (derived from TableModel\<ProductEntity>)
-  - View
-    - ProductsTableView (in the ContontControl of TableView)
+    - LoginWindow (Called from MainWindowViewModel constructor)
+
+#### Main Window
+- ViewModel
+  - MainWindowViewModel
+- View
+  - MainWindow
+
+#### Tables
+- View
+  - TableView
+    - Every table uses the same view, which contains the basic table features: Title, New-, Edit- and Delete-button
+    - The middle of the view is a ContentControl, that shows different views based on the different ViewModels
+- Model
+  - TableModel\<Entity> (derived from ListModel\<Entity>)
+    - This is the base class of every TableViewModel class, and it implements everything that connects the viewmodel with the TableView, except 4 abstract function, that has to be implemented in the derived classes:
+      - NewItem()
+      - EditItem()
+      - DeleteItem()
+      - RefreshList()
+##### Partners table
+- ViewModel
+  - PartnersViewModel (derived from TableModel\<PartnerEntity>)
+- View
+  - PartnersTableView (in the ContontControl of TableView)
+##### Product Categories table
+- ViewModel
+  - ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
+- View
+  - ProductCategoriesTableView (in the ContontControl of TableView)
+##### Products table
+- ViewModel
+  - ProductsViewModel (derived from TableModel\<ProductEntity>)
+- View
+  - ProductsTableView (in the ContontControl of TableView)
 
 
-  ##### Edit records
+##### Edit records
 
-  #### Lists
+#### Lists
 
-  ##### List Details
+##### List Details
 
 
-  #### Models
+#### Models
 
 
 
