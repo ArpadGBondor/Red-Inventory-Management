@@ -11,6 +11,11 @@ Contents
   - [Data Layer](#data-layer)
   - [Business Layer](#business-layer)
   - [UI Layer](#ui-layer)
+    - [Setup database connection](#setup-database-connection)
+    - [Login](#login)
+    - [Main Window](#main-Window)
+    - [Tables](#tables)
+    - [Lists](#lists)
 
 ## Program features
 ### Database connection
@@ -138,11 +143,16 @@ You can list:
     - PartnersViewModel (derived from TableModel\<PartnerEntity>)
   - View
     - PartnersTableView (in the ContontControl of TableView)
-  ##### Partners table
+  ##### Product Categories table
   - ViewModel
-    - PartnersViewModel (derived from TableModel\<PartnerEntity>)
+    - ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
   - View
-    - PartnersTableView (in the ContontControl of TableView)
+    - ProductCategoriesTableView (in the ContontControl of TableView)
+  ##### Products table
+  - ViewModel
+    - ProductsViewModel (derived from TableModel\<ProductEntity>)
+  - View
+    - ProductsTableView (in the ContontControl of TableView)
 
 
   ##### Edit records
