@@ -1,6 +1,6 @@
 # Red's Inventory Management
 - [Program features](#program-features)
-  - [Database connection](#database-connection)
+  - [Setup database connection](#setup-database-connection)
   - [Login](#login) 
   - [Notifications](#notifications)
   - [Tables](#tables)
@@ -10,16 +10,16 @@
   - [Data Layer](#data-layer)
   - [Business Layer](#business-layer)
   - [UI Layer](#ui-layer)
-    - [Setup database connection](#setup-database-connection)
-    - [Login](#login-ui)
-    - [Main Window](#main-window)
-    - [Tables](#tables-ui)
-    - [Lists](#lists-ui)
+    - [Setup database connection UI](#setup-database-connection-ui)
+    - [Login UI](#login-ui)
+    - [Main window UI](#main-window-ui)
+    - [Tables UI](#tables-ui)
+    - [Lists UI](#lists-ui)
 
 ## Program features
-### Database connection
+### Setup database connection
 The program connects to a database file with ".mdf" extension using MS SQL LocalDB. [Microsoft SQL Server 2014 Express LocalDB](https://github.com/kjbartel/SqlLocalDB2014-Bootstrapper) is set as prerequisite in the Setup project, but the program works with other versions of LocalDb as well. 
-When the application starts first time, a small window pops up and you have to create a new database file, or connect to an existing. You can't use the program without database connection. The program automatically stores the path of the database folder and the name of the database file in the DatabaseSettings.txt file in the application folder. You can change the database connection settings under the Settings => Database menu.
+When the application starts first time, a small window pops up and you have to create a new database file, or connect to an existing one. You can't use the program without database connection. The program automatically stores the path of the database folder and the name of the database file in the DatabaseSettings.txt file in the application folder. You can change the database connection settings under the Settings => Database menu.
 
 ### Login
 The program stores usernames and encrypted passwords in the "Users" table, and the passwords are encrypted with salted SHA-256 hashing. If the "Users" table is empty at the start of the program, a small window pops up, and you have to add the first user to the database. If there is at least one user in the "Users" table, you can enter the username and the password in the login window. You can Add/Modify/Remove users under the Settings => Users menu.
@@ -112,7 +112,7 @@ The UI Layer was made by using MVVM pattern.
     - ViewModel: LoginViewModel
     - View: LoginWindow (Called from MainWindowViewModel constructor)
 
-#### Main Window
+#### Main window UI
 - ViewModel: MainWindowViewModel
 - View: MainWindow
 
@@ -128,19 +128,19 @@ The UI Layer was made by using MVVM pattern.
     - RefreshList()
 - Partners table
   - ViewModel: PartnersViewModel (derived from TableModel\<PartnerEntity>)
-  - View: PartnersTableView (in the ContontControl of TableView)
+  - View: PartnersTableView (in the ContentControl of TableView)
 - Product categories table
   - ViewModel: ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
-  - View: ProductCategoriesTableView (in the ContontControl of TableView)
+  - View: ProductCategoriesTableView (in the ContentControl of TableView)
 - Products table
   - ViewModel: ProductsViewModel (derived from TableModel\<ProductListEntity>)
-  - View: ProductsTableView (in the ContontControl of TableView)
+  - View: ProductsTableView (in the ContentControl of TableView)
 - Transactions table
   - ViewModel: TransactionsViewModel (derived from TableModel\<TransactionHeadListEntity>)
-  - View: TransactionsTableView (in the ContontControl of TableView)
+  - View: TransactionsTableView (in the ContentControl of TableView)
 - Users table
   - ViewModel: UsersViewModel (derived from TableModel\<UserEntity>)
-  - View: UsersTableView  (in the ContontControl of TableView)
+  - View: UsersTableView  (in the ContentControl of TableView)
 
 ##### Add/Edit table-records
 - View: EditItemWindow
@@ -151,28 +151,39 @@ The UI Layer was made by using MVVM pattern.
     - Save()
 - Add/Edit partner
   - ViewModel: EditPartnerViewModel (derived from EditItemModel\<PartnerEntity>)
-  - View: EditPartnerView (in the ContontControl of EditItemWindow)
+  - View: EditPartnerView (in the ContentControl of EditItemWindow)
 - Add/Edit product category
   - ViewModel: EditProductCategoryViewModel (derived from EditItemModel\<ProductCategoryEntity>)
-  - View: EditProductCategoryView (in the ContontControl of EditItemWindow)
+  - View: EditProductCategoryView (in the ContentControl of EditItemWindow)
 - Add/Edit product
   - ViewModel: EditProductViewModel (derived from EditItemModel\<ProductListEntity>)
-  - View: EditProductView (in the ContontControl of EditItemWindow)
+  - View: EditProductView (in the ContentControl of EditItemWindow)
 - Add/Edit transaction
   - ViewModel: EditTransactionViewModel (derived from EditItemModel\<TransactionHeadListEntity>)
-  - View: EditTransactionView (in the ContontControl of EditItemWindow)
+  - View: EditTransactionView (in the ContentControl of EditItemWindow)
 - Add/Edit user
   - Adding and editing users are handled by the [Login UI](#login-ui)
 
-
-
-
 #### Lists UI
-
-##### List Details
-
-
-
-
-
-
+- View: ListView
+  - Every list uses the same view.
+  - The middle of the view is a ContentControl, that shows different views based on the different ViewModels
+- Model: ListModel\<Entity>
+  - This is the base class of every ListViewModel class and DetailsViewModel class, and it implements everything that connects the viewmodel with the ListView, except one abstract function, that has to be implemented in the derived classes:
+    - RefreshList()
+- Inventory list
+  - ViewModel:InventoryViewModel (derived from ListModel\<TransactionBodyListEntity>)
+  - View: InventoryListView (in the ContentControl of ListView)
+- Partner transactions list
+  - ViewModel:PartnerTransactionsViewModel (derived from ListModel\<TransactionHeadListEntity>)
+  - View: PartnerTransactionsListView (in the ContentControl of ListView)
+##### Details list
+- View: ListDetailsWindow
+  - Every details list uses the same view.
+  - The middle of the view is a ContentControl, that shows different views based on the different ViewModels
+- Inventory details list
+  - ViewModel:InventoryDetailsViewModel (derived from ListModel\<TransactionHeadListEntity>)
+  - View: InventoryListDetailsView (in the ContentControl of ListDetailsWindow)
+- Partner transactions list
+  - ViewModel:PartnerTransactionsDetailsViewModel (derived from ListModel\<TransactionHeadListEntity>)
+  - View: PartnerTransactionsListDetailsView (in the ContentControl of ListDetailsWindow)
