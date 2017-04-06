@@ -37,7 +37,7 @@ You can Add/Edit/Delete:
 - Outgoing transactions
 - Users
 
-If you Add/Edit a record a smaller window pops up in the center of the screen. You can change the details of the record in the window, and you can save or cancel the changes with the two button at the bottom of the window.
+If you Add/Edit a record a smaller window pops up in the center of the screen. You can change the details of the record, and you can save or cancel the changes with the two button at the bottom of the window.
 
 ### Lists
 #### Inventory list
