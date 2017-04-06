@@ -185,6 +185,6 @@ The UI Layer was made by using MVVM pattern.
 - Inventory details list
   - ViewModel: InventoryDetailsViewModel (derived from ListModel\<TransactionHeadListEntity>)
   - View: InventoryListDetailsView (in the ContentControl of ListDetailsWindow)
-- Partner transactions list
+- Partner transaction details list
   - ViewModel: PartnerTransactionsDetailsViewModel (derived from ListModel\<TransactionHeadListEntity>)
   - View: PartnerTransactionsListDetailsView (in the ContentControl of ListDetailsWindow)
