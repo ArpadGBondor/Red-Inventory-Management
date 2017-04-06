@@ -172,18 +172,18 @@ The UI Layer was made by using MVVM pattern.
   - This is the base class of every ListViewModel class and DetailsViewModel class, and it implements everything that connects the viewmodel with the ListView, except one abstract function, that has to be implemented in the derived classes:
     - RefreshList()
 - Inventory list
-  - ViewModel:InventoryViewModel (derived from ListModel\<TransactionBodyListEntity>)
+  - ViewModel: InventoryViewModel (derived from ListModel\<TransactionBodyListEntity>)
   - View: InventoryListView (in the ContentControl of ListView)
 - Partner transactions list
-  - ViewModel:PartnerTransactionsViewModel (derived from ListModel\<TransactionHeadListEntity>)
+  - ViewModel: PartnerTransactionsViewModel (derived from ListModel\<TransactionHeadListEntity>)
   - View: PartnerTransactionsListView (in the ContentControl of ListView)
 ##### Details list
 - View: ListDetailsWindow
   - Every details list uses the same view.
   - The middle of the view is a ContentControl, that shows different views based on the different ViewModels
 - Inventory details list
-  - ViewModel:InventoryDetailsViewModel (derived from ListModel\<TransactionHeadListEntity>)
+  - ViewModel: InventoryDetailsViewModel (derived from ListModel\<TransactionHeadListEntity>)
   - View: InventoryListDetailsView (in the ContentControl of ListDetailsWindow)
 - Partner transactions list
-  - ViewModel:PartnerTransactionsDetailsViewModel (derived from ListModel\<TransactionHeadListEntity>)
+  - ViewModel: PartnerTransactionsDetailsViewModel (derived from ListModel\<TransactionHeadListEntity>)
   - View: PartnerTransactionsListDetailsView (in the ContentControl of ListDetailsWindow)
