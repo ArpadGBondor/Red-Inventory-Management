@@ -1,5 +1,4 @@
 # Red's Inventory Management
-Contents
 - [Program features](#program-features)
   - [Database connection](#database-connection)
   - [Login](#login) 
@@ -130,7 +129,7 @@ The UI Layer was made by using MVVM pattern.
 - Partners table
   - ViewModel: PartnersViewModel (derived from TableModel\<PartnerEntity>)
   - View: PartnersTableView (in the ContontControl of TableView)
-- Product Categories table
+- Product categories table
   - ViewModel: ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
   - View: ProductCategoriesTableView (in the ContontControl of TableView)
 - Products table
@@ -143,8 +142,30 @@ The UI Layer was made by using MVVM pattern.
   - ViewModel: UsersViewModel (derived from TableModel\<UserEntity>)
   - View: UsersTableView  (in the ContontControl of TableView)
 
+##### Add/Edit table-records
+- View: EditItemWindow
+  - Every table uses the same edit view. A Window pops up in the middle of the screen with a(n) ADD/Save button and a Cancel Button at the bottom of the window.
+  - The middle of the view is a ContentControl, that shows different views based on the different ViewModels
+- Model: EditItemModel\<Entity>
+  - This is the base class of every Edit*ViewModel class, and it implements everything that connects the viewmodel with the EditItemWindow, except one logical abstract function, that has to be implemented in the derived classes:
+    - Save()
+- Add/Edit partner
+  - ViewModel: EditPartnerViewModel (derived from EditItemModel\<PartnerEntity>)
+  - View: EditPartnerView (in the ContontControl of EditItemWindow)
+- Add/Edit product category
+  - ViewModel: EditProductCategoryViewModel (derived from EditItemModel\<ProductCategoryEntity>)
+  - View: EditProductCategoryView (in the ContontControl of EditItemWindow)
+- Add/Edit product
+  - ViewModel: EditProductViewModel (derived from EditItemModel\<ProductListEntity>)
+  - View: EditProductView (in the ContontControl of EditItemWindow)
+- Add/Edit transaction
+  - ViewModel: EditTransactionViewModel (derived from EditItemModel\<TransactionHeadListEntity>)
+  - View: EditTransactionView (in the ContontControl of EditItemWindow)
+- Add/Edit user
+  - Adding and editing users are handled by the [Login UI](#login-ui)
 
-##### Edit records
+
+
 
 #### Lists UI
 
