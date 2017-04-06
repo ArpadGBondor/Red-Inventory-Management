@@ -17,6 +17,7 @@
     - [Lists UI](#lists-ui)
 
 ## Program features
+
 ### Setup database connection
 The program connects to a database file with ".mdf" extension using MS SQL LocalDB. [Microsoft SQL Server 2014 Express LocalDB](https://github.com/kjbartel/SqlLocalDB2014-Bootstrapper) is set as prerequisite in the Setup project, but the program works with other versions of LocalDb as well. 
 When the application starts first time, a small window pops up and you have to create a new database file, or connect to an existing one. You can't use the program without database connection. The program automatically stores the path of the database folder and the name of the database file in the DatabaseSettings.txt file in the application folder. You can change the database connection settings under the Settings => Database menu.
@@ -40,14 +41,18 @@ You can Add/Edit/Delete:
 If you Add/Edit a record a smaller window pops up in the center of the screen. You can change the details of the record, and you can save or cancel the changes with the two button at the bottom of the window.
 
 ### Lists
+
 #### Inventory list
 - This list shows every product's stock quantities. If you select a product, and press the "Quantity details" button above the list, a new window pops up, that lists every transaction, that affected the product's stock quantity.
+
 #### Partner transactions
 - This list shows every partner's total money transactions. If you select a partner, and press the "partner transactions" button above the list, a new window pops up, that lists every money transaction with that partner.
 
 ## Program structure
+
 ### Entity Layer
 The Entity Layer contains the classes responsible for the structure of the database tables, and the structure of the lists passed between the layers.
+
 #### Datatable Entities
 - PartnerEntity class
 - ProductCategoryEntity class
@@ -55,6 +60,7 @@ The Entity Layer contains the classes responsible for the structure of the datab
 - TransactionBodyEntity class
 - TransactionHeadEntity class
 - UserEntity class
+
 #### List Entities
 - ProductListEntity class
 - TransactionBodyListEntity class
@@ -62,6 +68,7 @@ The Entity Layer contains the classes responsible for the structure of the datab
 
 ### Data Layer
 The Data Layer contains the classes responsible for the Database connection, and the data provider classes responsible for the consistent database state.
+
 #### Database connection
 - Database class
   - Generates and holds the connectionstring to the mdf file.
@@ -70,6 +77,7 @@ The Data Layer contains the classes responsible for the Database connection, and
   - Derived from System.Data.Linq.DataContext.
   - Contains properties to get datatables easier
   - Contains template "sql" database manipulation functions, that can be used for database creation and datatable creation.
+
 #### Data providers
 - PartnerProvider class
 - ProductCategoryProvider class
@@ -143,6 +151,7 @@ The UI Layer was made by using MVVM pattern.
   - ViewModel: UsersViewModel (derived from TableModel\<UserEntity>)
   - View: UsersTableView  (in the ContentControl of TableView)
 
+
 ##### Add/Edit table-records
 - View: EditItemWindow
   - Every table uses the same edit view. A Window pops up in the middle of the screen with a(n) ADD/Save button and a Cancel Button at the bottom of the window.
@@ -178,6 +187,7 @@ The UI Layer was made by using MVVM pattern.
 - Partner transactions list
   - ViewModel: PartnerTransactionsViewModel (derived from ListModel\<TransactionHeadListEntity>)
   - View: PartnerTransactionsListView (in the ContentControl of ListView)
+
 ##### Details list
 - View: ListDetailsWindow
   - Every details list uses the same view.
