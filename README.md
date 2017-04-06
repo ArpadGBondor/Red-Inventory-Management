@@ -96,68 +96,52 @@ The classes in the Business Layer are providing services used by the UI Layer an
 The UI Layer was made by using MVVM pattern.
 
 #### Setup database connection
-- ViewModel
-  - SetupConnectionViewModel
-- View
+- ViewModel: SetupConnectionViewModel
+- View:
   - SetupConnectionWindow (Called from MainWindowViewModel constructor)
   - SetupConnectionMenuView (Called from Settings => Database)
   - SetupConnectionView
 
 #### Login UI
   - New User
-    - ViewModel
-      - NewUserViewModel
-    - View
-      - NewUserWindow (Called from MainWindowViewModel constructor and Settings => Users table)
+    - ViewModel: NewUserViewModel
+    - View: NewUserWindow (Called from MainWindowViewModel constructor and Settings => Users table)
   - Edit User
-    - ViewModel
-      - EditUserViewModel
-    - View
-      - EditUserWindow (Called from Settings => Users table)
+    - ViewModel: EditUserViewModel
+    - View: EditUserWindow (Called from Settings => Users table)
   - Login
-    - ViewModel
-      - LoginViewModel
-    - View
-      - LoginWindow (Called from MainWindowViewModel constructor)
+    - ViewModel: LoginViewModel
+    - View: LoginWindow (Called from MainWindowViewModel constructor)
 
 #### Main Window
-- ViewModel
-  - MainWindowViewModel
-- View
-  - MainWindow
+- ViewModel: MainWindowViewModel
+- View: MainWindow
 
 #### Tables UI
-- View
-  - TableView
-    - Every table uses the same view, which contains the basic table features: Title, New-, Edit- and Delete-button
-    - The middle of the view is a ContentControl, that shows different views based on the different ViewModels
-- Model
-  - TableModel\<Entity> (derived from ListModel\<Entity>)
-    - This is the base class of every TableViewModel class, and it implements everything that connects the viewmodel with the TableView, except 4 abstract function, that has to be implemented in the derived classes:
-      - NewItem()
-      - EditItem()
-      - DeleteItem()
-      - RefreshList()
+- View: TableView
+  - Every table uses the same view, which contains the basic table features: Title, New-, Edit- and Delete-button
+  - The middle of the view is a ContentControl, that shows different views based on the different ViewModels
+- Model: TableModel\<Entity> (derived from ListModel\<Entity>)
+  - This is the base class of every TableViewModel class, and it implements everything that connects the viewmodel with the TableView, except 4 abstract function, that has to be implemented in the derived classes:
+    - NewItem()
+    - EditItem()
+    - DeleteItem()
+    - RefreshList()
 - Partners table
-  - ViewModel
-    - PartnersViewModel (derived from TableModel\<PartnerEntity>)
-  - View
-    - PartnersTableView (in the ContontControl of TableView)
+  - ViewModel: PartnersViewModel (derived from TableModel\<PartnerEntity>)
+  - View: PartnersTableView (in the ContontControl of TableView)
 - Product Categories table
-  - ViewModel
-    - ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
-  - View
-    - ProductCategoriesTableView (in the ContontControl of TableView)
+  - ViewModel: ProductCategoriesViewModel (derived from TableModel\<ProductCategoryEntity>)
+  - View: ProductCategoriesTableView (in the ContontControl of TableView)
 - Products table
-  - ViewModel
-    - ProductsViewModel (derived from TableModel\<ProductListEntity>)
-  - View
-    - ProductsTableView (in the ContontControl of TableView)
+  - ViewModel: ProductsViewModel (derived from TableModel\<ProductListEntity>)
+  - View: ProductsTableView (in the ContontControl of TableView)
 - Transactions table
-  - ViewModel
-    - TransactionsViewModel (derived from TableModel\<TransactionHeadListEntity>)
-  - View
-    - TransactionsTableView (in the ContontControl of TableView)
+  - ViewModel: TransactionsViewModel (derived from TableModel\<TransactionHeadListEntity>)
+  - View: TransactionsTableView (in the ContontControl of TableView)
+- Users table
+  - ViewModel: UsersViewModel (derived from TableModel\<UserEntity>)
+  - View: UsersTableView  (in the ContontControl of TableView)
 
 
 ##### Edit records
