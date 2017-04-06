@@ -22,10 +22,10 @@ The program connects to a database file with ".mdf" extension using MS SQL Local
 When the application starts first time, a small window pops up and you have to create a new database file, or connect to an existing one. You can't use the program without database connection. The program automatically stores the path of the database folder and the name of the database file in the DatabaseSettings.txt file in the application folder. You can change the database connection settings under the Settings => Database menu.
 
 ### Login
-The program stores usernames and encrypted passwords in the "Users" table, and the passwords are encrypted with salted SHA-256 hashing. If the "Users" table is empty at the start of the program, a small window pops up, and you have to add the first user to the database. If there is at least one user in the "Users" table, you can enter the username and the password in the login window. You can Add/Modify/Remove users under the Settings => Users menu.
+The program stores usernames and passwords in the "Users" table, and the passwords are encrypted with salted SHA-256 hashing. If the "Users" table is empty at the start of the program, a small window pops up, and you have to add the first user to the database. If there is at least one user in the "Users" table, you can enter the username and the password in the login window. You can Add/Modify/Remove users under the Settings => Users menu.
 
 ### Notifications
-Program sends messages to the user via Notifications in the top right corner of the screen.
+The program sends messages to the user via Notifications in the top right corner of the screen.
 The notifications are based on this [GitHub project](https://github.com/IvanLeonenko/WPFGrowlNotification)
 
 ### Tables
