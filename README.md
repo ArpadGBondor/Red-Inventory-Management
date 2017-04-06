@@ -40,9 +40,10 @@ You can Add/Edit/Delete:
 If you Add/Edit a record a smaller window pops up in the center of the screen. You can change the details of the record in the window, and you can save or cancel the changes with the two button at the bottom of the window.
 
 ### Lists
-You can list:
-- Product's stock quantities
-- Partner's money transactions
+#### Inventory list
+- This list shows every product's stock quantities. If you select a product, and press the "Quantity details" button above the list, a new window pops up, that lists every transaction, that affected the product's stock quantity.
+#### Partner transactions
+- This list shows every partner's total money transactions. If you select a partner, and press the "partner transactions" button above the list, a new window pops up, that lists every money transaction with that partner.
 
 ## Program structure
 ### Entity Layer
@@ -94,7 +95,7 @@ The classes in the Business Layer are providing services used by the UI Layer an
 ### UI Layer
 The UI Layer was made by using MVVM pattern.
 
-#### Setup database connection
+#### Setup database connection UI
 - ViewModel: SetupConnectionViewModel
 - View:
   - SetupConnectionWindow (Called from MainWindowViewModel constructor)
