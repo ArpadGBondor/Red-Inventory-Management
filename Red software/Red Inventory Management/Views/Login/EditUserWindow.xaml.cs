@@ -16,11 +16,11 @@ using Red_Inventory_Management.ViewModel;
 namespace Red_Inventory_Management.Views
 {
     /// <summary>
-    /// Interaction logic for EditUserView.xaml
+    /// Interaction logic for EditUserWindow.xaml
     /// </summary>
-    public partial class EditUserView : Window
+    public partial class EditUserWindow : Window
     {
-        public EditUserView()
+        public EditUserWindow()
         {
             InitializeComponent();
         }

@@ -183,8 +183,8 @@
     <Compile Include="Views\Lists\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login\EditUserView.xaml.cs">
-      <DependentUpon>EditUserView.xaml</DependentUpon>
+    <Compile Include="Views\Login\EditUserWindow.xaml.cs">
+      <DependentUpon>EditUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tables\Edit\EditItemWindow.xaml.cs">
       <DependentUpon>EditItemWindow.xaml</DependentUpon>
@@ -280,7 +280,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login\EditUserView.xaml">
+    <Page Include="Views\Login\EditUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

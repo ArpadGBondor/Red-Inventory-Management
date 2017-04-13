@@ -26,7 +26,7 @@ namespace Red_Inventory_Management.ViewModel
         {
             string UserID = SelectedItem.Username;
             EditUserViewModel EUVM = new EditUserViewModel(UserID);
-            EditUserView EUV = new EditUserView() { DataContext = EUVM };
+            EditUserWindow EUV = new EditUserWindow() { DataContext = EUVM };
             EUVM.EditWindow = EUV;
             EUV.ShowDialog();
             RefreshList(parameter);
