@@ -10,103 +10,124 @@ using BusinessLayer;
 using Red_Inventory_Management.Views;
 using Red_Inventory_Management.Notifications;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 namespace Red_Inventory_Management.ViewModel
 {
     public class MainWindowViewModel : BindableBase
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         #region Constructors
-        public MainWindowViewModel(Window _mainwindow)
+        public MainWindowViewModel(Window mainwindow)
         {
-            mainWindow = _mainwindow;
-            // Set database connection
-            if (!DatabaseConnection.TestConnection())
+            log.Debug(">>> Program started. <<<");
+
+            MainWindow = mainwindow;
+
+            try
             {
-                SetupConnectionWindow SCW = new SetupConnectionWindow();
-                SCW.ShowDialog();
+                // Set database connection.
                 if (!DatabaseConnection.TestConnection())
                 {
-                    CloseWindow();
-                    return;
+                    log.Debug("Can't connect to database. => Opening connection setup window.");
+                    SetupConnectionWindow SCW = new SetupConnectionWindow();
+                    SCW.ShowDialog();
+                    if (!DatabaseConnection.TestConnection())
+                    {
+                        log.Debug("Database connection wasn't set.");
+                        CloseWindow();
+                        return;
+                    }
                 }
-            }
 
-            // New user
-            if (UserLogin.IsEmptyUserDatabase())
-            {
-                NotificationProvider.Info("Welcome First User!", "Please, set a username and a password.");
-                NewUserWindow NUW = new NewUserWindow();
-                NUW.ShowDialog();
+                // New user.
                 if (UserLogin.IsEmptyUserDatabase())
                 {
+                    log.Debug("User datatable is empty. => Opening new user window.");
+                    NotificationProvider.Info("Welcome First User!", "Please, set a username and a password.");
+                    NewUserWindow NUW = new NewUserWindow();
+                    NUW.ShowDialog();
+                    if (UserLogin.IsEmptyUserDatabase())
+                    {
+                        log.Debug("User wasn't added.");
+                        CloseWindow();
+                        return;
+                    }
+                }
+
+                // Login.
+                log.Debug("Opening login window.");
+                LoginWindow LW = new LoginWindow();
+                LW.ShowDialog();
+                if (UserLogin.LoginedUser == "")
+                {
+                    log.Debug("Not logged in.");
                     CloseWindow();
                     return;
                 }
             }
-
-            // Login
-            LoginWindow LW = new LoginWindow();
-            LW.ShowDialog();
-            if (UserLogin.LoginedUser == "") // Not logged in
+            catch (Exception ex)
             {
-                CloseWindow();
-                return;
+                log.Fatal("Program initialization error.", ex);
+                throw ex;
             }
         }
         #endregion
         #region Menus and Views
-        private string[] mainMenu = new string[] { "Tables", "Transactions", "Lists", "Settings" };
-        private string[] tablesMenu = new string[] { "Products", "Product categories", "Partners" };
-        private ProductsViewModel products = new ProductsViewModel();
-        private ProductCategoriesViewModel productCategories = new ProductCategoriesViewModel();
-        private PartnersViewModel partners = new PartnersViewModel();
-        private string[] transactionsMenu = new string[] { "Incoming", "Outgoing" };
-        private TransactionsViewModel incomingTransactions = new TransactionsViewModel(true);
-        private TransactionsViewModel outgoingTransactions = new TransactionsViewModel(false);
-        private string[] listsMenu = new string[] { "Inventory", "Partner transactions" };
-        private InventoryViewModel inventory = new InventoryViewModel();
-        private PartnerTransactionsViewModel partnerTransactions = new PartnerTransactionsViewModel();
-        private string[] settingsMenu = new string[] { "Users", "Database" };
-        private UsersViewModel users = new UsersViewModel();
-        private SetupConnectionViewModel setupConnection = new SetupConnectionViewModel();
+        private string[] _mainMenu = new string[] { "Tables", "Transactions", "Lists", "Settings" };
+        private string[] _tablesMenu = new string[] { "Products", "Product categories", "Partners" };
+        private ProductsViewModel _products = new ProductsViewModel();
+        private ProductCategoriesViewModel _productCategories = new ProductCategoriesViewModel();
+        private PartnersViewModel _partners = new PartnersViewModel();
+        private string[] _transactionsMenu = new string[] { "Incoming", "Outgoing" };
+        private TransactionsViewModel _incomingTransactions = new TransactionsViewModel(true);
+        private TransactionsViewModel _outgoingTransactions = new TransactionsViewModel(false);
+        private string[] _listsMenu = new string[] { "Inventory", "Partner transactions" };
+        private InventoryViewModel _inventory = new InventoryViewModel();
+        private PartnerTransactionsViewModel _partnerTransactions = new PartnerTransactionsViewModel();
+        private string[] _settingsMenu = new string[] { "Users", "Database" };
+        private UsersViewModel _users = new UsersViewModel();
+        private SetupConnectionViewModel _setupConnection = new SetupConnectionViewModel();
         #endregion
         #region Change Menu
-        public string[] MainMenu { get { return mainMenu; } }
+        public string[] MainMenu { get { return _mainMenu; } }
 
-        private string[] currentMenu;
+        private string[] _currentMenu;
         public string[] CurrentMenu
         {
-            get { return currentMenu; }
-            set { SetProperty(ref currentMenu, value); }
+            get { return _currentMenu; }
+            set { SetProperty(ref _currentMenu, value); }
         }
 
-        private ICommand switchMenuCommand;
+        private ICommand _switchMenuCommand;
         public ICommand SwitchMenuCommand
         {
             get
             {
-                if (switchMenuCommand == null) switchMenuCommand = new RelayCommand(new Action<object>(SwitchMenu));
-                return switchMenuCommand;
+                if (_switchMenuCommand == null) _switchMenuCommand = new RelayCommand(new Action<object>(SwitchMenu));
+                return _switchMenuCommand;
             }
-            set { SetProperty(ref switchMenuCommand, value); }
+            set { SetProperty(ref _switchMenuCommand, value); }
         }
 
         private void SwitchMenu(object parameter)
         {
             string destination = (string)parameter;
-            //NotificationProvider.Info("Switch menu", destination);
+            log.Debug(string.Format("Switch menu to: {0}", destination));
             switch (destination)
             {
                 case "Tables":
-                    CurrentMenu = tablesMenu;
+                    CurrentMenu = _tablesMenu;
                     break;
                 case "Transactions":
-                    CurrentMenu = transactionsMenu;
+                    CurrentMenu = _transactionsMenu;
                     break;
                 case "Lists":
-                    CurrentMenu = listsMenu;
+                    CurrentMenu = _listsMenu;
                     break;
                 case "Settings":
-                    CurrentMenu = settingsMenu;
+                    CurrentMenu = _settingsMenu;
                     break;
                 default:
                     CurrentMenu = null;
@@ -116,66 +137,65 @@ namespace Red_Inventory_Management.ViewModel
         }
         #endregion
         #region Change View
-        private BindableBase currentViewModel;
+        private BindableBase _currentViewModel;
         public BindableBase CurrentViewModel
         {
             get
             {
-                //if (currentViewModel == null) currentViewModel = new TablesMenuViewModel();
-                return currentViewModel;
+                return _currentViewModel;
             }
-            set { SetProperty(ref currentViewModel, value); }
+            set { SetProperty(ref _currentViewModel, value); }
         }
-        private ICommand switchViewCommand;
+        private ICommand _switchViewCommand;
         public ICommand SwitchViewCommand
         {
             get
             {
-                if (switchViewCommand == null) switchViewCommand = new RelayCommand(new Action<object>(Navigate));
-                return switchViewCommand;
+                if (_switchViewCommand == null) _switchViewCommand = new RelayCommand(new Action<object>(Navigate));
+                return _switchViewCommand;
             }
-            set { SetProperty(ref switchViewCommand, value); }
+            set { SetProperty(ref _switchViewCommand, value); }
         }
         private void Navigate(object parameter)
         {
             string destination = (string)parameter;
-            //NotificationProvider.Info("Navigate", destination);
+            log.Debug(string.Format("Navigate to: {0}", destination));
             switch (destination)
             {
                 case "Products":
-                    CurrentViewModel = products;
-                    ((RelayCommand)products.RefreshListCommand).CheckAndExecute(products);
+                    CurrentViewModel = _products;
+                    ((RelayCommand)_products.RefreshListCommand).CheckAndExecute(_products);
                     break;
                 case "Product categories":
-                    CurrentViewModel = productCategories;
-                    ((RelayCommand)productCategories.RefreshListCommand).CheckAndExecute(productCategories);
+                    CurrentViewModel = _productCategories;
+                    ((RelayCommand)_productCategories.RefreshListCommand).CheckAndExecute(_productCategories);
                     break;
                 case "Partners":
-                    CurrentViewModel = partners;
-                    ((RelayCommand)partners.RefreshListCommand).CheckAndExecute(partners);
+                    CurrentViewModel = _partners;
+                    ((RelayCommand)_partners.RefreshListCommand).CheckAndExecute(_partners);
                     break;
                 case "Users":
-                    CurrentViewModel = users;
-                    ((RelayCommand)users.RefreshListCommand).CheckAndExecute(users);
+                    CurrentViewModel = _users;
+                    ((RelayCommand)_users.RefreshListCommand).CheckAndExecute(_users);
                     break;
                 case "Incoming":
-                    CurrentViewModel = incomingTransactions;
-                    ((RelayCommand)incomingTransactions.RefreshListCommand).CheckAndExecute(incomingTransactions);
+                    CurrentViewModel = _incomingTransactions;
+                    ((RelayCommand)_incomingTransactions.RefreshListCommand).CheckAndExecute(_incomingTransactions);
                     break;
                 case "Outgoing":
-                    CurrentViewModel = outgoingTransactions;
-                    ((RelayCommand)outgoingTransactions.RefreshListCommand).CheckAndExecute(outgoingTransactions);
+                    CurrentViewModel = _outgoingTransactions;
+                    ((RelayCommand)_outgoingTransactions.RefreshListCommand).CheckAndExecute(_outgoingTransactions);
                     break;
                 case "Inventory":
-                    CurrentViewModel = inventory;
-                    ((RelayCommand)inventory.RefreshListCommand).CheckAndExecute(inventory);
+                    CurrentViewModel = _inventory;
+                    ((RelayCommand)_inventory.RefreshListCommand).CheckAndExecute(_inventory);
                     break;
                 case "Partner transactions":
-                    CurrentViewModel = partnerTransactions;
-                    ((RelayCommand)partnerTransactions.RefreshListCommand).CheckAndExecute(partnerTransactions);
+                    CurrentViewModel = _partnerTransactions;
+                    ((RelayCommand)_partnerTransactions.RefreshListCommand).CheckAndExecute(_partnerTransactions);
                     break;
                 case "Database":
-                    CurrentViewModel = setupConnection;
+                    CurrentViewModel = _setupConnection;
                     break;
                 default:
                     CurrentViewModel = null;
@@ -184,24 +204,25 @@ namespace Red_Inventory_Management.ViewModel
         }
         #endregion
         #region Close Main window
-        private Window mainWindow;
+        private Window _mainWindow;
         public Window MainWindow
         {
-            get { return mainWindow; }
-            set { SetProperty(ref mainWindow, value); }
+            get { return _mainWindow; }
+            set { SetProperty(ref _mainWindow, value); }
         }
-        private ICommand closeMainWindowCommand;
+        private ICommand _closeMainWindowCommand;
         public ICommand CloseMainWindowCommand
         {
             get
             {
-                if (closeMainWindowCommand == null) closeMainWindowCommand = new RelayCommand(CloseWindow);
-                return closeMainWindowCommand;
+                if (_closeMainWindowCommand == null) _closeMainWindowCommand = new RelayCommand(CloseWindow);
+                return _closeMainWindowCommand;
             }
-            set { SetProperty(ref closeMainWindowCommand, value); }
+            set { SetProperty(ref _closeMainWindowCommand, value); }
         }
         private void CloseWindow(object parameter = null)
         {
+            log.Debug("Close main window.");
             MainWindow?.Close();
         }
         #endregion

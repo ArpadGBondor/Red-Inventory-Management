@@ -15,66 +15,68 @@ namespace Red_Inventory_Management.ViewModel
 {
     class EditUserViewModel : BindableBase
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private EditUserViewModel() { }
-        public EditUserViewModel(string _OldUserID) { oldUserID = _OldUserID; }
+        public EditUserViewModel(string oldUserID) { this._oldUserID = oldUserID; }
 
-        private Window editWindow;
+        private Window _editWindow;
         public Window EditWindow
         {
-            get { return editWindow; }
-            set { SetProperty(ref editWindow, value); }
+            get { return _editWindow; }
+            set { SetProperty(ref _editWindow, value); }
         }
 
-        private string oldUserID;
-        private string newUserID;
-        private string password;
-        private string confirm;
+        private string _oldUserID;
+        private string _newUserID;
+        private string _password;
+        private string _confirm;
         public string UserID
         {
             get
             {
-                if (newUserID == null) newUserID = oldUserID;
-                return newUserID;
+                if (_newUserID == null) _newUserID = _oldUserID;
+                return _newUserID;
             }
-            set { SetProperty(ref newUserID, value); }
+            set { SetProperty(ref _newUserID, value); }
         }
         public string Password
         {
             get
             {
-                if (password == null) password = "";
-                return password;
+                if (_password == null) _password = "";
+                return _password;
             }
-            set { SetProperty(ref password, value); }
+            set { SetProperty(ref _password, value); }
         }
         public string Confirm
         {
             get
             {
-                if (confirm == null) confirm = "";
-                return confirm;
+                if (_confirm == null) _confirm = "";
+                return _confirm;
             }
-            set { SetProperty(ref confirm, value); }
+            set { SetProperty(ref _confirm, value); }
         }
 
-        private ICommand modifyUserCommand;
-
+        private ICommand _modifyUserCommand;
         public ICommand ModifyUserCommand
         {
             get
             {
-                if (modifyUserCommand == null) modifyUserCommand = new RelayCommand(new Action<object>(ModifyUser));
-                return modifyUserCommand;
+                if (_modifyUserCommand == null) _modifyUserCommand = new RelayCommand(new Action<object>(ModifyUser));
+                return _modifyUserCommand;
             }
-            set { SetProperty(ref modifyUserCommand, value); }
+            set { SetProperty(ref _modifyUserCommand, value); }
         }
         private void ModifyUser(object parameter)
         {
+            log.Debug("Modify user button");
+
             PasswordBox pwBox = (PasswordBox)parameter;
             string OldPassword = pwBox.Password;
 
-            if (string.IsNullOrWhiteSpace(oldUserID) ||
+            if (string.IsNullOrWhiteSpace(_oldUserID) ||
                 string.IsNullOrWhiteSpace(OldPassword) ||
                 string.IsNullOrWhiteSpace(UserID) ||
                 string.IsNullOrWhiteSpace(Password) ||
@@ -86,9 +88,9 @@ namespace Red_Inventory_Management.ViewModel
             {
                 try
                 {
-                    if (UserLogin.ModifyUser(oldUserID, OldPassword, UserID, Password, Confirm))
+                    if (UserLogin.ModifyUser(_oldUserID, OldPassword, UserID, Password, Confirm))
                     {
-                        NotificationProvider.Info(String.Format("User modified: {0}", oldUserID), String.Format("New username: {0}", UserID));
+                        NotificationProvider.Info(String.Format("User modified: {0}", _oldUserID), String.Format("New username: {0}", UserID));
                         EditWindow?.Close();
                     }
                     else

@@ -10,13 +10,13 @@ namespace BusinessLayer
 {
     public class UserLogin
     {
-        private static string loginedUser;
+        private static string _loginedUser;
         public static string LoginedUser
         {
             get
             {
-                if (loginedUser == null) loginedUser = "";
-                return loginedUser;
+                if (_loginedUser == null) _loginedUser = "";
+                return _loginedUser;
             }
         } 
         public static bool IsEmptyUserDatabase()
@@ -57,14 +57,11 @@ namespace BusinessLayer
             {
                 throw new System.ArgumentException("Wrong password.", "password");
             }
-            loginedUser = userID;
+            _loginedUser = userID;
         }
         public static List<UserEntity> ListUsers()
         {
-            var list = UsersProvider.ListUsers();
-            foreach (var u in list)
-                u.Password = "******";
-            return list;
+            return UsersProvider.ListUsers();
         }
 
         public static bool ModifyUser(string oldUserID, string oldPassword, string newUserId, string password, string confirm)
@@ -91,7 +88,7 @@ namespace BusinessLayer
             }
             else if (UsersProvider.Modify(oldUserID, newUserId, password))
             {
-                if (loginedUser == oldUserID) loginedUser = newUserId;
+                if (_loginedUser == oldUserID) _loginedUser = newUserId;
                 return true;
             }
             else

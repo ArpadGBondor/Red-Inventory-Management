@@ -10,49 +10,48 @@ namespace Red_Inventory_Management.Model
 {
     public abstract class EditItemModel<Entity> : BindableBase
     {
-
         private EditItemModel() { }
-        protected EditItemModel(Entity _Item, bool _NewRecord, string _ItemName/* = "record"*/) { Item = _Item; NewRecord = _NewRecord; ItemName = _ItemName; }
+        protected EditItemModel(Entity item, bool newRecord, string itemName) { Item = item; NewRecord = newRecord; ItemName = itemName; }
 
-        private string itemName;
+        private string _itemName;
         public string ItemName
         {
-            get { return itemName; }
-            set { SetProperty(ref itemName, value); }
+            get { return _itemName; }
+            set { SetProperty(ref _itemName, value); }
         }
 
         public string TitleText { get { return (NewRecord ? "New " : "Edit ") + ItemName; } }
         public string OkButtonText { get { return (NewRecord ? "Add " : "Save ") + ItemName; } }
 
-        private Entity item;
+        private Entity _item;
         public Entity Item
         {
-            get { return item; }
-            set { SetProperty(ref item, value); }
+            get { return _item; }
+            set { SetProperty(ref _item, value); }
         }
-        private bool newRecord;
+        private bool _newRecord;
         public bool NewRecord
         {
-            get { return newRecord; }
-            set { SetProperty(ref newRecord, value); }
+            get { return _newRecord; }
+            set { SetProperty(ref _newRecord, value); }
         }
 
-        private bool saveEdit = false;
+        private bool _saveEdit = false;
         public bool SaveEdit
         {
-            get { return saveEdit; }
-            set { SetProperty(ref saveEdit, value); }
+            get { return _saveEdit; }
+            set { SetProperty(ref _saveEdit, value); }
         }
 
-        private ICommand saveCommand;
+        private ICommand _saveCommand;
         public ICommand SaveCommand
         {
             get
             {
-                if (saveCommand == null) saveCommand = new RelayCommand(new Action<object>(Validate), new Predicate<object>(SaveCanExecute));
-                return saveCommand;
+                if (_saveCommand == null) _saveCommand = new RelayCommand(new Action<object>(Validate), new Predicate<object>(SaveCanExecute));
+                return _saveCommand;
             }
-            set { SetProperty(ref saveCommand, value); }
+            set { SetProperty(ref _saveCommand, value); }
         }
         private void Validate(object parameter)
         {
@@ -65,17 +64,20 @@ namespace Red_Inventory_Management.Model
         }
         protected virtual bool SaveCanExecute(object parameter) { return true; }
 
-        private ICommand closeCommand;
+        private ICommand _closeCommand;
         public ICommand CloseCommand
         {
             get
             {
-                if (closeCommand == null) closeCommand = new RelayCommand(new Action<object>(Close), new Predicate<object>(CloseCanExecute));
-                return closeCommand;
+                if (_closeCommand == null) _closeCommand = new RelayCommand(new Action<object>(Close), new Predicate<object>(CloseCanExecute));
+                return _closeCommand;
             }
-            set { SetProperty(ref closeCommand, value); }
+            set { SetProperty(ref _closeCommand, value); }
         }
-        private void Close(object parameter) { ((Window)parameter).Close(); }
+        private void Close(object parameter)
+        {
+            ((Window)parameter).Close();
+        }
         protected virtual bool CloseCanExecute(object parameter) { return true; }
 
         protected abstract bool Save(object parameter);

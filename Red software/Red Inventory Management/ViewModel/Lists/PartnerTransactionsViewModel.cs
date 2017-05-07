@@ -13,34 +13,38 @@ namespace Red_Inventory_Management.ViewModel
 {
     public class PartnerTransactionsViewModel : ListModel<TransactionHeadListEntity>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public PartnerTransactionsViewModel()
         {
             TableName = "Partner transaction summary";
         }
 
-        private decimal totalTransactions;
+        private decimal _totalTransactions;
         public decimal TotalTransactions
         {
-            get { return totalTransactions; }
-            set { SetProperty(ref totalTransactions, value); }
+            get { return _totalTransactions; }
+            set { SetProperty(ref _totalTransactions, value); }
         }
         protected override void RefreshList(object parameter)
         {
+            log.Debug("Refresh list: " + TableName);
+
             List = ManageTransactions.ListPartnerTransactions();
             TotalTransactions = 0;
             foreach (var record in List)
                 TotalTransactions += record.ListVariable;
         }
 
-        private ICommand detailsCommand;
+        private ICommand _detailsCommand;
         public ICommand DetailsCommand
         {
             get
             {
-                if (detailsCommand == null) detailsCommand = new RelayCommand(new Action<object>(Details), new Predicate<object>(DetailsCanExecute));
-                return detailsCommand;
+                if (_detailsCommand == null) _detailsCommand = new RelayCommand(new Action<object>(Details), new Predicate<object>(DetailsCanExecute));
+                return _detailsCommand;
             }
-            set { SetProperty(ref detailsCommand, value); }
+            set { SetProperty(ref _detailsCommand, value); }
         }
 
         private bool DetailsCanExecute(object parameter)
@@ -50,6 +54,8 @@ namespace Red_Inventory_Management.ViewModel
 
         private void Details(object parameter)
         {
+            log.Debug(TableName + " - details button");
+
             PartnerTransactionsDetailsViewModel PTDVM = new PartnerTransactionsDetailsViewModel(SelectedItem.Partner.Id);
             ListDetailsWindow LDW = new ListDetailsWindow() { DataContext = PTDVM };
             LDW.ShowDialog();

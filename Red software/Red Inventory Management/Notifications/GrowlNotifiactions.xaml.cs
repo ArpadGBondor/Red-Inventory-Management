@@ -7,10 +7,10 @@ namespace Red_Inventory_Management.Notifications
 {
     public partial class GrowlNotifiactions
     {
-        private const byte MAX_NOTIFICATIONS = 6;
-        private int count;
+        private const byte _MAX_NOTIFICATIONS = 6;
+        private int _count;
         public NotificationCollection Notifications = new NotificationCollection();
-        private readonly NotificationCollection buffer = new NotificationCollection();
+        private readonly NotificationCollection _buffer = new NotificationCollection();
 
         public GrowlNotifiactions()
         {
@@ -20,9 +20,9 @@ namespace Red_Inventory_Management.Notifications
 
         public void AddNotification(Notification notification)
         {
-            notification.Id = count++;
-            if (Notifications.Count + 1 > MAX_NOTIFICATIONS)
-                buffer.Add(notification);
+            notification.Id = _count++;
+            if (Notifications.Count + 1 > _MAX_NOTIFICATIONS)
+                _buffer.Add(notification);
             else
                 Notifications.Add(notification);
             
@@ -36,10 +36,10 @@ namespace Red_Inventory_Management.Notifications
             if (Notifications.Contains(notification))
                 Notifications.Remove(notification);
             
-            if (buffer.Count > 0)
+            if (_buffer.Count > 0)
             {
-                Notifications.Add(buffer[0]);
-                buffer.RemoveAt(0);
+                Notifications.Add(_buffer[0]);
+                _buffer.RemoveAt(0);
             }
             
             //Close window if there's nothing to show

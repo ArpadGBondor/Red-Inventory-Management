@@ -9,37 +9,37 @@ namespace Red_Inventory_Management.Model
 {
     public abstract class TableModel<Entity> : ListModel<Entity>
     {
-        private ICommand editItemCommand;
+        private ICommand _editItemCommand;
         public ICommand EditItemCommand
         {
             get
             {
-                if (editItemCommand == null) editItemCommand = new RelayCommand(new Action<object>(EditItem), new Predicate<object>(EditItemCanExecute));
-                return editItemCommand;
+                if (_editItemCommand == null) _editItemCommand = new RelayCommand(new Action<object>(EditItem), new Predicate<object>(EditItemCanExecute));
+                return _editItemCommand;
             }
-            set { SetProperty(ref editItemCommand, value); }
+            set { SetProperty(ref _editItemCommand, value); }
         }
 
-        private ICommand newItemCommand;
+        private ICommand _newItemCommand;
         public ICommand NewItemCommand
         {
             get
             {
-                if (newItemCommand == null) newItemCommand = new RelayCommand(new Action<object>(NewItem), new Predicate<object>(NewItemCanExecute));
-                return newItemCommand;
+                if (_newItemCommand == null) _newItemCommand = new RelayCommand(new Action<object>(NewItem), new Predicate<object>(NewItemCanExecute));
+                return _newItemCommand;
             }
-            set { SetProperty(ref newItemCommand, value); }
+            set { SetProperty(ref _newItemCommand, value); }
         }
 
-        private ICommand deleteItemCommand;
+        private ICommand _deleteItemCommand;
         public ICommand DeleteItemCommand
         {
             get
             {
-                if (deleteItemCommand == null) deleteItemCommand = new RelayCommand(new Action<object>(DeleteItem), new Predicate<object>(DeleteItemCanExecute));
-                return deleteItemCommand;
+                if (_deleteItemCommand == null) _deleteItemCommand = new RelayCommand(new Action<object>(DeleteItem), new Predicate<object>(DeleteItemCanExecute));
+                return _deleteItemCommand;
             }
-            set { SetProperty(ref deleteItemCommand, value); }
+            set { SetProperty(ref _deleteItemCommand, value); }
         }
 
         protected abstract void NewItem(object parameter);

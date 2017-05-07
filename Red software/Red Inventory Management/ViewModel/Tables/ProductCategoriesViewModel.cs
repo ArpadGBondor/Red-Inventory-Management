@@ -13,6 +13,8 @@ namespace Red_Inventory_Management.ViewModel
 {
     public class ProductCategoriesViewModel : TableModel<ProductCategoryEntity>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public ProductCategoriesViewModel()
         {
             ItemName = "category";
@@ -21,6 +23,8 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void DeleteItem(object parameter)
         {
+            log.Debug("Delete " + ItemName + " button");
+
             string name = SelectedItem.Category;
             if (ManageProducts.DeleteProductCategory(SelectedItem))
             {
@@ -35,8 +39,10 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void EditItem(object parameter)
         {
+            log.Debug("Edit " + ItemName + " button");
+
             ProductCategoryEntity Item = new ProductCategoryEntity();
-            EntityCloner.CloneProperties<ProductCategoryEntity>(Item, SelectedItem);
+            EntityCloner.CloneProperties<ProductCategoryEntity>(SelectedItem, Item);
             EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, false, ItemName);
             EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
             EIV.ShowDialog();
@@ -53,6 +59,8 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void NewItem(object parameter)
         {
+            log.Debug("New " + ItemName + " button");
+
             ProductCategoryEntity Item = new ProductCategoryEntity();
             EditProductCategoryViewModel EPVM = new EditProductCategoryViewModel(Item, true, ItemName);
             EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
@@ -70,6 +78,8 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void RefreshList(object parameter)
         {
+            log.Debug("Refresh " + ItemName + " list");
+
             List = ManageProducts.ListProductCategories();
         }
     }

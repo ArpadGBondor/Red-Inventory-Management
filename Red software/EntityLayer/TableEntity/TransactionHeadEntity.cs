@@ -1,28 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EntityLayer
 {
-    [Table(Name = "TransactionHeader")]
+    [Table("TransactionHeader")]
     public class TransactionHeadEntity
     {
-        [Column(IsPrimaryKey = true, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
+        [Key]
         public int Id { get; set; }
 
-        [Column]
         public bool Incoming { get; set; }
 
-        [Column]
-        public int Partner_Id { get; set; }
+        public int PartnerId { get; set; }
 
-        [Column]
-        public string Date { get; set; }
+        [Column(TypeName = "DateTime2")]
+        public DateTime Date { get; set; }
 
-        [Column]
         public decimal TotalPrice { get; set; }
     }
 }

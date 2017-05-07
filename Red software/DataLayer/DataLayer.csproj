@@ -45,7 +45,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
@@ -56,15 +69,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database.cs" />
-    <Compile Include="Database.Designer.cs">
-      <DependentUpon>Database.cs</DependentUpon>
+    <Compile Include="DatabaseConnection.cs" />
+    <Compile Include="DatabaseConnection.Designer.cs">
+      <DependentUpon>DatabaseConnection.cs</DependentUpon>
     </Compile>
     <Compile Include="EncriptionProvider.cs" />
-    <Compile Include="MyDataContext.cs" />
+    <Compile Include="InventoryContext.cs" />
     <Compile Include="DataProvider\PartnerProvider.cs" />
     <Compile Include="DataProvider\ProductCategoryProvider.cs" />
     <Compile Include="DataProvider\ProductProvider.cs" />
+    <Compile Include="Migrations\201705071801045_InitialCreate.cs" />
+    <Compile Include="Migrations\201705071801045_InitialCreate.Designer.cs">
+      <DependentUpon>201705071801045_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataProvider\TransactionProvider.cs" />
     <Compile Include="DataProvider\UsersProvider.cs" />
@@ -86,6 +104,14 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705071801045_InitialCreate.resx">
+      <DependentUpon>201705071801045_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

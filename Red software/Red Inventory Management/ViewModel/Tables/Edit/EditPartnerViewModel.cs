@@ -7,20 +7,24 @@ namespace Red_Inventory_Management.ViewModel
 {
     public class EditPartnerViewModel : EditItemModel<PartnerEntity>
     {
-        public EditPartnerViewModel(PartnerEntity _Item, bool _NewRecord, string _ItemName) : base(_Item, _NewRecord, _ItemName) { }
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public EditPartnerViewModel(PartnerEntity item, bool newRecord, string itemName) : base(item, newRecord, itemName) { }
 
         protected override bool Save(object parameter)
         {
-            bool lSuccess = false;
+            log.Debug("Save " + ItemName);
+
+            bool result = false;
             if (NewRecord)
             {
-                lSuccess = ManagePartners.NewPartner(Item);
+                result = ManagePartners.NewPartner(Item);
             }
             else
             {
-                lSuccess = ManagePartners.ModifyPartner(Item);
+                result = ManagePartners.ModifyPartner(Item);
             }
-            return lSuccess;
+            return result;
         }
     }
 }

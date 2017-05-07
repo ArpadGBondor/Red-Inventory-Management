@@ -10,52 +10,56 @@ namespace Red_Inventory_Management.ViewModel
 {
     class NewUserViewModel : BindableBase
     {
-        private string userID;
-        private string password;
-        private string confirm;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private string _userID;
+        private string _password;
+        private string _confirm;
         public Window NewUserWindow { get; set; }
         public string UserID
         {
             get
             {
-                if (userID == null) userID = "";
-                return userID;
+                if (_userID == null) _userID = "";
+                return _userID;
             }
-            set { SetProperty(ref userID, value); }
+            set { SetProperty(ref _userID, value); }
         }
         public string Password
         {
             get
             {
-                if (password == null) password = "";
-                return password;
+                if (_password == null) _password = "";
+                return _password;
             }
-            set { SetProperty(ref password, value); }
+            set { SetProperty(ref _password, value); }
         }
         public string Confirm
         {
             get
             {
-                if (confirm == null) confirm = "";
-                return confirm;
+                if (_confirm == null) _confirm = "";
+                return _confirm;
             }
-            set { SetProperty(ref confirm, value); }
+            set { SetProperty(ref _confirm, value); }
         }
 
-        private ICommand click_AddUserCommand;
+        private ICommand _click_AddUserCommand;
 
         public ICommand Click_AddUserCommand
         {
             get
             {
-                if (click_AddUserCommand == null) click_AddUserCommand = new RelayCommand(new Action<object>(AddUser));
-                return click_AddUserCommand;
+                if (_click_AddUserCommand == null) _click_AddUserCommand = new RelayCommand(new Action<object>(AddUser));
+                return _click_AddUserCommand;
             }
-            set { SetProperty(ref click_AddUserCommand, value); }
+            set { SetProperty(ref _click_AddUserCommand, value); }
         }
         private void AddUser(object parameter)
         {
-            if(Password != Confirm)
+            log.Debug("Add user button");
+
+            if (Password != Confirm)
             {
                 NotificationProvider.Error("New user error", "Password does not match the confirm password.");
             }

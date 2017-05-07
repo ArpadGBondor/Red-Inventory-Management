@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,40 +9,32 @@ using System.Threading.Tasks;
 namespace EntityLayer
 {
 
-    [Table(Name = "Partners")]
+    [Table("Partners")]
     public class PartnerEntity : IComparable<PartnerEntity>
     {
-        [Column(IsPrimaryKey = true, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
+        [Key]
         public int Id { get; set; }
 
-        [Column]
         public string Code { get; set; }
 
-        [Column]
         public string Name { get; set; }
 
-        [Column]
         public bool Customer { get; set; }
 
-        [Column]
         public bool Dealer { get; set; }
 
-        [Column]
         public string Address { get; set; }
 
-        [Column]
         public string AccountNumber { get; set; }
 
-        [Column]
         public string Phone { get; set; }
 
-        [Column]
         public string Email { get; set; }
 
         public int CompareTo(PartnerEntity other)
         {
-            var compare1 = (Name != null ? Name : "");
-            var compare2 = (other.Name != null ? other.Name : "");
+            var compare1 = Name ?? string.Empty;
+            var compare2 = other.Name ?? string.Empty;
             return compare1.CompareTo(compare2);
         }
     }

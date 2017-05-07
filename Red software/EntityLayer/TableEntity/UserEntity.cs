@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntityLayer
 {
-    [Table(Name = "Users")]
+    [Table("Users")]
     public class UserEntity
     {
         public UserEntity() { }
 
-        public UserEntity(string _user, string _pw)
-        { Username = _user; Password = _pw; }
+        public UserEntity(string user, string pw) { Username = user; Password = pw; }
 
-        [Column(IsPrimaryKey = true)]
+        [Key]
         public string Username { get; set; }
 
-        [Column]
         public string Password { get; set; }
     }
 }

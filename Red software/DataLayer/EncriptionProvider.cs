@@ -14,6 +14,15 @@ namespace DataLayer
             SHA256, SHA384, SHA512
         }
 
+        /// <summary>
+        /// Encripts a string with salted SHA hashing.
+        /// </summary>
+        /// <param name="plainText">The original string</param>
+        /// <param name="hash">The type of the hashing: SHA-256 / SHA-384 / SHA-512 </param>
+        /// <param name="salt">If this parameter is set to null, the function generates a random salt array.
+        ///                    If every password is encripted with a random salt array, it is harder to read 
+        ///                    out from the database which users use the same passwords.</param>
+        /// <returns></returns>
         public static string ComputeHash(string plainText, Supported_HA hash, byte[] salt)
         {
             if (plainText == null) plainText = "";
@@ -73,6 +82,14 @@ namespace DataLayer
             return Convert.ToBase64String(result);
         }
 
+        /// <summary>
+        /// Checks if a plainText is the same as the original text which was encripted to the hashValue.
+        /// </summary>
+        /// <param name="plainText">Original text.</param>
+        /// <param name="hashValue">Encripted text.</param>
+        /// <param name="hash"> The type of the hashing: SHA-256 / SHA-384 / SHA-512 
+        ///                     You have to select the same method that created the hashValue. </param>
+        /// <returns></returns>
         public static bool Confirm(string plainText, string hashValue, Supported_HA hash)
         {
             if (plainText == null) plainText = "";

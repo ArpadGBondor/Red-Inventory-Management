@@ -36,10 +36,10 @@
         <ComboBox  Grid.Column="1" Grid.Row="3" Text="{Binding Path=Item.Category, Mode=TwoWay}" ItemsSource="{Binding Path=CategoryList}" Margin="5" IsEditable="True" />
 
         <TextBlock Grid.Column="0" Grid.Row="4" Text="Cost price:" TextAlignment="Right" Margin="5"/>
-        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Path=Item.Cost_Price, Mode=TwoWay,StringFormat={}{0:F} }" Margin="5" />
+        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Path=Item.CostPrice, Mode=TwoWay,StringFormat={}{0:F} }" Margin="5" />
 
         <TextBlock Grid.Column="0" Grid.Row="5" Text="Sell price:" TextAlignment="Right" Margin="5"/>
-        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Path=Item.Sell_Price, Mode=TwoWay,StringFormat={}{0:F} }" Margin="5" />
+        <models:ClickSelectTextBox  Grid.Column="1" Grid.Row="5" Text="{Binding Path=Item.SellPrice, Mode=TwoWay,StringFormat={}{0:F} }" Margin="5" />
 
     </Grid>
 </UserControl>

@@ -10,10 +10,10 @@ namespace BusinessLayer
 {
     public class DatabaseConnection
     {
-        public static string Directory { get { return Database.Directory; } }
-        public static string DbName { get { return Database.DbName; } }
+        public static string Directory { get { return DataLayer.DatabaseConnection.Directory; } }
+        public static string DbName { get { return DataLayer.DatabaseConnection.DbName; } }
 
-        private static string BaseDir
+        private static string _baseDir
         {
             get
             {
@@ -23,12 +23,12 @@ namespace BusinessLayer
                 return baseDir;
             }
         }
-        private static string DbSettingFile { get { return BaseDir + "DatabaseSettings.txt"; } }
+        private static string _dbSettingFile { get { return _baseDir + "DatabaseSettings.txt"; } }
 
         private static void ReadDbSettings(ref string directory, ref string dbname)
         {
             //Open the stream and read it back.
-            using (StreamReader sr = new StreamReader(DbSettingFile))
+            using (StreamReader sr = new StreamReader(_dbSettingFile))
             {
                 string line = "";
                 if ((line = sr.ReadLine()) != null)
@@ -45,12 +45,12 @@ namespace BusinessLayer
         private static void WriteDbSettings(string directory, string dbname)
         {
             // Delete the file if it exists.
-            if (File.Exists(DbSettingFile))
+            if (File.Exists(_dbSettingFile))
             {
-                File.Delete(DbSettingFile);
+                File.Delete(_dbSettingFile);
             }
             //Create the file.
-            using (StreamWriter sw = new StreamWriter(DbSettingFile))
+            using (StreamWriter sw = new StreamWriter(_dbSettingFile))
             {
                 sw.WriteLine(directory);
                 sw.WriteLine(dbname);
@@ -61,17 +61,17 @@ namespace BusinessLayer
         {
             if (string.IsNullOrWhiteSpace(Directory) || string.IsNullOrWhiteSpace(DbName))
             {
-                string dirName = BaseDir;
+                string dirName = _baseDir;
                 string dbName = "Database";
-                if (File.Exists(DbSettingFile))
+                if (File.Exists(_dbSettingFile))
                     ReadDbSettings(ref dirName, ref dbName);
                 ChangeDatabase(dirName, dbName);
             }
-            return Database.Test();
+            return DataLayer.DatabaseConnection.Test();
         }
         public static bool ChangeDatabase(string directory, string database)
         {
-            if (Database.InitializeConnection(directory, database))
+            if (DataLayer.DatabaseConnection.InitializeConnection(directory, database))
             {
                 WriteDbSettings(directory, database);
                 return true;
@@ -81,7 +81,7 @@ namespace BusinessLayer
 
         public static bool CreateDatabase(string directory, string database)
         {
-            if (Database.CreateDatabase(directory, database))
+            if (DataLayer.DatabaseConnection.CreateDatabase(directory, database))
             {
                 WriteDbSettings(directory, database);
                 return true;

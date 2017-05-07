@@ -11,24 +11,28 @@ namespace Red_Inventory_Management.ViewModel
 {
     public class InventoryDetailsViewModel : ListModel<TransactionHeadListEntity>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private InventoryDetailsViewModel() { }
-        public InventoryDetailsViewModel(int _Product_Id)
+        public InventoryDetailsViewModel(int productId)
             :this()
         {
-            Product_Id = _Product_Id;
+            _productId = productId;
             RefreshList(null);
         }
-        private int Product_Id;
+        private int _productId;
 
-        private decimal totalQuantity;
+        private decimal _totalQuantity;
         public decimal TotalQuantity
         {
-            get { return totalQuantity; }
-            set { SetProperty(ref totalQuantity, value); }
+            get { return _totalQuantity; }
+            set { SetProperty(ref _totalQuantity, value); }
         }
         protected override void RefreshList(object parameter)
         {
-            List = ManageTransactions.ListInventoryDetails(Product_Id);
+            log.Debug("Refresh list: Inventory list details");
+
+            List = ManageTransactions.ListInventoryDetails(_productId);
             TotalQuantity = 0;
             foreach (var record in List)
                 TotalQuantity += record.ListVariable;

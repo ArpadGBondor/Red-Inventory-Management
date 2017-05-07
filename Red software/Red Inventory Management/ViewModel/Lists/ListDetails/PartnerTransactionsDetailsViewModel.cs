@@ -11,26 +11,30 @@ namespace Red_Inventory_Management.ViewModel
 {
     class PartnerTransactionsDetailsViewModel : ListModel<TransactionHeadListEntity>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private PartnerTransactionsDetailsViewModel() { }
-        public PartnerTransactionsDetailsViewModel(int _Partner_Id)
+        public PartnerTransactionsDetailsViewModel(int partnerId)
             :this()
         {
-            Partner_Id = _Partner_Id;
+            _partnerId = partnerId;
             RefreshList(null);
         }
 
-        private int Partner_Id;
+        private int _partnerId;
 
-        private decimal totalTransactions;
+        private decimal _totalTransactions;
         public decimal TotalTransactions
         {
-            get { return totalTransactions; }
-            set { SetProperty(ref totalTransactions, value); }
+            get { return _totalTransactions; }
+            set { SetProperty(ref _totalTransactions, value); }
         }
 
         protected override void RefreshList(object parameter)
         {
-            List = ManageTransactions.ListHead(Partner_Id);
+            log.Debug("Refresh list: Partner transaction summary details");
+
+            List = ManageTransactions.ListHead(_partnerId);
             TotalTransactions = 0;
             foreach (var record in List)
                 TotalTransactions += record.ListVariable;

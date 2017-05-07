@@ -28,7 +28,7 @@
             <ListView.View>
                 <models:AutoSizedGridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Head.Id}" />
-                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Head.Date}" />
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Head.Date,StringFormat='dd/MM/yyyy'}" />
                     <GridViewColumn Header="Partner name" DisplayMemberBinding="{Binding Path=Partner.Name}" />
                     <GridViewColumn Header="Partner code" DisplayMemberBinding="{Binding Path=Partner.Code}" />
                     <GridViewColumn Header="Transaction" Width="Auto">

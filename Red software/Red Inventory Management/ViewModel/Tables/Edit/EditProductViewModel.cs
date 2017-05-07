@@ -11,39 +11,43 @@ namespace Red_Inventory_Management.ViewModel
 {
     class EditProductViewModel : EditItemModel<ProductListEntity>
     {
-        public EditProductViewModel(ProductListEntity _Item, bool _NewRecord, string _ItemName) : base(_Item, _NewRecord, _ItemName) { }
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private List<string> categoryList;
+        public EditProductViewModel(ProductListEntity item, bool newRecord, string itemName) : base(item, newRecord, itemName) { }
+
+        private List<string> _categoryList;
         public List<string> CategoryList
         {
             get
             {
-                if (categoryList == null)
+                if (_categoryList == null)
                 {
-                    categoryList = new List<string>();
+                    _categoryList = new List<string>();
                     var EntityList = ManageProducts.ListProductCategories();
                     foreach (var e in EntityList)
                     {
-                        categoryList.Add(e.Category);
+                        _categoryList.Add(e.Category);
                     }
                 }
-                return categoryList;
+                return _categoryList;
             }
-            set { SetProperty(ref categoryList, value); }
+            set { SetProperty(ref _categoryList, value); }
         }
 
         protected override bool Save(object parameter)
         {
-            bool lSuccess = false;
+            log.Debug("Save " + ItemName);
+
+            bool result = false;
             if (NewRecord)
             {
-                lSuccess = ManageProducts.NewProduct(Item);
+                result = ManageProducts.NewProduct(Item);
             }
             else
             {
-                lSuccess = ManageProducts.ModifyProduct(Item);
+                result = ManageProducts.ModifyProduct(Item);
             }
-            return lSuccess;
+            return result;
         }
     }
 }

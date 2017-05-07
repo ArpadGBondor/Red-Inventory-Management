@@ -1,28 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EntityLayer
 {
-    [Table(Name = "TransactionBody")]
+    [Table("TransactionBody")]
     public class TransactionBodyEntity
     {
-        [Column(IsPrimaryKey = true, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
+        [Key]
         public int Id { get; set; }
 
-        [Column]
-        public int Transaction_Id { get; set; }
+        public int TransactionId { get; set; }
 
-        [Column]
         public decimal Quantity { get; set; }
 
-        [Column]
         public decimal Price { get; set; }
 
-        [Column]
-        public int Product_Id { get; set; }
+        public int ProductId { get; set; }
     }
 }

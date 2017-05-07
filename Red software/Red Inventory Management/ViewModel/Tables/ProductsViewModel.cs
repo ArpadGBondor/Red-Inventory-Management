@@ -15,6 +15,8 @@ namespace Red_Inventory_Management.ViewModel
 {
     public class ProductsViewModel : TableModel<ProductListEntity>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public ProductsViewModel()
         {
             ItemName = "product";
@@ -22,6 +24,8 @@ namespace Red_Inventory_Management.ViewModel
         }
         protected override void DeleteItem(object parameter)
         {
+            log.Debug("Delete " + ItemName + " button");
+
             string name = SelectedItem.Name;
             if (ManageProducts.DeleteProduct(SelectedItem))
             {
@@ -36,8 +40,10 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void EditItem(object parameter)
         {
+            log.Debug("Edit " + ItemName + " button");
+
             ProductListEntity Item = new ProductListEntity();
-            EntityCloner.CloneProperties<ProductListEntity>(Item, SelectedItem);
+            EntityCloner.CloneProperties<ProductListEntity>(SelectedItem, Item);
             EditProductViewModel EPVM = new EditProductViewModel(Item, false, ItemName);
             EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
             EIV.ShowDialog();
@@ -54,6 +60,8 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void NewItem(object parameter)
         {
+            log.Debug("New " + ItemName + " button");
+
             ProductListEntity Item = new ProductListEntity();
             EditProductViewModel EPVM = new EditProductViewModel(Item, true, ItemName);
             EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
@@ -71,6 +79,8 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void RefreshList(object parameter)
         {
+            log.Debug("Refresh " + ItemName + " list");
+
             List = ManageProducts.ListProducts();
         }
     }

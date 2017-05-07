@@ -10,16 +10,16 @@ namespace Red_Inventory_Management.Model
     public class BindableTransactionBodyListEntity : BindableBase
     {
         private BindableTransactionBodyListEntity() { }
-        public BindableTransactionBodyListEntity(TransactionBodyListEntity _Item)
+        public BindableTransactionBodyListEntity(TransactionBodyListEntity item)
         {
-            Item = _Item;
+            Item = item;
         }
 
-        private TransactionBodyListEntity item;
+        private TransactionBodyListEntity _item;
         public TransactionBodyListEntity Item
         {
-            get { return item; }
-            set { SetProperty(ref item, value); }
+            get { return _item; }
+            set { SetProperty(ref _item, value); }
         }
 
         public string ProductName { get { return Item.Product.Name; } }

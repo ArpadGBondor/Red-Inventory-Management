@@ -15,10 +15,12 @@ namespace Red_Inventory_Management.ViewModel
 {
     public class EditTransactionViewModel : EditItemModel<TransactionHeadListEntity>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         // Constructor
-        public EditTransactionViewModel(TransactionHeadListEntity _Item, bool _NewRecord, string _ItemName) : base(_Item, _NewRecord, _ItemName)
+        public EditTransactionViewModel(TransactionHeadListEntity item, bool newRecord, string itemName) : base(item, newRecord, itemName)
         {
-            TransactionDate = Item.Date;
+            TransactionDate = Item.Head.Date;
 
             this.TransactionBody.CollectionChanged += this.OnCollectionChanged;
             if (Item.Head.Id > 0)
@@ -42,100 +44,100 @@ namespace Red_Inventory_Management.ViewModel
             ProductCategories.AddRange(ManageProducts.ListProductCategories());
         }
         // Transaction date
-        private DateTime transactionDate;
+        private DateTime _transactionDate;
         public DateTime TransactionDate
         {
-            get { return transactionDate; }
-            set { SetProperty(ref transactionDate, value); }
+            get { return _transactionDate; }
+            set { SetProperty(ref _transactionDate, value); }
         }
 
         // Partners
-        private List<PartnerEntity> partners;
+        private List<PartnerEntity> _partners;
         public List<PartnerEntity> Partners
         {
-            get { return partners; }
-            set { SetProperty(ref partners, value); }
+            get { return _partners; }
+            set { SetProperty(ref _partners, value); }
         }
 
-        private PartnerEntity selectedPartner;
+        private PartnerEntity _selectedPartner;
         public PartnerEntity SelectedPartner
         {
-            get { return selectedPartner; }
-            set { SetProperty(ref selectedPartner, value); }
+            get { return _selectedPartner; }
+            set { SetProperty(ref _selectedPartner, value); }
         }
 
         // Products
-        private List<ProductCategoryEntity> productCategories;
+        private List<ProductCategoryEntity> _productCategories;
         public List<ProductCategoryEntity> ProductCategories
         {
             get
             {
-                if (productCategories == null) productCategories = new List<ProductCategoryEntity>();
-                return productCategories;
+                if (_productCategories == null) _productCategories = new List<ProductCategoryEntity>();
+                return _productCategories;
             }
-            set { SetProperty(ref productCategories, value); }
+            set { SetProperty(ref _productCategories, value); }
         }
 
-        private ProductCategoryEntity selectedProductCategory;
+        private ProductCategoryEntity _selectedProductCategory;
         public ProductCategoryEntity SelectedProductCategory
         {
-            get { return selectedProductCategory; }
+            get { return _selectedProductCategory; }
             set
             {
-                if (selectedProductCategory != value) Products = ManageProducts.ListProducts(value.Id);
-                SetProperty(ref selectedProductCategory, value);
+                if (_selectedProductCategory != value) Products = ManageProducts.ListProducts(value.Id);
+                SetProperty(ref _selectedProductCategory, value);
             }
         }
 
-        private List<ProductListEntity> products;
+        private List<ProductListEntity> _products;
         public List<ProductListEntity> Products
         {
-            get { return products; }
-            set { SetProperty(ref products, value); }
+            get { return _products; }
+            set { SetProperty(ref _products, value); }
         }
 
-        private ProductListEntity selectedProduct;
+        private ProductListEntity _selectedProduct;
         public ProductListEntity SelectedProduct
         {
-            get { return selectedProduct; }
+            get { return _selectedProduct; }
             set
             {
-                if (value != null) ProductPrice = (Item.Head.Incoming ? value.Cost_Price : value.Sell_Price);
-                SetProperty(ref selectedProduct, value);
+                if (value != null) ProductPrice = (Item.Head.Incoming ? value.CostPrice : value.SellPrice);
+                SetProperty(ref _selectedProduct, value);
             }
         }
 
-        private decimal productQuantity;
+        private decimal _productQuantity;
         public decimal ProductQuantity
         {
-            get { return productQuantity; }
-            set { SetProperty(ref productQuantity, value); }
+            get { return _productQuantity; }
+            set { SetProperty(ref _productQuantity, value); }
         }
 
-        private decimal productPrice;
+        private decimal _productPrice;
         public decimal ProductPrice
         {
-            get { return productPrice; }
-            set { SetProperty(ref productPrice, value); }
+            get { return _productPrice; }
+            set { SetProperty(ref _productPrice, value); }
         }
 
         // Transaction body
-        private ObservableCollection<BindableTransactionBodyListEntity> transactionBody;
+        private ObservableCollection<BindableTransactionBodyListEntity> _transactionBody;
         public ObservableCollection<BindableTransactionBodyListEntity> TransactionBody
         { 
             get
             {
-                if (transactionBody == null) transactionBody = new ObservableCollection<BindableTransactionBodyListEntity>();
-                return transactionBody;
+                if (_transactionBody == null) _transactionBody = new ObservableCollection<BindableTransactionBodyListEntity>();
+                return _transactionBody;
             }
-            set { SetProperty(ref transactionBody, value); }
+            set { SetProperty(ref _transactionBody, value); }
         }
 
-        private BindableTransactionBodyListEntity selectedBody;
+        private BindableTransactionBodyListEntity _selectedBody;
         public BindableTransactionBodyListEntity SelectedBody
         {
-            get { return selectedBody; }
-            set { SetProperty(ref selectedBody, value); }
+            get { return _selectedBody; }
+            set { SetProperty(ref _selectedBody, value); }
         }
 
         void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -146,22 +148,22 @@ namespace Red_Inventory_Management.ViewModel
             TotalPrice = sum;
         }
 
-        private decimal totalPrice;
+        private decimal _totalPrice;
         public decimal TotalPrice
         {
-            get { return totalPrice; }
-            set { SetProperty(ref totalPrice, value); }
+            get { return _totalPrice; }
+            set { SetProperty(ref _totalPrice, value); }
         }
 
-        private ICommand addProductCommand;
+        private ICommand _addProductCommand;
         public ICommand AddProductCommand
         {
             get
             {
-                if (addProductCommand == null) addProductCommand = new RelayCommand(new Action<object>(AddProduct), new Predicate<object>(CanAddProduct));
-                return addProductCommand;
+                if (_addProductCommand == null) _addProductCommand = new RelayCommand(new Action<object>(AddProduct), new Predicate<object>(CanAddProduct));
+                return _addProductCommand;
             }
-            set { SetProperty(ref addProductCommand, value); }
+            set { SetProperty(ref _addProductCommand, value); }
         }
         private void AddProduct(object parameter)
         {
@@ -170,10 +172,10 @@ namespace Red_Inventory_Management.ViewModel
             rec.Product.Id = SelectedProduct.Id;
             rec.Product.Name = SelectedProduct.Name;
             rec.Product.Code = SelectedProduct.Code;
-            rec.Product.Cost_Price = SelectedProduct.Cost_Price;
-            rec.Product.Sell_Price = SelectedProduct.Sell_Price;
+            rec.Product.CostPrice = SelectedProduct.CostPrice;
+            rec.Product.SellPrice = SelectedProduct.SellPrice;
             rec.Body = new TransactionBodyEntity();
-            rec.Body.Product_Id = SelectedProduct.Id;
+            rec.Body.ProductId = SelectedProduct.Id;
             rec.Body.Price = ProductPrice;
             rec.Body.Quantity = ProductQuantity;
             TransactionBody.Add(new BindableTransactionBodyListEntity(rec));
@@ -183,15 +185,15 @@ namespace Red_Inventory_Management.ViewModel
             return (SelectedProduct != null);
         }
 
-        private ICommand removeProductCommand;
+        private ICommand _removeProductCommand;
         public ICommand RemoveProductCommand
         {
             get
             {
-                if (removeProductCommand == null) removeProductCommand = new RelayCommand(new Action<object>(RemoveProduct), new Predicate<object>(CanRemoveProduct));
-                return removeProductCommand;
+                if (_removeProductCommand == null) _removeProductCommand = new RelayCommand(new Action<object>(RemoveProduct), new Predicate<object>(CanRemoveProduct));
+                return _removeProductCommand;
             }
-            set { SetProperty(ref removeProductCommand, value); }
+            set { SetProperty(ref _removeProductCommand, value); }
         }
         private void RemoveProduct(object parameter)
         {
@@ -204,6 +206,8 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override bool Save(object parameter)
         {
+            log.Debug("Save " + ItemName);
+
             if (SelectedPartner == null)
             {
                 NotificationProvider.Error("Save transaction error", "Pleace select a partner.");
@@ -211,9 +215,9 @@ namespace Red_Inventory_Management.ViewModel
             }
             else
             {
-                Item.Head.Partner_Id = SelectedPartner.Id;
+                Item.Head.PartnerId = SelectedPartner.Id;
                 Item.Head.TotalPrice = TotalPrice;
-                Item.Date = TransactionDate;
+                Item.Head.Date = TransactionDate;
                 Item.Partner = SelectedPartner;
                 var list = new List<TransactionBodyListEntity>();
                 foreach (var record in TransactionBody)

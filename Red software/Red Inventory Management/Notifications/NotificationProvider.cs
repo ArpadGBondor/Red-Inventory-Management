@@ -9,19 +9,22 @@ namespace Red_Inventory_Management.Notifications
 {
     class NotificationProvider
     {
-        private const double topOffset = 20;
-        private const double leftOffset = 480;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private const double _topOffset = 20;
+        private const double _leftOffset = 480;
         public static GrowlNotifiactions growlNotifications { get; set; }
 
         static NotificationProvider()
         {
             growlNotifications = new GrowlNotifiactions();
-            growlNotifications.Top = SystemParameters.WorkArea.Top + topOffset;
-            growlNotifications.Left = SystemParameters.WorkArea.Left + SystemParameters.WorkArea.Width - leftOffset;
+            growlNotifications.Top = SystemParameters.WorkArea.Top + _topOffset;
+            growlNotifications.Left = SystemParameters.WorkArea.Left + SystemParameters.WorkArea.Width - _leftOffset;
         }
 
         public static void Error(string msgTitle, string msgMessage)
         {
+            log.Info(string.Format("Error notification\nTitle: {0}\nMessage: {1}",msgTitle,msgMessage));
             growlNotifications.AddNotification(
                 new Notification {
                     TextColor = "Red",
@@ -34,6 +37,7 @@ namespace Red_Inventory_Management.Notifications
 
         public static void Alert(string msgTitle, string msgMessage)
         {
+            log.Info(string.Format("Alert notification\nTitle: {0}\nMessage: {1}", msgTitle, msgMessage));
             growlNotifications.AddNotification(
                 new Notification
                 {
@@ -47,6 +51,7 @@ namespace Red_Inventory_Management.Notifications
 
         public static void Info(string msgTitle, string msgMessage)
         {
+            log.Info(string.Format("Info notification\nTitle: {0}\nMessage: {1}", msgTitle, msgMessage));
             growlNotifications.AddNotification(
                 new Notification
                 {

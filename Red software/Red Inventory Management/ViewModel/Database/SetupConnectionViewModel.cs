@@ -17,9 +17,11 @@ namespace Red_Inventory_Management.ViewModel
 {
     class SetupConnectionViewModel : BindableBase
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public Window SetupWindow { get; set; }
 
-        private static string BaseDir
+        private static string _baseDir
         {
             get
             {
@@ -43,42 +45,42 @@ namespace Red_Inventory_Management.ViewModel
             }
         }
 
-        private string directory;
+        private string _directory;
         public string Directory
         {
             get
             {
-                if (directory == null)
+                if (_directory == null)
                 {
-                    directory = (string.IsNullOrWhiteSpace(DatabaseConnection.Directory) ? BaseDir : DatabaseConnection.Directory);
-                    CollectDbNames(directory);
+                    _directory = (string.IsNullOrWhiteSpace(DatabaseConnection.Directory) ? _baseDir : DatabaseConnection.Directory);
+                    CollectDbNames(_directory);
                 }
-                return directory;
+                return _directory;
             }
             set
             {
-                if (directory != value)
+                if (_directory != value)
                     CollectDbNames(value);
-                SetProperty(ref directory, value);
+                SetProperty(ref _directory, value);
             }
         }
 
-        private string dbname;
+        private string _dbname;
         public string DbName
         {
             get
             {
-                if (dbname == null) dbname = (string.IsNullOrWhiteSpace(DatabaseConnection.DbName) ? "Database" : DatabaseConnection.DbName) ;
-                return dbname;
+                if (_dbname == null) _dbname = (string.IsNullOrWhiteSpace(DatabaseConnection.DbName) ? "Database" : DatabaseConnection.DbName) ;
+                return _dbname;
             }
-            set { SetProperty(ref dbname, value); }
+            set { SetProperty(ref _dbname, value); }
         }
 
-        private List<string> dbnamelist;
+        private List<string> _dbnamelist;
         public List<string> DbNameList
         {
-            get { return dbnamelist; }
-            set { SetProperty(ref dbnamelist, value); }
+            get { return _dbnamelist; }
+            set { SetProperty(ref _dbnamelist, value); }
         }
 
         private void CollectDbNames(string dir)
@@ -92,19 +94,21 @@ namespace Red_Inventory_Management.ViewModel
             DbNameList = list;
         }
 
-        private ICommand connectDatabaseCommand;
+        private ICommand _connectDatabaseCommand;
         public ICommand ConnectDatabaseCommand
         {
             get
             {
-                if (connectDatabaseCommand == null) connectDatabaseCommand = new RelayCommand(new Action<object>(ConnectDatabase), new Predicate<object>(CanConnectDatabase));
-                return connectDatabaseCommand;
+                if (_connectDatabaseCommand == null) _connectDatabaseCommand = new RelayCommand(new Action<object>(ConnectDatabase), new Predicate<object>(CanConnectDatabase));
+                return _connectDatabaseCommand;
             }
-            set { SetProperty(ref connectDatabaseCommand, value); }
+            set { SetProperty(ref _connectDatabaseCommand, value); }
         }
 
         private void ConnectDatabase(object parameter)
         {
+            log.Debug("Connect to database");
+
             if (DatabaseConnection.ChangeDatabase(Directory, DbName))
             {
                 NotificationProvider.Info("Connected to:", ConnectedFile);
@@ -121,19 +125,21 @@ namespace Red_Inventory_Management.ViewModel
             return File.Exists(Directory + DbName + ".mdf");
         }
 
-        private ICommand createDatabaseCommand;
+        private ICommand _createDatabaseCommand;
         public ICommand CreateDatabaseCommand
         {
             get
             {
-                if (createDatabaseCommand == null) createDatabaseCommand = new RelayCommand(new Action<object>(CreateDatabase), new Predicate<object>(CanCreateDatabase));
-                return createDatabaseCommand;
+                if (_createDatabaseCommand == null) _createDatabaseCommand = new RelayCommand(new Action<object>(CreateDatabase), new Predicate<object>(CanCreateDatabase));
+                return _createDatabaseCommand;
             }
-            set { SetProperty(ref createDatabaseCommand, value); }
+            set { SetProperty(ref _createDatabaseCommand, value); }
         }
 
         private void CreateDatabase(object parameter)
         {
+            log.Debug("Create database");
+
             if (DatabaseConnection.CreateDatabase(Directory, DbName))
             {
                 RaisePropertyChanged("ConnectionState");
@@ -152,25 +158,25 @@ namespace Red_Inventory_Management.ViewModel
             return !File.Exists(Directory + DbName + ".mdf");
         }
 
-        private ICommand selectDirectoryCommand;
+        private ICommand _selectDirectoryCommand;
         public ICommand SelectDirectoryCommand
         {
             get
             {
-                if (selectDirectoryCommand == null) selectDirectoryCommand = new RelayCommand(new Action<object>(SelectDirectory));
-                return selectDirectoryCommand;
+                if (_selectDirectoryCommand == null) _selectDirectoryCommand = new RelayCommand(new Action<object>(SelectDirectory));
+                return _selectDirectoryCommand;
             }
-            set { SetProperty(ref selectDirectoryCommand, value); }
+            set { SetProperty(ref _selectDirectoryCommand, value); }
         }
 
-        private FolderBrowserDialog FBD = new FolderBrowserDialog();
+        private FolderBrowserDialog _FBD = new FolderBrowserDialog();
 
         private void SelectDirectory(object parameter)
         {
-            FBD.SelectedPath = Directory;
-            if (FBD.ShowDialog() == DialogResult.OK)
+            _FBD.SelectedPath = Directory;
+            if (_FBD.ShowDialog() == DialogResult.OK)
             {
-                Directory = FBD.SelectedPath;
+                Directory = _FBD.SelectedPath;
                 if (!Directory.EndsWith("\\"))
                     Directory += "\\";
             }

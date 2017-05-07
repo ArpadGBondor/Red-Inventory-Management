@@ -12,41 +12,45 @@ namespace Red_Inventory_Management.ViewModel
 {
     class LoginViewModel : BindableBase
     {
-        private string userID;
-        private string password;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private string _userID;
+        private string _password;
         public Window LoginWindow { get; set; }
         public string UserID
         {
             get
             {
-                if (userID == null) userID = "";
-                return userID;
+                if (_userID == null) _userID = "";
+                return _userID;
             }
-            set { SetProperty(ref userID, value); }
+            set { SetProperty(ref _userID, value); }
         }
         public string Password
         {
             get
             {
-                if (password == null) password = "";
-                return password;
+                if (_password == null) _password = "";
+                return _password;
             }
-            set { SetProperty(ref password, value); }
+            set { SetProperty(ref _password, value); }
         }
 
-        private ICommand click_LoginCommand;
+        private ICommand _click_LoginCommand;
         public ICommand Click_LoginCommand
         {
             get
             {
-                if (click_LoginCommand == null) click_LoginCommand = new RelayCommand(new Action<object>(Login));
-                return click_LoginCommand;
+                if (_click_LoginCommand == null) _click_LoginCommand = new RelayCommand(new Action<object>(Login));
+                return _click_LoginCommand;
             }
-            set { SetProperty(ref click_LoginCommand, value); }
+            set { SetProperty(ref _click_LoginCommand, value); }
         }
 
         private void Login(object parameter)
         {
+            log.Debug("Login button");
+
             PasswordBox pwBox = (PasswordBox)parameter;
             Password = pwBox.Password;
 
@@ -69,15 +73,15 @@ namespace Red_Inventory_Management.ViewModel
             }
         }
 
-        private ICommand click_SetupCommand;
+        private ICommand _click_SetupCommand;
         public ICommand Click_SetupCommand
         {
             get
             {
-                if (click_SetupCommand == null) click_SetupCommand = new RelayCommand(new Action<object>(Setup));
-                return click_SetupCommand;
+                if (_click_SetupCommand == null) _click_SetupCommand = new RelayCommand(new Action<object>(Setup));
+                return _click_SetupCommand;
             }
-            set { SetProperty(ref click_SetupCommand, value); }
+            set { SetProperty(ref _click_SetupCommand, value); }
         }
 
         private void Setup(object parameter)

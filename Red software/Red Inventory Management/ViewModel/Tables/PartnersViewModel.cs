@@ -9,6 +9,8 @@ namespace Red_Inventory_Management.ViewModel
 {
     public class PartnersViewModel : TableModel<PartnerEntity>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public PartnersViewModel()
         {
             ItemName = "partner";
@@ -16,6 +18,8 @@ namespace Red_Inventory_Management.ViewModel
         }
         protected override void DeleteItem(object parameter)
         {
+            log.Debug("Delete " + ItemName + " button");
+
             string name = SelectedItem.Name;
             if (ManagePartners.DeletePartner(SelectedItem))
             {
@@ -30,8 +34,10 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void EditItem(object parameter)
         {
+            log.Debug("Edit " + ItemName + " button");
+
             PartnerEntity Item = new PartnerEntity();
-            EntityCloner.CloneProperties<PartnerEntity>(Item, SelectedItem);
+            EntityCloner.CloneProperties<PartnerEntity>(SelectedItem, Item);
             EditPartnerViewModel EPVM = new EditPartnerViewModel(Item, false, ItemName);
             EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
             EIV.ShowDialog();
@@ -48,6 +54,8 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void NewItem(object parameter)
         {
+            log.Debug("New " + ItemName + " button");
+
             PartnerEntity Item = new PartnerEntity();
             EditPartnerViewModel EPVM = new EditPartnerViewModel(Item, true, ItemName);
             EditItemWindow EIV = new EditItemWindow() { DataContext = EPVM };
@@ -65,6 +73,8 @@ namespace Red_Inventory_Management.ViewModel
 
         protected override void RefreshList(object parameter)
         {
+            log.Debug("Refresh " + ItemName + " list");
+
             List = ManagePartners.ListPartners();
         }
     }

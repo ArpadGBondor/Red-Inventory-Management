@@ -17,9 +17,9 @@ namespace BusinessLayer
             list.Sort();
             return list;
         }
-        public static List<TransactionHeadListEntity> ListHead(int Partner_Id)
+        public static List<TransactionHeadListEntity> ListHead(int partnerId)
         {
-            var list = TransactionProvider.ListHead(p => p.Partner_Id == Partner_Id);
+            var list = TransactionProvider.ListHead(p => p.PartnerId == partnerId);
             list.Sort();
             foreach (var record in list)
                 record.ListVariable = record.Head.TotalPrice * (record.Head.Incoming ? -1 : 1);
@@ -27,7 +27,7 @@ namespace BusinessLayer
         }
         public static List<TransactionBodyListEntity> ListBody(int transactionId)
         {
-            return TransactionProvider.ListBody(p => p.Transaction_Id == transactionId);
+            return TransactionProvider.ListBody(p => p.TransactionId == transactionId);
         }
         public static bool AddOrModifyTransaction(TransactionHeadEntity head, List<TransactionBodyListEntity> body)
         {
@@ -43,9 +43,9 @@ namespace BusinessLayer
             return TransactionProvider.ListInventory(p => true);
         }
 
-        public static List<TransactionHeadListEntity> ListInventoryDetails(int Product_Id)
+        public static List<TransactionHeadListEntity> ListInventoryDetails(int productId)
         {
-            var list = TransactionProvider.ListInventoryDetails(Product_Id);
+            var list = TransactionProvider.ListInventoryDetails(productId);
             list.Sort();
             return list;
         }

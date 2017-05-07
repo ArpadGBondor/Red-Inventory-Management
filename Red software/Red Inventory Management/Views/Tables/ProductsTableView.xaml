@@ -19,14 +19,14 @@
                 <GridViewColumn Header="Cost price" Width="Auto">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Cost_Price,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
+                            <TextBlock Text="{Binding Path=CostPrice,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
                 <GridViewColumn Header="Sell price" Width="Auto">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Sell_Price,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
+                            <TextBlock Text="{Binding Path=SellPrice,StringFormat={}{0:C} }" TextAlignment="Right" Width="Auto" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>

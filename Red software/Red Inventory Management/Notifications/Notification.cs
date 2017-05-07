@@ -7,54 +7,54 @@ namespace Red_Inventory_Management.Notifications
 {
     public class Notification : BindableBase
     {
-        private string message;
+        private string _message;
         public string Message
         {
-            get { return message; }
-            set { SetProperty(ref message, value); }
+            get { return _message; }
+            set { SetProperty(ref _message, value); }
         }
 
-        private int id;
+        private int _id;
         public int Id
         {
-            get { return id; }
-            set { SetProperty(ref id, value); }
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
         }
 
-        private string imageUrl;
+        private string _imageUrl;
         public string ImageUrl
         {
-            get { return imageUrl; }
-            set { SetProperty(ref imageUrl, value); }
+            get { return _imageUrl; }
+            set { SetProperty(ref _imageUrl, value); }
         }
 
-        private string title;
+        private string _title;
         public string Title
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
-        private string bgcolor;
+        private string _bgcolor;
         public string BGColor
         {
             get
             {
-                if (bgcolor == null) bgcolor = "#2a3345";
-                return bgcolor;
+                if (_bgcolor == null) _bgcolor = "#2a3345";
+                return _bgcolor;
             }
-            set { SetProperty(ref bgcolor, value); }
+            set { SetProperty(ref _bgcolor, value); }
         }
 
-        private string textcolor;
+        private string _textcolor;
         public string TextColor
         {
             get
             {
-                if (textcolor == null) textcolor = "White";
-                return textcolor;
+                if (_textcolor == null) _textcolor = "White";
+                return _textcolor;
             }
-            set { SetProperty(ref textcolor, value); }
+            set { SetProperty(ref _textcolor, value); }
         }
     }
 

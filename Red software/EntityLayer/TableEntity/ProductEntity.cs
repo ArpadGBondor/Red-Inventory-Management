@@ -1,28 +1,24 @@
 ﻿using System;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntityLayer
 {
-    [Table(Name = "Products")]
+    [Table("Products")]
     public class ProductEntity 
     {
-        [Column(IsPrimaryKey = true, IsDbGenerated = true, AutoSync = AutoSync.OnInsert)]
+        [Key]
         public int Id { get; set; }
 
-        [Column]
         public string Code { get; set; }
 
-        [Column]
         public string Name { get; set; }
 
-        [Column]
-        public int Category_Id { get; set; }
+        public int CategoryId { get; set; }
 
-        [Column]
-        public decimal Cost_Price { get; set; }
+        public decimal CostPrice { get; set; }
 
-        [Column]
-        public decimal Sell_Price { get; set; }
+        public decimal SellPrice { get; set; }
 
     }
 }

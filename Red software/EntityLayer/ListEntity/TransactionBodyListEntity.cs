@@ -3,11 +3,11 @@
     public class TransactionBodyListEntity
     {
         public TransactionBodyListEntity() { }
-        public TransactionBodyListEntity(TransactionBodyEntity _Body, ProductEntity _Product) 
+        public TransactionBodyListEntity(TransactionBodyEntity body, ProductEntity product) 
             :this()
         {
-            Body = _Body;
-            Product = _Product;
+            Body = body;
+            Product = product;
         }
         public TransactionBodyEntity Body { get; set; }
         public ProductEntity Product { get; set; }
