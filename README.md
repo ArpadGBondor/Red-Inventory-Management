@@ -97,7 +97,7 @@ The classes in the Business Layer are providing services used by the UI Layer an
   - Reads the default setting from the "DatabaseSettings.txt" and tries to connect to the default file when TestConnection() is called.
   - Connects the DatabaseConnection class in the Data Layer with the UI Layer.
 - UserLogin class
-  - Handles user authentication, and holds the last logged in users ID.
+  - Handles user authentication, and holds the last logged in user's ID.
   - Connects the UsersProvider class in the Data Layer with the UI Layer
 - ManagePartners class
   - Connects the PartnerProvider class in the Data Layer with the UI Layer
