@@ -70,7 +70,9 @@ namespace Red_Inventory_Management.ViewModel
             catch (Exception ex)
             {
                 log.Fatal("Program initialization error.", ex);
-                throw ex;
+                MessageBox.Show("Program initialization error.\nCheck RedLog.txt for more information.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                CloseWindow();
+                return;
             }
         }
         #endregion
