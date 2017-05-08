@@ -31,7 +31,7 @@ The program sends messages to the user via Notifications in the top right corner
 The notifications are based on this [GitHub project](https://github.com/IvanLeonenko/WPFGrowlNotification)
 
 ### Program log
-The program uses log4net to log it's behaviour into the RedLog.txt file. To see a more detailed debug information, open the programs config file, and  <-- comment --> the filter section from the log4net appender tags.
+The program uses log4net to log it's behaviour into the RedLog.txt file. To see more detailed debug information, open the programs config file, and  <-- comment --> the filter section from the log4net appender tags.
 
 ### Tables
 Every table builds up similar way in the program with the same features.
@@ -95,9 +95,9 @@ The Data Layer contains the classes responsible for the Database connection, and
 The classes in the Business Layer are providing services used by the UI Layer and connecting the Data Layer and the UI Layer.
 - DatabaseConnection class
   - Reads the default setting from the "DatabaseSettings.txt" and tries to connect to the default file when TestConnection() is called.
-  - Connects the Database class in the Data Layer with the UI Layer.
+  - Connects the DatabaseConnection class in the Data Layer with the UI Layer.
 - UserLogin class
-  - User authentication
+  - Handles user authentication, and holds the last logged in users ID.
   - Connects the UsersProvider class in the Data Layer with the UI Layer
 - ManagePartners class
   - Connects the PartnerProvider class in the Data Layer with the UI Layer
