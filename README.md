@@ -3,6 +3,7 @@
   - [Setup database connection](#setup-database-connection)
   - [Login](#login) 
   - [Notifications](#notifications)
+  - [Program log](#program-log)
   - [Tables](#tables)
   - [Lists](#lists)
 - [Program structure](#program-structure)
@@ -28,6 +29,9 @@ The program stores usernames and passwords in the "Users" table, and the passwor
 ### Notifications
 The program sends messages to the user via Notifications in the top right corner of the screen.
 The notifications are based on this [GitHub project](https://github.com/IvanLeonenko/WPFGrowlNotification)
+
+### Program log
+The program uses log4net to log it's behaviour into the RedLog.txt file. To see a more detailed debug information, open the programs config file, and  <-- comment --> the filter section from the log4net appender tags.
 
 ### Tables
 Every table builds up similar way in the program with the same features.
@@ -70,13 +74,15 @@ The Entity Layer contains the classes responsible for the structure of the datab
 The Data Layer contains the classes responsible for the Database connection, and the data provider classes responsible for the consistent database state.
 
 #### Database connection
-- Database class
+- InventoryContext class
+  - Database context for the Inventory database.
+  - Derived from the Entity Framework's System.Data.Entity.DbContext class.
+- DatabaseConnection class
   - Generates and holds the connectionstring to the mdf file.
+  - Uses Entity Framework to connect to the MS SQL LocalDB.
+  - Can create a database file if the file does not exists.
+  - Automatically migrates database to the latest version after connecting to it.
   - Contains template "linq to sql" database manipulation functions, that can be used in the data provider classes
-- MyDataContext class
-  - Derived from System.Data.Linq.DataContext.
-  - Contains properties to get datatables easier
-  - Contains template "sql" database manipulation functions, that can be used for database creation and datatable creation.
 
 #### Data providers
 - PartnerProvider class
