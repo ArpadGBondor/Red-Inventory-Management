@@ -1,5 +1,4 @@
-﻿using System;
-using EntityLayer;
+﻿using EntityLayer;
 using Red_Inventory_Management.Model;
 using BusinessLayer;
 

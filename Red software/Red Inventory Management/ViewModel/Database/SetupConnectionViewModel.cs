@@ -1,14 +1,9 @@
 ﻿using BusinessLayer;
-using Microsoft.Win32;
 using Red_Inventory_Management.Model;
 using Red_Inventory_Management.Notifications;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.Windows;

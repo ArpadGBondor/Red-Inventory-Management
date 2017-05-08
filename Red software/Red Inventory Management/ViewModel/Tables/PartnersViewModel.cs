@@ -2,7 +2,6 @@
 using BusinessLayer;
 using Red_Inventory_Management.Views;
 using Red_Inventory_Management.Model;
-using System;
 using Red_Inventory_Management.Notifications;
 
 namespace Red_Inventory_Management.ViewModel

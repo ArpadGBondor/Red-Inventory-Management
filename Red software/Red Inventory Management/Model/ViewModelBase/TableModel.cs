@@ -1,8 +1,4 @@
-﻿using Red_Inventory_Management.Model;
-using Red_Inventory_Management.Notifications;
-using System;
-using System.Collections.Generic;
-using System.Windows.Controls;
+﻿using System;
 using System.Windows.Input;
 
 namespace Red_Inventory_Management.Model

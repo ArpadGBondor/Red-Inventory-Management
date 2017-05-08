@@ -2,16 +2,20 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Linq;
 using System.Reflection;
 using System.Linq.Expressions;
 using EntityLayer;
-using System.Text.RegularExpressions;
 using System.Data.Entity;
-using System.Configuration;
 
 namespace DataLayer
 {
+    /// <summary>
+    /// Generates and holds the connectionstring to the mdf file.
+    /// Uses Entity Framework to connect to the MS SQL LocalDB.
+    /// Can create a database file if it does not exists.
+    /// Automatically migrates database to the latest version after connecting to it.
+    /// Contains template "linq to sql" database manipulation functions, that can be used in the data provider classes
+    /// </summary>
     public class DatabaseConnection
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

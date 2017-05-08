@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using EntityLayer;
-using System.Data.Linq;
 using System.Linq;
 using System;
 using System.Linq.Expressions;
-using System.Data.Linq.Mapping;
 using System.Reflection;
 
 namespace DataLayer
