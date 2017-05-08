@@ -1,4 +1,4 @@
-# Red's Inventory Management
+# [Red's Inventory Management](https://arpadgbondor.github.io/Red-Inventory-Management/)
 - [Program features](#program-features)
   - [Setup database connection](#setup-database-connection)
   - [Login](#login) 
