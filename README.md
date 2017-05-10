@@ -34,7 +34,7 @@ The notifications are based on this [GitHub project](https://github.com/IvanLeon
 The program uses log4net to log it's behaviour into the RedLog.txt file. To see more detailed debug information, open the programs config file, and  <-- comment --> the filter section from the log4net appender tags.
 
 ### Tables
-Every table builds up similar way in the program with the same features.
+Every table builds up in a similar way in the program with the same features.
 You can Add/Edit/Delete:
 - Products
 - Partners
@@ -97,7 +97,7 @@ The classes in the Business Layer are providing services used by the UI Layer an
   - Reads the default setting from the "DatabaseSettings.txt" and tries to connect to the default file when TestConnection() is called.
   - Connects the DatabaseConnection class in the Data Layer with the UI Layer.
 - UserLogin class
-  - Handles user authentication, and holds the last logged in users ID.
+  - Handles user authentication, and holds the last logged in user's ID.
   - Connects the UsersProvider class in the Data Layer with the UI Layer
 - ManagePartners class
   - Connects the PartnerProvider class in the Data Layer with the UI Layer
