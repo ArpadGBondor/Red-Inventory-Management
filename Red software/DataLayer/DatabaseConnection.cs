@@ -54,7 +54,7 @@ namespace DataLayer
                 DatabaseConnection._directory = directory;
                 DatabaseConnection._dbName = dbName;
                 DatabaseConnection._connectionString = "Data Source=" + _server + ";AttachDbFilename=\"" + Directory + DbName + ".mdf\";Integrated Security=True;";
-                Database.SetInitializer(new MigrateDatabaseToLatestVersion<InventoryContext, Migrations.Configuration>());
+                Database.SetInitializer(new MigrateDatabaseToLatestVersion<InventoryContext, Migrations.Configuration>(true));
                 using (var db = new InventoryContext(_connectionString))
                 {
                     result = db.Database.Exists();
