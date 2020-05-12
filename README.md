@@ -20,7 +20,7 @@
 ## Program features
 
 ### Setup database connection
-The program connects to a database file with ".mdf" extension using MS SQL LocalDB. [Microsoft SQL Server 2014 Express LocalDB](https://github.com/kjbartel/SqlLocalDB2014-Bootstrapper) is set as prerequisite in the Setup project, but the program works with other versions of LocalDb as well. 
+The program connects to a database file with ".mdf" extension using MS SQL LocalDB. [Microsoft SQL Server 2014 Express LocalDB](https://github.com/kjbartel/SqlLocalDB2014-Bootstrapper) is ~~set as prerequisite in the Setup project~~, but the program works with other versions of LocalDb as well. (Update: Setup project has been removed, because it's not supported in new versions of Visual Studio.)
 When the application starts first time, a small window pops up and you have to create a new database file, or connect to an existing one. You can't use the program without database connection. The program automatically stores the path of the database folder and the name of the database file in the DatabaseSettings.txt file in the application folder. You can change the database connection settings under the Settings => Database menu.
 
 ### Login
