@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red Inventory Management", "Red Inventory Management\Red Inventory Management.csproj", "{E13B7158-F733-4226-967F-43C989E7F5EC}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{9FB4883C-A109-4B58-B5C9-705722BB9B01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLayer", "EntityLayer\EntityLayer.csproj", "{9A9DA9F8-9527-4DDF-ADEB-C10831C494B0}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Red Inventory Management Setup", "Red Inventory Management Setup\Red Inventory Management Setup.vdproj", "{693CA5A2-E303-4D5A-ABC8-C7CD2A3FE699}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +34,11 @@ Global
 		{9A9DA9F8-9527-4DDF-ADEB-C10831C494B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A9DA9F8-9527-4DDF-ADEB-C10831C494B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A9DA9F8-9527-4DDF-ADEB-C10831C494B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{693CA5A2-E303-4D5A-ABC8-C7CD2A3FE699}.Debug|Any CPU.ActiveCfg = Debug
-		{693CA5A2-E303-4D5A-ABC8-C7CD2A3FE699}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {005EF0BC-6291-4459-8630-22B94E5BCE50}
 	EndGlobalSection
 EndGlobal

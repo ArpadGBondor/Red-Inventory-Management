@@ -55,18 +55,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>AEA360C0F753A0DB6FDE0543C7044F19BBACA54F</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Red Inventory Management_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
     <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
@@ -398,13 +386,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ReadMe - Incompatible setup.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Old - ReadMe - Incompatible setup.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
