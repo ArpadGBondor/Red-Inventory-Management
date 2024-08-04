@@ -56,5 +56,12 @@ namespace BusinessLayer
             list.Sort();
             return list;
         }
+
+        public static List<TransactionHeadListEntity> ListPartnerTransactionsByDate(DateTime? date = null)
+        {
+            var list = TransactionProvider.ListPartnerTransactions(p => date == null || p.Date == date);
+            list.Sort();
+            return list;
+        }
     }
 }

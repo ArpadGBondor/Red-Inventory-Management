@@ -22,11 +22,22 @@ namespace Red_Inventory_Management.ViewModel
             get { return _totalTransactions; }
             set { SetProperty(ref _totalTransactions, value); }
         }
+
+        private DateTime? _selectedDate = null;
+        public DateTime? SelectedDate
+        {
+            get { return _selectedDate; }
+            set { 
+                SetProperty(ref _selectedDate, value);
+                RefreshList(null);
+            }
+        }
+
         protected override void RefreshList(object parameter)
         {
             log.Debug("Refresh list: " + TableName);
 
-            List = ManageTransactions.ListPartnerTransactions();
+            List = ManageTransactions.ListPartnerTransactionsByDate(_selectedDate);
             TotalTransactions = 0;
             foreach (var record in List)
                 TotalTransactions += record.ListVariable;

@@ -17,6 +17,7 @@
         </Grid.RowDefinitions>
         <WrapPanel>
             <Button Content="Partner transactions" Command="{Binding DetailsCommand}" />
+            <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}"   />
         </WrapPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Stretch" HorizontalContentAlignment ="Stretch">
             <ListView.ItemContainerStyle>
