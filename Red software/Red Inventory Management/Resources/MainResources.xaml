@@ -13,6 +13,8 @@
                 BorderBrush="{TemplateBinding BorderBrush}" 
                 FontFamily="{TemplateBinding FontFamily}" 
                 FontSize="{TemplateBinding FontSize}"
+                Margin="{TemplateBinding Margin}"
+                Padding="{TemplateBinding Padding}"
                 Command="{TemplateBinding Command}" 
                 CommandParameter="{TemplateBinding CommandParameter}"/>
         </Border>
@@ -23,6 +25,7 @@
         <Setter Property="BorderBrush" Value="Red" />
         <Setter Property="FontFamily" Value="Comic Sans MS" />
         <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="10 0 10 0" />
         <Setter Property="Template" Value="{StaticResource ShadowButtonControlTemplate}" />
     </Style>
 
@@ -31,6 +34,7 @@
         <Setter Property="BorderBrush" Value="Blue" />
         <Setter Property="FontFamily" Value="Comic Sans MS" />
         <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="10 0 10 0" />
         <Setter Property="Template" Value="{StaticResource ShadowButtonControlTemplate}" />
     </Style>
 

@@ -17,9 +17,9 @@
             </Grid.RowDefinitions>
             <TextBlock Text="{Binding TableName}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
             <WrapPanel Grid.Row="1">
-                <Button Content="{Binding newButtonContent}" Command="{Binding NewItemCommand}" Margin="2"/>
-                <Button Content="{Binding editButtonContent}" Command="{Binding EditItemCommand}" Margin="2"/>
-                <Button Content="{Binding deleteButtonContent}" Command="{Binding DeleteItemCommand}" Margin="2"/>
+                <Button Content="{Binding newButtonContent}" Command="{Binding NewItemCommand}" Margin="0 0 5 0" Padding="5" />
+                <Button Content="{Binding editButtonContent}" Command="{Binding EditItemCommand}" Margin="0 0 5 0" Padding="5" />
+                <Button Content="{Binding deleteButtonContent}" Command="{Binding DeleteItemCommand}" Margin="0 0 5 0" Padding="5" />
             </WrapPanel>
             <ContentControl  Grid.Row="2" Content="{Binding}">
                 <ContentControl.Resources>
