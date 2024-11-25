@@ -55,6 +55,6 @@
             </Border>
             <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}"/>
         </Grid>
-        <Label Grid.Row="2" FontSize="10" FontFamily="Comic Sans MS" Foreground="White">Copyright © 2017 Arpad Gabor Bondor. All rights reserved.</Label>
+        <Label Grid.Row="2" FontSize="10" FontFamily="Comic Sans MS" Foreground="White">Copyright © 2017–2024 Arpad Gabor Bondor. All rights reserved.</Label>
     </Grid>
 </Window>
