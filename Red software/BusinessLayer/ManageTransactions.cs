@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataLayer;
 using EntityLayer;
-using DataLayer;
+using System.Collections.Generic;
 
 
 namespace BusinessLayer
@@ -52,7 +48,7 @@ namespace BusinessLayer
 
         public static List<TransactionHeadListEntity> ListPartnerTransactions()
         {
-            var list = TransactionProvider.ListPartnerTransactions(p=>true);
+            var list = TransactionProvider.ListPartnerTransactions(p => true);
             list.Sort();
             return list;
         }

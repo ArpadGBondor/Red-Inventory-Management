@@ -6,7 +6,7 @@ namespace EntityLayer
     {
         public ProductListEntity() { }
         public ProductListEntity(ProductEntity p)
-            :this()
+            : this()
         {
             Code = p.Code;
             CostPrice = p.CostPrice;
@@ -15,7 +15,7 @@ namespace EntityLayer
             SellPrice = p.SellPrice;
         }
         public ProductListEntity(ProductEntity p, ProductCategoryEntity c)
-            :this(p)
+            : this(p)
         {
             Category = c.Category;
         }

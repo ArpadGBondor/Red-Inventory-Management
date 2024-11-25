@@ -1,9 +1,9 @@
-﻿using Red_Inventory_Management.Model;
-using Red_Inventory_Management.Notifications;
-using System;
+﻿using BusinessLayer;
 using EntityLayer;
-using BusinessLayer;
+using Red_Inventory_Management.Model;
+using Red_Inventory_Management.Notifications;
 using Red_Inventory_Management.Views;
+using System;
 
 namespace Red_Inventory_Management.ViewModel
 {

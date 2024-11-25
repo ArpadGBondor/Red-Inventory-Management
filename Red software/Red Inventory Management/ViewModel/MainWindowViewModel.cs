@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BusinessLayer;
 using Red_Inventory_Management.Model;
+using Red_Inventory_Management.Notifications;
+using Red_Inventory_Management.Views;
+using System;
 using System.Windows;
 using System.Windows.Input;
-using BusinessLayer;
-using Red_Inventory_Management.Views;
-using Red_Inventory_Management.Notifications;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 

@@ -1,5 +1,5 @@
-﻿using EntityLayer;
-using BusinessLayer;
+﻿using BusinessLayer;
+using EntityLayer;
 using Red_Inventory_Management.Model;
 
 namespace Red_Inventory_Management.ViewModel
@@ -10,7 +10,7 @@ namespace Red_Inventory_Management.ViewModel
 
         private InventoryDetailsViewModel() { }
         public InventoryDetailsViewModel(int productId)
-            :this()
+            : this()
         {
             _productId = productId;
             RefreshList(null);

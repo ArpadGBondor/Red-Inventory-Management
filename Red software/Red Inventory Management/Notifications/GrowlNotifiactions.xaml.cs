@@ -25,7 +25,7 @@ namespace Red_Inventory_Management.Notifications
                 _buffer.Add(notification);
             else
                 Notifications.Add(notification);
-            
+
             //Show window if there're notifications
             if (Notifications.Count > 0 && !IsActive)
                 Show();
@@ -35,13 +35,13 @@ namespace Red_Inventory_Management.Notifications
         {
             if (Notifications.Contains(notification))
                 Notifications.Remove(notification);
-            
+
             if (_buffer.Count > 0)
             {
                 Notifications.Add(_buffer[0]);
                 _buffer.RemoveAt(0);
             }
-            
+
             //Close window if there's nothing to show
             if (Notifications.Count < 1)
                 Hide();

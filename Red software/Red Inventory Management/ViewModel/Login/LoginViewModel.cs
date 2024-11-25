@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows.Input;
-using System.Windows.Controls;
-using System.Windows;
-using BusinessLayer;
-using Red_Inventory_Management.Views;
+﻿using BusinessLayer;
 using Red_Inventory_Management.Model;
 using Red_Inventory_Management.Notifications;
+using Red_Inventory_Management.Views;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Red_Inventory_Management.ViewModel
 {

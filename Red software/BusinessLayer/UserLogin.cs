@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataLayer;
+﻿using DataLayer;
 using EntityLayer;
+using System.Collections.Generic;
 
 namespace BusinessLayer
 {
@@ -18,7 +14,7 @@ namespace BusinessLayer
                 if (_loginedUser == null) _loginedUser = "";
                 return _loginedUser;
             }
-        } 
+        }
         public static bool IsEmptyUserDatabase()
         {
             return UsersProvider.IsEmptyUserDatabase();

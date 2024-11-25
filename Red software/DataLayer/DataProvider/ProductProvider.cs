@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using EntityLayer;
-using System.Linq;
+﻿using EntityLayer;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace DataLayer
@@ -64,7 +64,7 @@ namespace DataLayer
             ProductEntity record = ConvertToProduct(product);
             if (record == null)
                 return false;
-            return DatabaseConnection.Modify<ProductEntity>(record, p=>p.Id== record.Id);
+            return DatabaseConnection.Modify<ProductEntity>(record, p => p.Id == record.Id);
         }
 
         /// <summary>

@@ -6,13 +6,13 @@ namespace EntityLayer
     {
         public TransactionHeadListEntity() { }
         public TransactionHeadListEntity(TransactionHeadEntity head, PartnerEntity partner)
-            :this()
+            : this()
         {
             Head = head;
             Partner = partner;
         }
         public TransactionHeadListEntity(TransactionHeadEntity head, PartnerEntity partner, decimal listVariable)
-            : this(head,partner)
+            : this(head, partner)
         {
             ListVariable = listVariable;
         }

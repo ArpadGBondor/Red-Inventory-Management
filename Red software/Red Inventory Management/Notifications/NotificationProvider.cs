@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Red_Inventory_Management.Notifications
 {
@@ -24,9 +19,10 @@ namespace Red_Inventory_Management.Notifications
 
         public static void Error(string msgTitle, string msgMessage)
         {
-            log.Info(string.Format("Error notification\nTitle: {0}\nMessage: {1}",msgTitle,msgMessage));
+            log.Info(string.Format("Error notification\nTitle: {0}\nMessage: {1}", msgTitle, msgMessage));
             growlNotifications.AddNotification(
-                new Notification {
+                new Notification
+                {
                     TextColor = "Red",
                     BGColor = "#FFFFB0",
                     Title = msgTitle,
