@@ -11,6 +11,13 @@
         WindowStartupLocation="CenterScreen" 
         Style="{StaticResource loginWindowStyle}" >
 
+    <Window.InputBindings>
+        <KeyBinding 
+            Command="{Binding Click_LoginCommand}" 
+            CommandParameter="{Binding ElementName=passwordPasswordBox}" 
+            Key="Enter" />
+    </Window.InputBindings>    
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
