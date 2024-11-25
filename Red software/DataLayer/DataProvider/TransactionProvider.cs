@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using EntityLayer;
-using System.Linq;
+﻿using EntityLayer;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -16,7 +16,7 @@ namespace DataLayer
         /// </summary>
         /// <param name="condition">Condition on the records of the table. Eg. (p => p.Id == record.Id)</param>
         /// <returns></returns>
-        public static List<TransactionHeadListEntity> ListHead(Expression<Func<TransactionHeadEntity,bool>> condition)
+        public static List<TransactionHeadListEntity> ListHead(Expression<Func<TransactionHeadEntity, bool>> condition)
         {
             List<TransactionHeadListEntity> list = new List<TransactionHeadListEntity>();
             using (var db = new InventoryContext(DatabaseConnection.ConnectionString))
@@ -29,7 +29,7 @@ namespace DataLayer
                              from subp in PartJoin.DefaultIfEmpty()
                              select new { Head = h, Partner = subp });
                 foreach (var record in query)
-                    list.Add(new TransactionHeadListEntity(record.Head, record.Partner) );
+                    list.Add(new TransactionHeadListEntity(record.Head, record.Partner));
                 list.Sort();
             }
             return list;
@@ -51,7 +51,7 @@ namespace DataLayer
                 var query = (from b in db.TransactionBody.Where(condition)
                              join p in db.Products on b.ProductId equals p.Id into ProdJoin
                              from subp in ProdJoin.DefaultIfEmpty()
-                             select new { Body = b, Product = subp});
+                             select new { Body = b, Product = subp });
                 foreach (var record in query)
                     list.Add(new TransactionBodyListEntity(record.Body, record.Product));
             }
@@ -110,7 +110,7 @@ namespace DataLayer
                              group body by body.TransactionId into g
                              join head in db.TransactionHeader on g.FirstOrDefault().TransactionId equals head.Id
                              join partner in db.Partners on head.PartnerId equals partner.Id
-                             select new { Head = head, Partner = partner, Sum = g.Sum(p => p.Quantity) * (head.Incoming ? 1 : -1) } );
+                             select new { Head = head, Partner = partner, Sum = g.Sum(p => p.Quantity) * (head.Incoming ? 1 : -1) });
 
                 foreach (var record in query)
                     list.Add(new TransactionHeadListEntity(record.Head, record.Partner, record.Sum));

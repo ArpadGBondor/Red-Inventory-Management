@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using Red_Inventory_Management.ViewModel;
+﻿using Red_Inventory_Management.ViewModel;
+using System.Windows;
 
 namespace Red_Inventory_Management.Views
 {

@@ -1,7 +1,6 @@
-﻿using System.Windows;
-using BusinessLayer;
-using Red_Inventory_Management.Notifications;
+﻿using Red_Inventory_Management.Notifications;
 using Red_Inventory_Management.ViewModel;
+using System.Windows;
 
 namespace Red_Inventory_Management.Views
 {

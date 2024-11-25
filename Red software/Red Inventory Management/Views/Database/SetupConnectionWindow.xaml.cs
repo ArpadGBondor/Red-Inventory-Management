@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Red_Inventory_Management.ViewModel;
 using System.Windows;
-using Microsoft.Win32;
-using BusinessLayer;
-using Red_Inventory_Management.ViewModel;
 
 namespace Red_Inventory_Management.Views
 {

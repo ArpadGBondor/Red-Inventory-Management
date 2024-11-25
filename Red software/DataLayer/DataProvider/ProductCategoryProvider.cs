@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using EntityLayer;
-using System.Linq.Expressions;
+﻿using EntityLayer;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataLayer
 {
@@ -39,8 +39,8 @@ namespace DataLayer
                                 record = query.FirstOrDefault();
                             }
                             id = record.Id;
-                            
-                            dbTransaction.Commit();                         
+
+                            dbTransaction.Commit();
                         }
                         catch (Exception ex)
                         {
@@ -67,7 +67,7 @@ namespace DataLayer
         {
             if ((category == null)
                 || (string.IsNullOrWhiteSpace(category.Category))
-                || (DatabaseConnection.IsExist<ProductCategoryEntity>(p => p.Category == category.Category))) 
+                || (DatabaseConnection.IsExist<ProductCategoryEntity>(p => p.Category == category.Category)))
                 return false;
             return DatabaseConnection.Add<ProductCategoryEntity>(category);
         }

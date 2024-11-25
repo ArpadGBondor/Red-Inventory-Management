@@ -9,7 +9,7 @@ namespace EntityLayer
     {
         struct DictionaryEntity
         {
-            public Type           entityType;
+            public Type entityType;
             public PropertyInfo[] entityProperties;
         }
 
@@ -18,7 +18,7 @@ namespace EntityLayer
         public static PropertyInfo[] GetProperties(Type entityType)
         {
             PropertyInfo[] result = null;
-            foreach (var DE in propertyDictionary.Where(p => p.entityType == entityType)) 
+            foreach (var DE in propertyDictionary.Where(p => p.entityType == entityType))
                 result = DE.entityProperties;
             if (result == null)
             {
@@ -33,7 +33,7 @@ namespace EntityLayer
             return result;
         }
 
-        public static void CloneProperties<Entity>( Entity from, Entity to)
+        public static void CloneProperties<Entity>(Entity from, Entity to)
         {
             var typeofentity = typeof(Entity);
             PropertyInfo[] properties = EntityCloner.GetProperties(typeof(Entity));

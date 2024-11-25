@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using EntityLayer;
+using System.Collections.Generic;
 using System.Linq;
-using EntityLayer;
 
 namespace DataLayer
 {
@@ -47,7 +47,7 @@ namespace DataLayer
         /// <param name="userID"></param>
         /// <param name="pw">The encription of the password is handled by the UsersProvider.</param>
         /// <returns></returns>
-        public static bool IsValidPassword(string userID,string pw)
+        public static bool IsValidPassword(string userID, string pw)
         {
             bool exists = false;
 
@@ -70,9 +70,9 @@ namespace DataLayer
         /// <param name="userID"></param>
         /// <param name="password">The encription of the password is handled by the UsersProvider.</param>
         /// <returns></returns>
-        public static bool NewUser(string userID,string password)
+        public static bool NewUser(string userID, string password)
         {
-            UserEntity User = new UserEntity( userID, EncriptionProvider.ComputeHash(password, EncriptionProvider.Supported_HA.SHA256, null));
+            UserEntity User = new UserEntity(userID, EncriptionProvider.ComputeHash(password, EncriptionProvider.Supported_HA.SHA256, null));
             return DatabaseConnection.Add<UserEntity>(User);
         }
 
@@ -96,7 +96,7 @@ namespace DataLayer
         public static bool Modify(string oldUserID, string newUserId, string password)
         {
             UserEntity User = new UserEntity(newUserId, EncriptionProvider.ComputeHash(password, EncriptionProvider.Supported_HA.SHA256, null));
-            if (oldUserID != newUserId) 
+            if (oldUserID != newUserId)
             {
                 return (DeleteUser(oldUserID) && NewUser(newUserId, password));
             }

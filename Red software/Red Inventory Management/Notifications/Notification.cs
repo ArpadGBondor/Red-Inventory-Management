@@ -1,7 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using Red_Inventory_Management;
-using Red_Inventory_Management.Model;
+﻿using Red_Inventory_Management.Model;
+using System.Collections.ObjectModel;
 
 namespace Red_Inventory_Management.Notifications
 {

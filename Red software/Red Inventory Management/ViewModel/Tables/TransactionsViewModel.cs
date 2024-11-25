@@ -1,9 +1,9 @@
-﻿using System;
+﻿using BusinessLayer;
 using EntityLayer;
-using BusinessLayer;
 using Red_Inventory_Management.Model;
 using Red_Inventory_Management.Notifications;
 using Red_Inventory_Management.Views;
+using System;
 
 namespace Red_Inventory_Management.ViewModel
 {
@@ -31,7 +31,7 @@ namespace Red_Inventory_Management.ViewModel
             if (ManageTransactions.RemoveTransaction(SelectedItem.Head))
             {
                 RefreshList(parameter);
-                NotificationProvider.Info("Transaction deleted", string.Format("Id: {0}\nDate: {1}\nPartner name: {2}",id,date, PartnerName));
+                NotificationProvider.Info("Transaction deleted", string.Format("Id: {0}\nDate: {1}\nPartner name: {2}", id, date, PartnerName));
             }
             else
             {
@@ -45,7 +45,7 @@ namespace Red_Inventory_Management.ViewModel
 
             TransactionHeadListEntity Item = new TransactionHeadListEntity();
             EntityCloner.CloneProperties<TransactionHeadListEntity>(SelectedItem, Item);
-            EditTransactionViewModel ETVM = new EditTransactionViewModel(Item, false,ItemName);
+            EditTransactionViewModel ETVM = new EditTransactionViewModel(Item, false, ItemName);
             EditItemWindow EIV = new EditItemWindow() { DataContext = ETVM };
             EIV.ShowDialog();
             if (ETVM.SaveEdit)

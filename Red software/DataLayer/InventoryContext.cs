@@ -1,6 +1,6 @@
 ﻿using EntityLayer;
-using System.Data.Linq.Mapping;
 using System.Data.Entity;
+using System.Data.Linq.Mapping;
 
 namespace DataLayer
 {
@@ -13,7 +13,7 @@ namespace DataLayer
 
         public InventoryContext() : base() { }
 
-        public InventoryContext(string connectionstring) :base(connectionstring) { }
+        public InventoryContext(string connectionstring) : base(connectionstring) { }
 
         public InventoryContext(System.Data.Common.DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection) { }
 

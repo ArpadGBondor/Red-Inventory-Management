@@ -1,6 +1,6 @@
-﻿using EntityLayer;
+﻿using BusinessLayer;
+using EntityLayer;
 using Red_Inventory_Management.Model;
-using BusinessLayer;
 
 namespace Red_Inventory_Management.ViewModel
 {

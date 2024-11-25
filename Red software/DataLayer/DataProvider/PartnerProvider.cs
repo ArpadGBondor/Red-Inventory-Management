@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using EntityLayer;
-using System.Linq.Expressions;
+﻿using EntityLayer;
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace DataLayer
 {
@@ -41,7 +41,7 @@ namespace DataLayer
         public static bool Remove(PartnerEntity partner)
         {
             if ((partner == null)
-                || (TransactionProvider.IsExistHead(p=>p.PartnerId == partner.Id)))
+                || (TransactionProvider.IsExistHead(p => p.PartnerId == partner.Id)))
                 return false;
             return DatabaseConnection.Remove<PartnerEntity>(p => p.Id == partner.Id);
         }
@@ -51,7 +51,7 @@ namespace DataLayer
         /// </summary>
         /// <param name="condition">Condition on the records of the table. Eg. (p => p.Id == record.Id)</param>
         /// <returns></returns>
-        public static List<PartnerEntity> List(Expression<Func<PartnerEntity,bool>> condition)
+        public static List<PartnerEntity> List(Expression<Func<PartnerEntity, bool>> condition)
         {
             var list = DatabaseConnection.ListTable<PartnerEntity>(condition);
             list.Sort();

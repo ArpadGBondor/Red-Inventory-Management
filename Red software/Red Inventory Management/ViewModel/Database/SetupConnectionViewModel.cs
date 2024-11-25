@@ -4,9 +4,9 @@ using Red_Inventory_Management.Notifications;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Input;
-using System.Windows.Forms;
 using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace Red_Inventory_Management.ViewModel
 {
@@ -65,7 +65,7 @@ namespace Red_Inventory_Management.ViewModel
         {
             get
             {
-                if (_dbname == null) _dbname = (string.IsNullOrWhiteSpace(DatabaseConnection.DbName) ? "Database" : DatabaseConnection.DbName) ;
+                if (_dbname == null) _dbname = (string.IsNullOrWhiteSpace(DatabaseConnection.DbName) ? "Database" : DatabaseConnection.DbName);
                 return _dbname;
             }
             set { SetProperty(ref _dbname, value); }
@@ -82,7 +82,7 @@ namespace Red_Inventory_Management.ViewModel
         {
             List<string> list = new List<string>();
             var filenames = System.IO.Directory.GetFiles(dir, "*.mdf");
-            foreach(var name in filenames)
+            foreach (var name in filenames)
             {
                 list.Add(Path.GetFileNameWithoutExtension(name));
             }

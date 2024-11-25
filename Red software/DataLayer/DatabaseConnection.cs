@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using EntityLayer;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Linq.Expressions;
-using EntityLayer;
 using System.Data.Entity;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace DataLayer
 {
@@ -76,7 +76,7 @@ namespace DataLayer
             }
             return result;
         }
-        
+
         /// <summary>
         /// Creates a database file if it does not exists.
         /// </summary>
@@ -96,7 +96,7 @@ namespace DataLayer
                 }
                 catch (Exception ex)
                 {
-                    log.Error(string.Format("Create database error\nFolder: {0}\nDatabase: {1}",directory,dbName), ex);
+                    log.Error(string.Format("Create database error\nFolder: {0}\nDatabase: {1}", directory, dbName), ex);
                 }
             }
             if (result)
@@ -178,7 +178,7 @@ namespace DataLayer
         /// <param name="record">A record with updated values.</param>
         /// <param name="condition">A condition on the database table, that selects the record. Eg. (p => p.Id == record.Id) </param>
         /// <returns></returns>
-        public static bool Modify<Entity>(Entity record, Expression<Func<Entity,bool>> condition) where Entity : class
+        public static bool Modify<Entity>(Entity record, Expression<Func<Entity, bool>> condition) where Entity : class
         {
             bool result = false;
             bool exists = false;

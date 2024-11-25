@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BusinessLayer;
 using EntityLayer;
 using Red_Inventory_Management.Model;
-using BusinessLayer;
 using Red_Inventory_Management.Notifications;
-using System.Windows.Input;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
+using System.Windows.Input;
 
 namespace Red_Inventory_Management.ViewModel
 {
@@ -33,7 +33,7 @@ namespace Red_Inventory_Management.ViewModel
             else
                 Partners = ManagePartners.ListCustomers();
             if (Item.Partner != null)
-                foreach(var record in Partners.Where(p=>p.Id == Item.Partner.Id))
+                foreach (var record in Partners.Where(p => p.Id == Item.Partner.Id))
                     SelectedPartner = record;
 
             SelectedProductCategory = new ProductCategoryEntity() { Category = " - All product categories - ", Id = 0 };
@@ -122,7 +122,7 @@ namespace Red_Inventory_Management.ViewModel
         // Transaction body
         private ObservableCollection<BindableTransactionBodyListEntity> _transactionBody;
         public ObservableCollection<BindableTransactionBodyListEntity> TransactionBody
-        { 
+        {
             get
             {
                 if (_transactionBody == null) _transactionBody = new ObservableCollection<BindableTransactionBodyListEntity>();

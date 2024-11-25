@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EntityLayer
 {
     [Table("Products")]
-    public class ProductEntity 
+    public class ProductEntity
     {
         [Key]
         public int Id { get; set; }
